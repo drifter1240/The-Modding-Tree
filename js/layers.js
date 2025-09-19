@@ -219,8 +219,8 @@
     
         layerShown(){ return true },
     })
-    
-    addLayer("sp", {
+
+addLayer("sp", {
         name: "subpoints",
         symbol: "SP",
         position: 1,
@@ -241,14 +241,6 @@
             if (player.points.lt(250000)) return new Decimal(0)
             return player.points.sub(250000).pow(0.3)
         },
-        tabFormat: [
-            ["row", [
-                ["clickable", 11],
-            ]],
-            ["row", [
-                ["upgrade", 21],
-            ]],
-        ],
     
         // Optional: add a clickable to perform the conversion
         clickables: {
@@ -279,13 +271,23 @@
     
         // Optional: show conversion in the tab
         tabFormat: [
-            ["display-text", function() {
-                if (!player.sp.unlocked) return "Unlock this layer with Upgrade #8."
-                let sub = layers.sp.convertToSubpoints()
-                return `You can convert points to subpoints: ${format(sub)}`
-            }],
-            "clickables",
-        ],
+    // Display the conversion info
+    ["display-text", function() {
+        if (!player.sp.unlocked) return "Unlock this layer with Upgrade #8."
+        let sub = layers.sp.convertToSubpoints()
+        return `You can convert points to subpoints: ${format(sub)}`
+    }],
+
+    // Row with clickables
+    ["row", [
+        ["clickable", 11],
+    ]],
+
+    // Row with upgrades
+    ["row", [
+        ["upgrade", 21],
+    ]],
+]
     })
     
 
