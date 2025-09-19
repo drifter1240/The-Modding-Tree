@@ -82,7 +82,7 @@
                         return "For every point upgrade unlocked, multiply point gain by 1.2 compounding."
             
                     // Point upgrades
-                    let pointUpgrades = [11, 12, 13, 21]
+                    let pointUpgrades = [11, 12, 13, 21, 23, 24, 31, 32, 33]
                     let unlockedCount = pointUpgrades.reduce((sum, id) => hasUpgrade("p", id) ? sum + 1 : sum, 0)
             
                     // Count buyable 14 only once if bought
@@ -102,7 +102,7 @@
                 currencyInternalName: "points",
                 currencyLayer: "",
                 effect() {
-                    let pointUpgrades = [11, 12, 13, 21]
+                    let pointUpgrades = [11, 12, 13, 21, 23, 24, 31, 32, 33]
                     let unlockedCount = pointUpgrades.reduce((sum, id) => hasUpgrade("p", id) ? sum + 1 : sum, 0)
             
                     if (getBuyableAmount("p", 14).gt(0)) unlockedCount++
@@ -152,8 +152,16 @@
             },
             33: {
                 title: "#10: Huge increase... sort of",
-                description: "+100,000 point gain. No multipliers though :)",
-                cost: new Decimal(5),
+                description: "+10,000 point gain. No multipliers though :)",
+                cost: new Decimal(500000),
+                currencyDisplayName: "points",
+                currencyInternalName: "points",
+                currencyLayer: "",
+            },
+            34: {
+                title: "#11: Another triple",
+                description: "Triple your point gain. Again.",
+                cost: new Decimal(2500000),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
                 currencyLayer: "",
@@ -204,7 +212,8 @@
             ["row", [
                 ["upgrade", 31],
                 ["upgrade", 32],
-                ["upgrade", 33]
+                ["upgrade", 33],
+                ["upgrade", 34]
             ]],
         ],
     

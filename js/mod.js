@@ -6,7 +6,7 @@ let modInfo = {
 
 	discordName: "",
 	discordLink: "",
-	initialStartPoints: new Decimal (0), // Used for hard resets and new players
+	initialStartPoints: new Decimal (10000), // Used for hard resets and new players
 	offlineLimit: 1,  // In hours
 }
 
@@ -48,10 +48,11 @@ function getPointGen() {
 	if (!hasUpgrade("p", 11)) gain = gain.times(0)
 	if (hasUpgrade("p", 12)) gain = gain.times(2)
 	if (hasUpgrade("p", 13)) gain = gain.times(3)
+	if (hasUpgrade("p", 34)) gain = gain.times(3)
 	gain = gain.times(buyableEffect("p", 14))
 	if (hasUpgrade('p', 21)) gain = gain.times(upgradeEffect('p', 21))
-		if (hasUpgrade("p", 22)) {
-			let pointUpgrades = [11, 12, 13, 21, 23, 24, 31, 32, 33]
+	if (hasUpgrade("p", 22)) {
+			let pointUpgrades = [11, 12, 13, 21, 23, 24, 31, 32, 33, 34]
 			let unlockedCount = pointUpgrades.reduce((sum, id) => hasUpgrade("p", id) ? sum + 1 : sum, 0)
 	
 			// Count buyable 14 only once if bought
@@ -67,7 +68,7 @@ function getPointGen() {
 		}
 	if (hasUpgrade("p", 23)) gain = gain.pow(1.02)
     // End point increases
-	if (hasUpgrade("p", 33)) gain = gain.add(100000)
+	if (hasUpgrade("p", 33)) gain = gain.add(10000)
 	return gain
 }
 
