@@ -134,13 +134,29 @@
             31: {
                 title: "#8: Subpoints",
                 description: "Unlock the 'subpoints' layer, allowing conversion of points to sub-points.",
-                cost: new Decimal(1),
+                cost: new Decimal(10000),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
                 currencyLayer: "",
                 onPurchase() {
                     player.sp.unlocked = true
                 },
+            },
+            32: {
+                title: "#9: Very big base increase",
+                description: "+5 base point gain. Not broken.",
+                cost: new Decimal(35000),
+                currencyDisplayName: "points",
+                currencyInternalName: "points",
+                currencyLayer: "",
+            },
+            33: {
+                title: "#10: Huge increase... sort of",
+                description: "+100,000 point gain. No multipliers though :)",
+                cost: new Decimal(5),
+                currencyDisplayName: "points",
+                currencyInternalName: "points",
+                currencyLayer: "",
             },
         },   
 
@@ -186,7 +202,9 @@
                 ["upgrade", 24],
             ]],
             ["row", [
-                ["upgrade", 31]
+                ["upgrade", 31],
+                ["upgrade", 32],
+                ["upgrade", 33]
             ]],
         ],
     
@@ -211,8 +229,8 @@
     
         // Function to calculate subpoints from points
         convertToSubpoints() {
-            if (player.points.lt(100000)) return new Decimal(0)
-            return player.points.sub(100000).pow(0.9)
+            if (player.points.lt(250000)) return new Decimal(0)
+            return player.points.sub(250000).pow(0.3)
         },
         tabFormat: [
             ["row", [
@@ -228,15 +246,15 @@
             11: {
                 title: "Convert points → subpoints",
                 canClick() {
-                    return player.points.gte(100000)
+                    return player.points.gte(250000)
                 },
                 onClick() {
                     let subpoints = layers.sp.convertToSubpoints()
                     player.sp.points = player.sp.points.add(subpoints)
-                    player.points = new Decimal(100000) // keep minimum
+                    player.points = new Decimal(0) // keep minimum
                 },
                 display() {
-                    return "Convert points above 100,000 into subpoints using (points-100000)^0.9"
+                    return "Convert points above 250,000 into subpoints using (points-250000)^0.9"
                 }
             }
         },
