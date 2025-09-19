@@ -6,7 +6,7 @@ let modInfo = {
 
 	discordName: "",
 	discordLink: "",
-	initialStartPoints: new Decimal (10), // Used for hard resets and new players
+	initialStartPoints: new Decimal (100000), // Used for hard resets and new players
 	offlineLimit: 1,  // In hours
 }
 
@@ -42,6 +42,29 @@ function getPointGen() {
 		return new Decimal(0)
 
 	let gain = new Decimal(1)
+	if (hasUpgrade("p", 24)) gain = gain.add(1)
+	if (!hasUpgrade("p", 11)) gain = gain.times(0)
+	if (hasUpgrade("p", 12)) gain = gain.times(2)
+	if (hasUpgrade("p", 13)) gain = gain.times(3)
+	gain = gain.times(buyableEffect("p", 14))
+	if (hasUpgrade('p', 21)) gain = gain.times(upgradeEffect('p', 21))
+		if (hasUpgrade("p", 22)) {
+			let pointUpgrades = [11, 12, 13, 21, 23, 24]
+			let unlockedCount = pointUpgrades.reduce((sum, id) => hasUpgrade("p", id) ? sum + 1 : sum, 0)
+	
+			// Count buyable 14 only once if bought
+			if (getBuyableAmount("p", 14).gt(0)) unlockedCount++
+	
+			// Calculate stacking multiplier
+			let multiplier = new Decimal(1)
+			for (let i = 0; i < unlockedCount; i++) {
+				multiplier = multiplier.times(1.2)
+			}
+		
+			gain = gain.times(multiplier)
+		}
+		if (!hasUpgrade("p", 11)) gain = gain.pow(1.02)
+		
 	return gain
 }
 
