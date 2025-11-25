@@ -6,7 +6,7 @@ let modInfo = {
 
 	discordName: "",
 	discordLink: "",
-	initialStartPoints: new Decimal (200000000000000000), // Used for hard resets and new players
+	initialStartPoints: new Decimal (0), // Used for hard resets and new players
 	offlineLimit: 1,  // In hours
 }
 
@@ -42,43 +42,30 @@ function getPointGen() {
 		return new Decimal(0)
 
 	let gain = new Decimal(1)
-	if (hasUpgrade("p", 24)) gain = gain.add(1)
-	if (hasUpgrade("t", 13)) gain = gain.add(1)
-	if (hasUpgrade("pr", 22)) gain = gain.add(2)
-	if (hasUpgrade("p", 32)) gain = gain.add(5)
+	if (hasUpgrade("p", 71)) gain = gain.add(1)
+	if (hasUpgrade("p", 191)) gain = gain.add(2)
 	// Base point increases
 	if (!hasUpgrade("p", 11)) gain = gain.times(0)
-	if (hasUpgrade("t", 12)) gain = gain.times(1.5)
-	if (hasUpgrade("t", 21)) gain = gain.times(2)
-    if (hasUpgrade("p", 12)) gain = gain.times(upgradeEffect("p", 12))
-	if (hasUpgrade("t", 14)) gain = gain.times(upgradeEffect("t", 14))
-	if (hasUpgrade("p", 13)) gain = gain.times(upgradeEffect("p", 13))
-	if (hasUpgrade("p", 34)) gain = gain.times(upgradeEffect("p", 34))
-	if (hasUpgrade("pr", 21)) gain = gain.times(3)
-	gain = gain.times(buyableEffect("p", 14))
-	gain = gain.times(buyableEffect("sp", 32))
-	if (hasUpgrade('p', 21)) gain = gain.times(upgradeEffect('p', 21))
-	if (hasUpgrade("p", 22)) {
-			let pointUpgrades = [11, 12, 13, 21, 23, 24, 31, 32, 33, 34, 41, 42, 43, 44, 51, 52]
-			let unlockedCount = pointUpgrades.reduce((sum, id) => hasUpgrade("p", id) ? sum + 1 : sum, 0)
-	
-			// Count buyable 14 only once if bought
-			if (getBuyableAmount("p", 14).gt(0)) unlockedCount++
-	
-			// Calculate stacking multiplier
-			let multiplier = new Decimal(1)
-			for (let i = 0; i < unlockedCount; i++) {
-				multiplier = multiplier.times(1.2)
-			}
+	// if (hasUpgrade("p", 11)) gain = gain.times(2)	
+	if (hasUpgrade("p", 21)) gain = gain.times(2)
+	if (hasUpgrade("p", 22)) gain = gain.times(3)
+	if (hasUpgrade("p", 31)) gain = gain.times(upgradeEffect("p", 31))
+	if (hasUpgrade("p", 41)) gain = gain.times(2.5)
+	if (hasUpgrade("p", 51)) gain = gain.times(1.5)
+	if (hasUpgrade("p", 62)) gain = gain.times(upgradeEffect("p", 62))
+	if (hasUpgrade("p", 71)) gain = gain.times(1.75)
+	if (hasUpgrade("p", 101)) gain = gain.times(upgradeEffect("p", 101))
+	if (hasUpgrade("p", 111)) gain = gain.times(0.8)
+	if (hasUpgrade("p", 112)) gain = gain.times(3)
+	if (hasUpgrade("p", 121)) gain = gain.times(1.01)
+	if (hasUpgrade("p", 151)) gain = gain.times(2)
+	if (hasUpgrade("p", 161)) gain = gain.times(upgradeEffect("p", 161))
+	if (hasUpgrade("p", 181)) gain = gain.times(2)
+
+	gain = gain.times(buyableEffect("m", 11))
+
+	if (hasUpgrade("p", 131)) gain = gain.add(25000)
 		
-			gain = gain.times(multiplier)
-		}
-	if (hasUpgrade("sp", 21)) gain = gain.times(2)
-	if (hasUpgrade("p", 52)) gain = gain.times(0.05)
-	if (hasUpgrade("p", 52)) gain = gain.pow(1.15)
-	if (hasUpgrade("p", 23)) gain = gain.pow(upgradeEffect("p", 23))
-    // End point increases
-	if (hasUpgrade("p", 33)) gain = gain.add(upgradeEffect("p", 33))
 	return gain
 }
 
