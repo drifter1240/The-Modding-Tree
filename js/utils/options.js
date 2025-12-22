@@ -15,19 +15,21 @@ function getStartOptions() {
 		oldStyle: false,
 		forceTooltips: true,
 		hideMilestonePopups: false,
+		inverseTree: false,
 	}
 }
 
 function toggleOpt(name) {
-	if (name == "oldStyle" && styleCooldown > 0)
-		return;
+	if (name == "oldStyle" && styleCooldown > 0) return;
 
 	options[name] = !options[name];
 	if (name == "hqTree")
 		changeTreeQuality();
 	if (name == "oldStyle")
 		updateStyle();
-}
+	if (name == "inverseTree")
+		player.inverseTree = options.inverseTree
+	}
 var styleCooldown = 0;
 function updateStyle() {
 	styleCooldown = 1;

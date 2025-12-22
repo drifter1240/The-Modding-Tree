@@ -1,3 +1,4 @@
+
 addLayer("layer1", {
     name: "P",
     symbol:"P",
@@ -12,7 +13,7 @@ addLayer("layer1", {
             embedLayer: "p",
             buttonStyle: {
                 "color": "#7cee4fff",
-                "border": "2px solid #7cee4fff"
+                "border": "2px solid #7cee4fff",
             },
             glowColor: "#ffffffff",
         },
@@ -56,21 +57,6 @@ addLayer("layer1", {
             },
             glowColor: "#4e3ee2ff"
         },
-        "Generators": {
-            content: ["main-display",
-            "blank",],
-            unlocked() {return false}
-        },
-        "Uber Prestige": {
-            content: ["main-display",
-            "blank",],
-            unlocked() {return false}
-        },
-        "OMEGA": {
-            content: ["main-display",
-            "blank",],
-            unlocked() {return false}
-        }
     }
 })
 
@@ -100,6 +86,13 @@ addLayer("p", {
                 }
            }
         },
+
+            shouldNotify() {
+                let layer = 'p';
+                return Object.keys(tmp[layer].upgrades).some(
+                    id => canAffordUpgrade(layer, id) && !hasUpgrade(layer, id)
+                );
+            },
 
         
         upgrades: {
@@ -347,7 +340,7 @@ addLayer("p", {
             },
             101: {
                 title: "Upgrade #12",
-                description: "The longer you own this upgrade, the stronger the boost becomes. Formula: log125(time)",
+                description: "The longer you own this upgrade, the stronger this upgrade boosts points. Formula: log125(time)",
                 cost: new Decimal(60000),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
@@ -465,7 +458,7 @@ addLayer("p", {
             },
             161: {
                 title: "Upgrade #19",
-                description: "Points boost itself again. Formula: points^0.05",
+                description: "Points boost themselves again. Formula: points^0.05",
                 cost: new Decimal(25000000),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
@@ -955,164 +948,110 @@ addLayer("p", {
             },
         },   
 
-        /* infoboxes: {
+        infoboxes: {
             1: {
                 title() {return "You have " + format(player.points) + "p (Points) | +" + format(getPointGen()) + "/s‎"},
-                body() {return "Before you begin to play, go to the tree tab and navigate to the settings, then set single-tab mode to ALWAYS. This is very important! Once you've done that, you can click on the white section at the top of this infobox to minimize it."},
+                body() {return "Welcome to Drifter's Upgrade Tree, filled with a shit-ton of upgrades, layers & resets! It's recommended to play with offline mode off, but it's fine either way. Enjoy the game! Note: If you don't like scrolling, you can flip the tree in settings."}, // I am currently trying to make a fix but this is my temporary solution
                 unlocked() {return true}
                 }
-            }, */
+            },
     
-        tabFormat: [
-            ["row", [
-                ["infobox", 1],
-            ]],
-            ["row", [
-                ["upgrade", 11],
-            ]],
-            ["row", [
-                ["upgrade", 21],
-                ["upgrade", 22],
-            ]],
-            ["row", [
-                ["upgrade", 31],
-            ]],
-            ["row", [
-                ["upgrade", 41],
-            ]],
-             ["row", [
-                ["upgrade", 51],
-            ]],
-            ["row", [
-                ["upgrade", 61],
-                ["upgrade", 62],
-                ["upgrade", 63],
-            ]],
-            ["row", [
-                ["upgrade", 71],
-            ]],
-            ["row", [
-                ["upgrade", 81],
-            ]],
-            ["row", [
-                ["upgrade", 91],
-            ]],
-            ["row", [
-                ["upgrade", 101],
-            ]],
-            ["row", [
-                ["upgrade", 111],
-                ["upgrade", 112],
-            ]],
-            ["row", [
-                ["upgrade", 121],
-            ]],
-            ["row", [
-                ["upgrade", 131],
-            ]],
-            ["row", [
-                ["upgrade", 141],
-            ]],
-            ["row", [
-                ["upgrade", 151],
-            ]],
-            ["row", [
-                ["upgrade", 161],
-                ["upgrade", 162],
-            ]],
-            ["row", [
-                ["upgrade", 171],
-            ]],
-            ["row", [
-                ["upgrade", 181],
-            ]],
-            ["row", [
-                ["upgrade", 191],
-                ["upgrade", 192],
-            ]],
-            ["row", [
-                ["upgrade", 201],
-            ]],
-            ["row", [
-                ["upgrade", 211],
-            ]],
-            ["row", [
-                ["upgrade", 221],
-            ]],
-            ["row", [
-                ["upgrade", 231],
-                ["upgrade", 232],
-            ]],
-            ["row", [
-                ["upgrade", 241],
-            ]],
-            ["row", [
-                ["upgrade", 251],
-                ["upgrade", 252],
-            ]],
-            ["row", [
-                ["upgrade", 261],
-            ]],
-            ["row", [
-                ["upgrade", 271],
-                ["upgrade", 272],
-            ]],
-            ["row", [
-                ["upgrade", 281],
-            ]],
-            ["row", [
-                ["upgrade", 291],
-            ]],
-            ["row", [
-                ["upgrade", 301],
-            ]],
-            ["row", [
-                ["upgrade", 311],
-            ]],
-            ["row", [
-                ["upgrade", 321],
-                ["upgrade", 322],
-            ]],
-            ["row", [
-                ["upgrade", 331],
-                ["upgrade", 332],
-            ]],
-            ["row", [
-                ["upgrade", 341],
-                ["upgrade", 342],
-            ]],
-            ["row", [
-                ["upgrade", 351],
-                ["upgrade", 352],
-            ]],
-            ["row", [
-                ["upgrade", 361],
-                ["upgrade", 362],
-            ]],
-            ["row", [
-                ["upgrade", 371],
-            ]],
-            ["row", [
-                ["upgrade", 381],
-            ]],
-            ["row", [
-                ["upgrade", 391],
-            ]],
-            ["row", [
-                ["upgrade", 401],
-            ]],
-            ["row", [
-                ["upgrade", 411],
-            ]],
-             ["row", [
-                ["upgrade", 421],
-                ["upgrade", 422],
-                ["upgrade", 423],
-            ]],
-            ["row", [
-                ["upgrade", 431],
-            ]],
-        ],
+        tabFormat() {
+            const inverseTree = player?.inverseTree ?? false; // I cannot believe to tell you how fucking long it took to just grab a value from options. I want to kill myself
+        if (inverseTree) { return [
+        ["row", [["infobox", 1]]],
+        ["row", [["upgrade", 431]]],
+        ["row", [["upgrade", 421], ["upgrade", 422], ["upgrade", 423]]],
+        ["row", [["upgrade", 411]]],
+        ["row", [["upgrade", 401]]],
+        ["row", [["upgrade", 391]]],
+        ["row", [["upgrade", 381]]],
+        ["row", [["upgrade", 371]]],
+        ["row", [["upgrade", 361], ["upgrade", 362]]],
+        ["row", [["upgrade", 351], ["upgrade", 352]]],
+        ["row", [["upgrade", 341], ["upgrade", 342]]],
+        ["row", [["upgrade", 331], ["upgrade", 332]]],
+        ["row", [["upgrade", 321], ["upgrade", 322]]],
+        ["row", [["upgrade", 311]]],
+        ["row", [["upgrade", 301]]],
+        ["row", [["upgrade", 291]]],
+        ["row", [["upgrade", 281]]],
+        ["row", [["upgrade", 271], ["upgrade", 272]]],
+        ["row", [["upgrade", 261]]],
+        ["row", [["upgrade", 251], ["upgrade", 252]]],
+        ["row", [["upgrade", 241]]],
+        ["row", [["upgrade", 231], ["upgrade", 232]]],
+        ["row", [["upgrade", 221]]],
+        ["row", [["upgrade", 211]]],
+        ["row", [["upgrade", 201]]],
+        ["row", [["upgrade", 191], ["upgrade", 192]]],
+        ["row", [["upgrade", 181]]],
+        ["row", [["upgrade", 171]]],
+        ["row", [["upgrade", 161], ["upgrade", 162]]],
+        ["row", [["upgrade", 151]]],
+        ["row", [["upgrade", 141]]],
+        ["row", [["upgrade", 131]]],
+        ["row", [["upgrade", 121]]],
+        ["row", [["upgrade", 111], ["upgrade", 112]]],
+        ["row", [["upgrade", 101]]],
+        ["row", [["upgrade", 91]]],
+        ["row", [["upgrade", 81]]],
+        ["row", [["upgrade", 71]]],
+        ["row", [["upgrade", 61], ["upgrade", 62], ["upgrade", 63]]],
+        ["row", [["upgrade", 51]]],
+        ["row", [["upgrade", 41]]],
+        ["row", [["upgrade", 31]]],
+        ["row", [["upgrade", 21], ["upgrade", 22]]],
+        ["row", [["upgrade", 11]]],
+    ];
+} else { return [
+     ["row", [["infobox", 1]]],
+        ["row", [["upgrade", 11]]],
+        ["row", [["upgrade", 21], ["upgrade", 22]]],
+        ["row", [["upgrade", 31]]],
+        ["row", [["upgrade", 41]]],
+        ["row", [["upgrade", 51]]],
+        ["row", [["upgrade", 61], ["upgrade", 62], ["upgrade", 63]]],
+        ["row", [["upgrade", 71]]],
+        ["row", [["upgrade", 81]]],
+        ["row", [["upgrade", 91]]],
+        ["row", [["upgrade", 101]]],
+        ["row", [["upgrade", 111], ["upgrade", 112]]],
+        ["row", [["upgrade", 121]]],
+        ["row", [["upgrade", 131]]],
+        ["row", [["upgrade", 141]]],
+        ["row", [["upgrade", 151]]],
+        ["row", [["upgrade", 161], ["upgrade", 162]]],
+        ["row", [["upgrade", 171]]],
+        ["row", [["upgrade", 181]]],
+        ["row", [["upgrade", 191], ["upgrade", 192]]],
+        ["row", [["upgrade", 201]]],
+        ["row", [["upgrade", 211]]],
+        ["row", [["upgrade", 221]]],
+        ["row", [["upgrade", 231], ["upgrade", 232]]],
+        ["row", [["upgrade", 241]]],
+        ["row", [["upgrade", 251], ["upgrade", 252]]],
+        ["row", [["upgrade", 261]]],
+        ["row", [["upgrade", 271], ["upgrade", 272]]],
+        ["row", [["upgrade", 281]]],
+        ["row", [["upgrade", 291]]],
+        ["row", [["upgrade", 301]]],
+        ["row", [["upgrade", 311]]],
+        ["row", [["upgrade", 321], ["upgrade", 322]]],
+        ["row", [["upgrade", 331], ["upgrade", 332]]],
+        ["row", [["upgrade", 341], ["upgrade", 342]]],
+        ["row", [["upgrade", 351], ["upgrade", 352]]],
+        ["row", [["upgrade", 361], ["upgrade", 362]]],
+        ["row", [["upgrade", 371]]],
+        ["row", [["upgrade", 381]]],
+        ["row", [["upgrade", 391]]],
+        ["row", [["upgrade", 401]]],
+        ["row", [["upgrade", 411]]],
+        ["row", [["upgrade", 421], ["upgrade", 422], ["upgrade", 423]]],
+        ["row", [["upgrade", 431]]],
+]}
+},
+
     })
 
 addLayer("m", {
