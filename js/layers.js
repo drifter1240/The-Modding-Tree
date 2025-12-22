@@ -777,7 +777,7 @@ addLayer("p", {
             },
             331: {
                 title: "Upgrade #41-X",
-                description: "+25 base clicks, but x0.5 money and points.",
+                description: "+10 base clicks, but x0.5 money and points.",
                 cost: new Decimal(4e14),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
@@ -796,7 +796,7 @@ addLayer("p", {
                     return (player.c.points.max(2).log(150)).max(1) // the first max does nothing btw
                 },
                 effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
-                unlocked() {return hasUpgrade(this.layer,331)},
+                unlocked() {return hasUpgrade(this.layer,332)},
                 branches: [341],
             },
             341: {
