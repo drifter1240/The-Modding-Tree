@@ -14,7 +14,12 @@ addLayer("layer1", {
                 "color": "#7cee4fff",
                 "border": "2px solid #7cee4fff"
             },
-            glowColor: "#7cee4fff"
+            glowColor: "#ffffffff",
+            glow: function() { return tmp.p.anyUpgradeBuyable; },
+style: function() {
+    if (tmp.p.anyUpgradeBuyable) return { "box-shadow": "0 0 20px 5px white" };
+    return {};
+}
         },
         "Money": {
             embedLayer: "m",
@@ -82,9 +87,20 @@ addLayer("p", {
             points: new Decimal(1),
         } },
         color: "#7cee4fff",
-        row: 0, // literallly the only layer that needs null :sob:
+        row: 0, 
         layerShown() { return false },
 
+        update(diff) {
+            tmp.p.anyUpgradeBuyable = false;
+             for (let id in this.upgrades) {
+                 let upg = this.upgrades[id];
+                 if (upg.canAfford && upg.canAfford()) {
+                 tmp.p.anyUpgradeBuyable = true;
+                break;
+        }
+    }
+}
+, 
          doReset(resettingLayer) {
             if (resettingLayer === "sp") {
                 layerDataReset(this.layer)
@@ -1271,7 +1287,7 @@ addLayer("m", {
         Currently: x${this.effect()}  
         Bought: ${bought}/${cap}  
         Cost: ${format(this.cost(bought))} points` */
-        return `Multiply point gain by x1.25 each purchase. 
+        return `Multiply point gain by +25% each purchase. 
         After every 10 levels, the effect is multiplied by x1.5.
         Currently: x${this.effect()}  
         Bought: ${bought}/${cap}  
@@ -1294,7 +1310,7 @@ addLayer("m", {
     let amt = getBuyableAmount("m", 11)  
     let base = new Decimal(1).add(amt.times(0.25))
     let bonus = Decimal.pow(1.5, Math.floor(amt / 10))
-    return base.times(bonus).times(100).round().div(100) // keep as Decimal
+    return format(base.times(bonus)) 
 },
     cap() {
         let base = 100
@@ -1315,7 +1331,7 @@ addLayer("m", {
         Currently: x${this.effect()}  
         Bought: ${bought}/${cap}  
         Cost: ${format(this.cost(bought))} points` */
-        return `Multiply money gain by x1.2 each purchase. 
+        return `Multiply money gain by +20% each purchase. 
         After every 10 levels, the effect is multiplied by x1.4.
         Currently: x${this.effect()}  
         Bought: ${bought}/${cap}  
@@ -1338,7 +1354,7 @@ addLayer("m", {
     let amt = getBuyableAmount("m", 12)  
     let base = new Decimal(1).add(amt.times(0.2))
     let bonus = Decimal.pow(1.4, Math.floor(amt / 10))
-    return base.times(bonus).times(100).round().div(100) // keep as Decimal
+    return format(base.times(bonus))  // keep as Decimal
 },
     cap() {
         let base = 100
@@ -1450,7 +1466,7 @@ addLayer("pr", {
                 title() {
                 return "You have " + format(player.pr.points) + "PR (Prestige)"
             },
-                body() {return "Prestige resets your points and money, but gives prestige points for milestones. Make sure to prestige whenever you can!"},
+                body() {return "Prestige resets your points and money (does not reset upgrades), but gives prestige points for milestones. Make sure to prestige whenever you can!"},
                 unlocked() {return true}
                 }
             },

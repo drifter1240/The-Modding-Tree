@@ -37,7 +37,7 @@ function canGenPoints(){
 }
 
 function globalMult() { // hi if ur seeing this its for a loop layer :3
-    let mult = new Decimal(1)
+    let mult = new Decimal(10)
     return mult
 }
 
