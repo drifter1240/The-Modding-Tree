@@ -165,14 +165,9 @@ addLayer("p", {
             31: {
                 title: "Upgrade #3",
                 description() {
-                    // Point upgrades
                     let pointUpgrades = [11, 21, 22, 31, 41, 51, 61, 62, 63, 71, 81, 91, 101, 111, 112, 121, 131, 141, 151, 161, 162, 171, 181, 191, 192, 201, 211, 221, 231, 232, 241, 251, 261, 271, 272, 281, 291, 301, 311, 321, 322, 331, 332, 341, 342, 351, 352, 361, 362, 371, 381, 391, 401, 411]
                     let unlockedCount = pointUpgrades.reduce((sum, id) => hasUpgrade("p", id) ? sum + 1 : sum, 0)
-            
-                    /* Count buyable 14 only once if bought
-                    if (getBuyableAmount("p", 14).gt(0)) unlockedCount++
-                    */
-                    // Calculate stacking multiplier
+        
                     let normalMultiplier = new Decimal(1)
                     for (let i = 0; i < unlockedCount; i++) {
                         normalMultiplier = normalMultiplier.times(1.1)
@@ -357,15 +352,12 @@ addLayer("p", {
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
 
-                // Save the time when the upgrade was bought
                 onPurchase() {
                     player[this.layer].upgradeTimes = player[this.layer].upgradeTimes || {};
                     player[this.layer].upgradeTimes[this.id] = player.time;
                 },
 
-                // Calculate effect based on time since purchase
                 effect() {
-                    // If somehow not purchased or no timestamp, effect = 1
                     if (!player[this.layer].upgradeTimes ||
                         !player[this.layer].upgradeTimes[this.id])
                         return new Decimal(1);
@@ -376,7 +368,6 @@ addLayer("p", {
                     if (hasUpgrade(this.layer,291)) timeOwned = timeOwned.times(1000)
                     if (hasUpgrade("sp", 61)) timeOwned = timeOwned.pow(5)
 
-                    // Example scaling: grows logarithmically, but you can change it
                     return timeOwned.add(1).log(125).add(1);
                 },
 
@@ -561,14 +552,9 @@ addLayer("p", {
                     if (!hasUpgrade("p", 201)) 
                         return "For every upgrade in this layer unlocked, multiply money gain by 1.05 (compounding)."
             
-                    // Point upgrades
                     let pointUpgrades = [11, 21, 22, 31, 41, 51, 61, 62, 63, 71, 81, 91, 101, 111, 112, 121, 131, 141, 151, 161, 162, 171, 181, 191, 192, 201, 211, 221, 231, 232, 241, 251, 261, 271, 272, 281, 291, 301, 311, 321, 322, 331, 332, 341, 342, 351, 352, 361, 362, 371, 381, 391, 401, 411]
                     let unlockedCount = pointUpgrades.reduce((sum, id) => hasUpgrade("p", id) ? sum + 1 : sum, 0)
             
-                    /* Count buyable 14 only once if bought
-                    if (getBuyableAmount("p", 14).gt(0)) unlockedCount++
-                    */
-                    // Calculate stacking multiplier
                     let multiplier = new Decimal(1)
                     for (let i = 0; i < unlockedCount; i++) {
                         multiplier = multiplier.times(1.05)
@@ -1329,7 +1315,7 @@ addLayer("m", {
     },
     buy() {
         let bought = getBuyableAmount("m", 12)
-        if (bought.gte(this.cap())) return // stop if capped
+        if (bought.gte(this.cap())) return
         player.m.points = player.m.points.sub(this.cost(bought))
         setBuyableAmount("m", 12, bought.add(1))
     },
@@ -1337,7 +1323,7 @@ addLayer("m", {
     let amt = getBuyableAmount("m", 12)  
     let base = new Decimal(1).add(amt.times(0.2))
     let bonus = Decimal.pow(1.4, Math.floor(amt / 10))
-    return format(base.times(bonus))  // keep as Decimal
+    return format(base.times(bonus))
 },
     cap() {
         let base = 100
@@ -1369,7 +1355,7 @@ addLayer("m", {
     },
     buy() {
         let bought = getBuyableAmount("m", 13)
-        if (bought.gte(this.cap())) return // stop if capped
+        if (bought.gte(this.cap())) return
         player.m.points = player.m.points.sub(this.cost(bought))
         setBuyableAmount("m", 13, bought.add(1))
     },
@@ -1616,6 +1602,7 @@ addLayer("sp", {
     if (hasMilestone("c", 2)) {
         gain = gain.times(player.c.points.pow(0.025));
     }
+    gain = gain.floor();
     return gain
     },
     layerShown() { return false },
