@@ -748,7 +748,7 @@ addLayer("p", {
             321: {
                 title: "Upgrade #39",
                 description: "x2 click gain.",
-                cost: new Decimal(2e9),
+                cost: new Decimal(5e9),
                 currencyDisplayName: "dollars",
                 currencyInternalName: "points",
                 currencyLayer: "m",
@@ -758,7 +758,7 @@ addLayer("p", {
             322: {
                 title: "Upgrade #40",
                 description: "x2 point gain.",
-                cost: new Decimal(5e9),
+                cost: new Decimal(1e10),
                 currencyDisplayName: "dollars",
                 currencyInternalName: "points",
                 currencyLayer: "m",
@@ -777,7 +777,7 @@ addLayer("p", {
             },
             331: {
                 title: "Upgrade #41-X",
-                description: "+10 base clicks, but x0.3 money and points.",
+                description: "+10 base clicks, but x0.4 money and points.",
                 cost: new Decimal(4e14),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
@@ -835,7 +835,7 @@ addLayer("p", {
             },
             361: {
                 title: "Upgrade #46",
-                description: "+1e13 point gain. Not affected by multipliers.",
+                description: "+2.5e13 point gain. Not affected by multipliers.",
                 cost: new Decimal(4.65e15),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
@@ -845,7 +845,7 @@ addLayer("p", {
             },
             362: {
                 title: "Upgrade #47",
-                description: "+250,000,000 money gain. Not affected by multipliers.",
+                description: "+1e9 money gain. Not affected by multipliers.",
                 cost: new Decimal(1.3e16),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
@@ -909,7 +909,7 @@ addLayer("p", {
             422: {
                 title: "Upgrade #53",
                 description: "Unlock the Autoclicker, which clicks at a rate of 0.1/s.",
-                cost: new Decimal(8e19),
+                cost: new Decimal(5e19),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
                 currencyLayer: "",
@@ -919,7 +919,7 @@ addLayer("p", {
             421: {
                 title: "Upgrade #54",
                 description: "x3 clicks.",
-                cost: new Decimal(1e20),
+                cost: new Decimal(7e19),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
                 currencyLayer: "",
@@ -929,7 +929,7 @@ addLayer("p", {
             423: {
                 title: "Upgrade #55",
                 description: "Improve the autoclicker to 0.2/s.",
-                cost: new Decimal(2e20),
+                cost: new Decimal(1e20),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
                 currencyLayer: "",
@@ -1103,7 +1103,7 @@ addLayer("m", {
     if (hasUpgrade("p", 272)) gain = gain.times(6)
     if (hasUpgrade("p", 281)) gain = gain.times(1.02)
     if (hasUpgrade("p", 311)) gain = gain.times(2)
-    if (hasUpgrade("p", 331)) gain = gain.times(0.3)
+    if (hasUpgrade("p", 331)) gain = gain.times(0.4)
     if (hasUpgrade("p", 341)) gain = gain.times(upgradeEffect("p", 341))
     if (hasUpgrade("p", 371)) gain = gain.times(1.5)
     if (hasUpgrade("p", 381)) gain = gain.times(7)
@@ -1119,7 +1119,7 @@ addLayer("m", {
         gain = gain.times(player.c.points.pow(0.125));
     }
 
-    if (hasUpgrade("p", 362)) gain = gain.add(250000000)
+    if (hasUpgrade("p", 362)) gain = gain.add(1e9 * diff)
 
     gain = gain.times(globalMult())
 
@@ -1148,7 +1148,7 @@ addLayer("m", {
     if (hasUpgrade("p", 272)) gain = gain.times(6)
     if (hasUpgrade("p", 281)) gain = gain.times(1.02)
     if (hasUpgrade("p", 311)) gain = gain.times(2)
-    if (hasUpgrade("p", 331)) gain = gain.times(0.3)
+    if (hasUpgrade("p", 331)) gain = gain.times(0.4)
     if (hasUpgrade("p", 341)) gain = gain.times(upgradeEffect("p", 341))
     if (hasUpgrade("p", 371)) gain = gain.times(1.5)
     if (hasUpgrade("p", 381)) gain = gain.times(7)
@@ -1164,7 +1164,7 @@ addLayer("m", {
         gain = gain.times(player.c.points.pow(0.125));
     } // I FORGOT THIS CUHHH
 
-    if (hasUpgrade("p", 362)) gain = gain.add(250000000)
+    if (hasUpgrade("p", 362)) gain = gain.add(1e9)
 
     gain = gain.times(globalMult())
 
@@ -1180,7 +1180,7 @@ addLayer("m", {
                 let perSec = layers["m"].getMoneyPerSecond()  // use the layer reference
                 return "You have " + format(player.m.points) + "$ (Money) | +" + format(perSec) + "/s"
             },
-                body() {return "For every new layer you unlock, there will be an infobox. Money can be spent on buyables that will speed up your progress."},
+                body() {return "For every new layer you unlock, there will be an infobox. Money can be spent on buyables that will speed up your progress. Tip: You can hold down buyables to buy them quickly."},
                 unlocked() {return true}
                 }
             },
@@ -1440,11 +1440,12 @@ addLayer("c", {
     update(diff) {
         if (hasUpgrade("p", 422)) {
             let gain = new Decimal(diff)
+            gain = gain.add(buyableEffect("m", 13).times(diff))
+            
             gain = gain.times(0.1)
             if (hasUpgrade("p", 423)) gain = gain.times(2)
 
-            gain = gain.add(buyableEffect("m", 13))
-            if (hasUpgrade("p", 331)) gain = gain.add(25)
+            if (hasUpgrade("p", 331)) gain = gain.add(10)
             if (hasUpgrade("p", 321)) gain = gain.times(2)
             if (hasUpgrade("p", 371)) gain = gain.times(1.5)
             if (hasUpgrade("p", 421)) gain = gain.times(3)
@@ -1464,7 +1465,7 @@ addLayer("c", {
     clickMult() {
         let gain = new Decimal(1)
         gain = gain.add(buyableEffect("m", 13))
-        if (hasUpgrade("p", 331)) gain = gain.add(25)
+        if (hasUpgrade("p", 331)) gain = gain.add(10)
         if (hasUpgrade("p", 321)) gain = gain.times(2)
         if (hasUpgrade("p", 371)) gain = gain.times(1.5)
         if (hasUpgrade("p", 421)) gain = gain.times(3)
@@ -1550,7 +1551,7 @@ addLayer("sp", {
                 title() {
                 return "You have " + format(player.sp.points) + "SP (Subpoints)"
             },
-                body() {return "Welcome to your first 'reset'. Subpoints reset everything so far but grant sub-points which are used to buff upgrades. You must have Upgrade #51 and at least 1e19 points to reset. It's recommended to get 6 subpoints for your first reset. Formula: points/1e18^0.8"},
+                body() {return "Welcome to your first 'reset'. Subpoints reset everything so far but grant sub-points which are used to buff upgrades. You must have Upgrade #51 and at least 1e18 points to reset. It's recommended to get 6 subpoints for your first reset. Formula: points/1e18^0.8"},
                 unlocked() {return true}
                 }
             },
@@ -1563,7 +1564,7 @@ addLayer("sp", {
                 currencyInternalName: "points",
                 branches: [21],
                 currencyLayer: "sp",
-                unlocked() { return player.sp && player.sp.points.gte(0.01)},
+                unlocked() { return player.sp && player.sp.points.gte(0.01) || hasUpgrade(this.layer,11)},
             },
             21: {
                 title: "Upgrade #2-S",
@@ -1698,6 +1699,6 @@ addLayer("sp", {
             ["row", [
                 ["upgrade", 101],
             ]],
-        ]
+        ],
     }
 })
