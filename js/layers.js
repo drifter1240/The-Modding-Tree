@@ -777,7 +777,7 @@ addLayer("p", {
             },
             331: {
                 title: "Upgrade #41-X",
-                description: "+10 base clicks, but x0.5 money and points.",
+                description: "+10 base clicks, but x0.3 money and points.",
                 cost: new Decimal(4e14),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
@@ -788,7 +788,7 @@ addLayer("p", {
             342: {
                 title: "Upgrade #42",
                 description: "Clicks boost Points again. Formula: log150(clicks)",
-                cost: new Decimal(4e14),
+                cost: new Decimal(3e14),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
                 currencyLayer: "",
@@ -802,7 +802,7 @@ addLayer("p", {
             341: {
                 title: "Upgrade #43",
                 description: "Clicks boost Money again. Formula: log125(clicks)",
-                cost: new Decimal(9.5e14),
+                cost: new Decimal(6.5e14),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
                 currencyLayer: "",
@@ -816,7 +816,7 @@ addLayer("p", {
             351: {
                 title: "Upgrade #44",
                 description: "+5 base point gain.",
-                cost: new Decimal(3e15),
+                cost: new Decimal(1.75e15),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
                 currencyLayer: "",
@@ -826,7 +826,7 @@ addLayer("p", {
             352: {
                 title: "Upgrade #45",
                 description: "+4 base money gain.",
-                cost: new Decimal(1.3e16),
+                cost: new Decimal(8.75e15),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
                 currencyLayer: "",
@@ -836,7 +836,7 @@ addLayer("p", {
             361: {
                 title: "Upgrade #46",
                 description: "+1e13 point gain. Not affected by multipliers.",
-                cost: new Decimal(8.65e15),
+                cost: new Decimal(4.65e15),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
                 currencyLayer: "",
@@ -846,7 +846,7 @@ addLayer("p", {
             362: {
                 title: "Upgrade #47",
                 description: "+250,000,000 money gain. Not affected by multipliers.",
-                cost: new Decimal(2.25e16),
+                cost: new Decimal(1.3e16),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
                 currencyLayer: "",
@@ -856,7 +856,7 @@ addLayer("p", {
             371: {
                 title: "Upgrade #48",
                 description: "x1.5 money, point and click gain.",
-                cost: new Decimal(5e16),
+                cost: new Decimal(3e16),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
                 currencyLayer: "",
@@ -866,7 +866,7 @@ addLayer("p", {
             381: {
                 title: "Upgrade #49",
                 description: "Almost halfway! x7 money gain.",
-                cost: new Decimal(1.7e17),
+                cost: new Decimal(9e16),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
                 currencyLayer: "",
@@ -876,7 +876,7 @@ addLayer("p", {
             391: {
                 title: "Upgrade #50",
                 description: "Halfway point! x5 point gain.",
-                cost: new Decimal(5e17),
+                cost: new Decimal(2.5e17),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
                 currencyLayer: "",
@@ -885,8 +885,8 @@ addLayer("p", {
             },
             401: {
                 title: "Upgrade #51", // fun facts with drifter: This is intended to be #50, but I accidentally made two Upgrade #37s, so yeah
-                description: "x3 point gain & unlock a new sub-layer. This one will be more interesting.",
-                cost: new Decimal(1e19),
+                description: "x2 point gain & unlock a new sub-layer. This one will be more interesting.",
+                cost: new Decimal(1e18),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
                 currencyLayer: "",
@@ -899,7 +899,7 @@ addLayer("p", {
             411: {
                 title: "Upgrade #52",
                 description: "x1.1 point gain.",
-                cost: new Decimal(1e20),
+                cost: new Decimal(1e19),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
                 currencyLayer: "",
@@ -909,7 +909,7 @@ addLayer("p", {
             422: {
                 title: "Upgrade #53",
                 description: "Unlock the Autoclicker, which clicks at a rate of 0.1/s.",
-                cost: new Decimal(2e20),
+                cost: new Decimal(8e19),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
                 currencyLayer: "",
@@ -919,7 +919,7 @@ addLayer("p", {
             421: {
                 title: "Upgrade #54",
                 description: "x3 clicks.",
-                cost: new Decimal(4e20),
+                cost: new Decimal(1e20),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
                 currencyLayer: "",
@@ -929,7 +929,7 @@ addLayer("p", {
             423: {
                 title: "Upgrade #55",
                 description: "Improve the autoclicker to 0.2/s.",
-                cost: new Decimal(3e20),
+                cost: new Decimal(2e20),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
                 currencyLayer: "",
@@ -1103,7 +1103,7 @@ addLayer("m", {
     if (hasUpgrade("p", 272)) gain = gain.times(6)
     if (hasUpgrade("p", 281)) gain = gain.times(1.02)
     if (hasUpgrade("p", 311)) gain = gain.times(2)
-    if (hasUpgrade("p", 331)) gain = gain.times(0.5)
+    if (hasUpgrade("p", 331)) gain = gain.times(0.3)
     if (hasUpgrade("p", 341)) gain = gain.times(upgradeEffect("p", 341))
     if (hasUpgrade("p", 371)) gain = gain.times(1.5)
     if (hasUpgrade("p", 381)) gain = gain.times(7)
@@ -1148,7 +1148,7 @@ addLayer("m", {
     if (hasUpgrade("p", 272)) gain = gain.times(6)
     if (hasUpgrade("p", 281)) gain = gain.times(1.02)
     if (hasUpgrade("p", 311)) gain = gain.times(2)
-    if (hasUpgrade("p", 331)) gain = gain.times(0.5)
+    if (hasUpgrade("p", 331)) gain = gain.times(0.3)
     if (hasUpgrade("p", 341)) gain = gain.times(upgradeEffect("p", 341))
     if (hasUpgrade("p", 371)) gain = gain.times(1.5)
     if (hasUpgrade("p", 381)) gain = gain.times(7)
@@ -1526,14 +1526,14 @@ addLayer("sp", {
     type: "normal", 
     row: 4,
     canReset() {
-    return (player.points.gte("1e19") && hasUpgrade("p", 401))
+    return (player.points.gte("1e18") && hasUpgrade("p", 401))
     },
     getResetGain() {
     let base = player.points  
-    if (player.points.lt("1e19")) {
+    if (player.points.lt("1e18")) {
         return new Decimal(0)
     }
-    let gain = base.div(new Decimal("1e19")).pow(0.8)
+    let gain = base.div(new Decimal("1e18")).pow(0.8)
     gain = gain.times(globalMult())
     if (hasMilestone("pr", 4)) {
         gain = gain.times((player.pr.points.sub(14).times(0.5)).add(1));
@@ -1550,7 +1550,7 @@ addLayer("sp", {
                 title() {
                 return "You have " + format(player.sp.points) + "SP (Subpoints)"
             },
-                body() {return "Welcome to your first 'reset'. Subpoints reset everything so far but grant sub-points which are used to buff upgrades. You must have Upgrade #51 and at least 1e19 points to reset. It's recommended to get 6 subpoints for your first reset. Formula: points/1e19^0.8"},
+                body() {return "Welcome to your first 'reset'. Subpoints reset everything so far but grant sub-points which are used to buff upgrades. You must have Upgrade #51 and at least 1e19 points to reset. It's recommended to get 6 subpoints for your first reset. Formula: points/1e18^0.8"},
                 unlocked() {return true}
                 }
             },
