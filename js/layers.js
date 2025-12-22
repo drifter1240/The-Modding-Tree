@@ -1133,7 +1133,10 @@ addLayer("m", {
     gain = gain.times(buyableEffect("m", 12))
     if (!player.m.unlocked) gain = gain.times(0)
     if (!hasUpgrade("p", 63)) gain = gain.times(0)
-    if (hasUpgrade("p", 91)) gain = gain.times(3)
+    if (hasUpgrade("p", 91)) {
+		if (hasUpgrade("sp", 31)) gain = gain.times(15)
+		else gain = gain.times(3)
+	}
     if (hasUpgrade("p", 111)) gain = gain.times(3)
 	if (hasUpgrade("p", 112)) gain = gain.times(0.8)
     if (hasUpgrade("p", 121)) gain = gain.times(1.01)
