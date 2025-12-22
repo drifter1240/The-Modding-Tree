@@ -15,11 +15,6 @@ addLayer("layer1", {
                 "border": "2px solid #7cee4fff"
             },
             glowColor: "#ffffffff",
-            glow: function() { return tmp.p.anyUpgradeBuyable; },
-style: function() {
-    if (tmp.p.anyUpgradeBuyable) return { "box-shadow": "0 0 20px 5px white" };
-    return {};
-}
         },
         "Money": {
             embedLayer: "m",
@@ -89,18 +84,6 @@ addLayer("p", {
         color: "#7cee4fff",
         row: 0, 
         layerShown() { return false },
-
-        update(diff) {
-            tmp.p.anyUpgradeBuyable = false;
-             for (let id in this.upgrades) {
-                 let upg = this.upgrades[id];
-                 if (upg.canAfford && upg.canAfford()) {
-                 tmp.p.anyUpgradeBuyable = true;
-                break;
-        }
-    }
-}
-, 
          doReset(resettingLayer) {
             if (resettingLayer === "sp") {
                 layerDataReset(this.layer)
