@@ -1270,7 +1270,7 @@ addLayer("m", {
         Currently: x${this.effect()}  
         Bought: ${bought}/${cap}  
         Cost: ${format(this.cost(bought))} points` */
-        return `Multiply point gain by +25% each purchase. 
+        return `Multiply point gain by +25% additive each purchase. 
         After every 10 levels, the effect is multiplied by x1.5.
         Currently: x${this.effect()}  
         Bought: ${bought}/${cap}  
@@ -1314,7 +1314,7 @@ addLayer("m", {
         Currently: x${this.effect()}  
         Bought: ${bought}/${cap}  
         Cost: ${format(this.cost(bought))} points` */
-        return `Multiply money gain by +20% each purchase. 
+        return `Multiply money gain by +20% additive each purchase. 
         After every 10 levels, the effect is multiplied by x1.4.
         Currently: x${this.effect()}  
         Bought: ${bought}/${cap}  
