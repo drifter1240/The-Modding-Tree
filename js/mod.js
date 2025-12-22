@@ -1,6 +1,6 @@
 let modInfo = {
-	name: "The ??? Tree",
-	author: "nobody",
+	name: "Drifter's Upgrade Tree",
+	author: "Drifter1240",
 	pointsName: "points",
 	modFiles: ["layers.js", "tree.js"],
 
@@ -17,9 +17,9 @@ let VERSION = {
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-	<h3>v0.0</h3><br>
-		- Added things.<br>
-		- Added stuff.`
+	<h3>v0.01</h3><br>
+		- Added the first 55 upgrades & 4 sub-layers.<br>
+		- Absolutely not balanced.`
 
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
 
@@ -36,6 +36,11 @@ function canGenPoints(){
 	return true
 }
 
+function globalMult() { // hi if ur seeing this its for a loop layer :3
+    let mult = new Decimal(1)
+    return mult
+}
+
 // Calculate points/sec!
 function getPointGen() {
 	if(!canGenPoints())
@@ -44,10 +49,13 @@ function getPointGen() {
 	let gain = new Decimal(1)
 	if (hasUpgrade("p", 71)) gain = gain.add(1)
 	if (hasUpgrade("p", 191)) gain = gain.add(2)
+	if (hasUpgrade("p", 351)) gain = gain.add(5)
 	// Base point increases
 	if (!hasUpgrade("p", 11)) gain = gain.times(0)
-	// if (hasUpgrade("p", 11)) gain = gain.times(2)	
-	if (hasUpgrade("p", 21)) gain = gain.times(2)
+	if (hasUpgrade("p", 21)) {
+		if (hasUpgrade("sp", 21)) gain = gain.times(5)
+		else gain = gain.times(2)
+	}
 	if (hasUpgrade("p", 22)) gain = gain.times(3)
 	if (hasUpgrade("p", 31)) gain = gain.times(upgradeEffect("p", 31))
 	if (hasUpgrade("p", 41)) gain = gain.times(2.5)
@@ -60,11 +68,43 @@ function getPointGen() {
 	if (hasUpgrade("p", 121)) gain = gain.times(1.01)
 	if (hasUpgrade("p", 151)) gain = gain.times(2)
 	if (hasUpgrade("p", 161)) gain = gain.times(upgradeEffect("p", 161))
+	if (hasUpgrade("p", 162)) gain = gain.times(2)
 	if (hasUpgrade("p", 181)) gain = gain.times(2)
+	if (hasUpgrade("p", 221)) gain = gain.times(upgradeEffect("p", 221))
+	if (hasUpgrade("p", 232)) gain = gain.times(1.5)
+	if (hasUpgrade("p", 231)) gain = gain.times(3)
+	if (hasUpgrade("p", 251)) gain = gain.div(0.5)
+	if (hasUpgrade("p", 261)) gain = gain.times(1.25)
+	if (hasUpgrade("p", 271)) gain = gain.times(2.5)
+	if (hasUpgrade("p", 281)) gain = gain.times(1.02)
+	if (hasUpgrade("p", 322)) gain = gain.times(2)
+	if (hasUpgrade("p", 331)) gain = gain.times(0.5)
+	if (hasUpgrade("p", 342)) gain = gain.times(upgradeEffect("p", 342))
+	if (hasUpgrade("p", 371)) gain = gain.times(1.5)
+	if (hasUpgrade("p", 391)) gain = gain.times(5)
+	if (hasUpgrade("p", 401)) gain = gain.times(3)
+	if (hasUpgrade("p", 411)) gain = gain.times(1.1)
+
+	if (hasUpgrade("sp", 11)) gain = gain.times(2) // Just because I'm lazy lul (real reason is because the +1 base would be nullified quickly and it would just feel like a regular run)
+	if (hasUpgrade("sp", 81)) gain = gain.times(upgradeEffect("sp", 81))
+
+	if (hasMilestone("pr", 0)) {
+        if (hasUpgrade("sp", 41)) gain = gain.times(player.pr.points.add(1).times(1.5));
+		else gain = gain.times(player.pr.points.add(1));
+    }
+	if (hasMilestone("pr", 2)) {
+        gain = gain.times(new Decimal(1.1).pow(player.pr.points.sub(5)));
+    }
+	if (hasMilestone("c", 0)) {
+        gain = gain.times(player.c.points.pow(0.15));
+    }
 
 	gain = gain.times(buyableEffect("m", 11))
 
 	if (hasUpgrade("p", 131)) gain = gain.add(25000)
+	if (hasUpgrade("p", 361)) gain = gain.add(1e13)
+
+	gain = gain.times(globalMult())
 		
 	return gain
 }
