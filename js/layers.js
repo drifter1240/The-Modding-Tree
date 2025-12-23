@@ -1409,7 +1409,7 @@ addLayer("pr", {
     4: {
         requirementDescription: "15 Prestige Points",
         effectDescription: "Boosts subpoint gain by +50% additive per prestige point past 14 prestige points.",
-        done() { return player.pr.points.gte(15) && hasUpgrade("pr",11) },
+        done() { return player.pr.points.gte(15) && hasUpgrade("sp",11) },
         unlocked() {return hasUpgrade("sp",11)},
     },
     5: {
