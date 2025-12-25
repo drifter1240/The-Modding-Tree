@@ -89,7 +89,7 @@ addLayer("layer2", {
     color: "#13c5dcff",
     type: "none",
     tooltip: "Layer 2: Ascension",
-    layerShown() {if (hasUpgrade('p',801) || player.a.points.gte(0.01) || hasUpgrade("a", 11) || player.bonus1.points.gte(0) || getBuyableAmount("bonus1", 11).gt(0) || getBuyableAmount("bonus1", 12).gt(0) || getBuyableAmount("bonus1", 21).gt(0) || getBuyableAmount("bonus1", 22).gt(0)) return true
+    layerShown() {if (hasUpgrade('p',801) || player.a.points.gt(0) || hasUpgrade("a", 11) || player.bonus1.points.gt(0) || getBuyableAmount("bonus1", 11).gt(0) || getBuyableAmount("bonus1", 12).gt(0) || getBuyableAmount("bonus1", 21).gt(0) || getBuyableAmount("bonus1", 22).gt(0)) return true
             else return false},
     
     tabFormat: {
@@ -103,7 +103,7 @@ addLayer("layer2", {
         },
         "Crystals": {
             embedLayer: "bonus1",
-            unlocked() {if (hasUpgrade('a',161) || player.bonus1.points.gte(0) || getBuyableAmount("bonus1", 11).gt(0) || getBuyableAmount("bonus1", 12).gt(0) || getBuyableAmount("bonus1", 21).gt(0) || getBuyableAmount("bonus1", 22).gt(0)) return true
+            unlocked() {if (hasUpgrade('a',161) || player.bonus1.points.gt(0) || getBuyableAmount("bonus1", 11).gt(0) || getBuyableAmount("bonus1", 12).gt(0) || getBuyableAmount("bonus1", 21).gt(0) || getBuyableAmount("bonus1", 22).gt(0)) return true
             else return false},
             buttonStyle: {
                 "color": "#a30fe7ff",
