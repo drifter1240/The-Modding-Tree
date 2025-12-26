@@ -125,11 +125,12 @@ addLayer("p", {
         row: 0, 
         layerShown() { return false },
          doReset(resettingLayer) {
+            let had101 = hasUpgrade(this.layer, 101)
             if (resettingLayer === "sp") {
                 if (!hasUpgrade("a", 72)) {
                 layerDataReset(this.layer) 
                 if (hasUpgrade("sp", 41) && !hasUpgrade("a", 72)) {
-                    player[this.layer].upgrades = [211]
+                    player[this.layer].upgrades.push(211)
                 }
                 } 
             
@@ -138,6 +139,9 @@ addLayer("p", {
             } else if (resettingLayer === "bonus1") {
                 layerDataReset(this.layer)
             } 
+            if (had101) {
+            player[this.layer].upgrades.push(101)
+            }
         },
 
         automate() {
@@ -2406,20 +2410,30 @@ addLayer("pr", {
     milestones: {
     0: {
         requirementDescription: "1 Prestige Point",
+         effect() {
+            let base = hasUpgrade("sp", 41) ? 2 : 1 // 200% or 100%
+            return player.pr.points.add(1).mul(base)
+        },
         effectDescription() {
-                if (hasUpgrade("sp", 41)) return "Boosts point gain by +200% additive per prestige point."
-                return "Boosts point gain by +100% additive per prestige point."},
+                if (hasUpgrade("sp", 41)) return "Boosts point gain by +200% additive per prestige point. Current boost: x" + format(this.effect())
+                return "Boosts point gain by +100% additive per prestige point. Current boost: x" + format(this.effect())},
         done() { return player.pr.points.gte(1) }
     },
 
     1: {
         requirementDescription: "3 Prestige Points",
-        effectDescription: "Boosts money gain by +100% additive per prestige point past 2 prestige points.",
+         effect() {
+         return player.pr.points.sub(2).max(0)
+         },
+        effectDescription() { return "Boosts money gain by +100% additive per prestige point past 2 prestige points. Current boost: x" + format(this.effect()) },
         done() { return player.pr.points.gte(3) },
     },
 
     2: {
         requirementDescription: "6 Prestige Points",
+        effect() {
+         return player.pr.points.sub(2).max(0)
+         },
         effectDescription: "Boosts point gain by 1.1x compounding per prestige point past 5 prestige points.",
         done() { return player.pr.points.gte(6) }
     },
@@ -2712,7 +2726,7 @@ addLayer("sp", {
             },
             61: {
                 title: "Upgrade #6-S",
-                description: "^10 Upgrade #15's time.",
+                description: "^10 Upgrade #12's time.",
                 cost: new Decimal(1e10),
                 currencyDisplayName: "subpoints",
                 currencyInternalName: "points",
@@ -3820,7 +3834,7 @@ addLayer("bonus1", {
         return `Boosts point gain by 100% additive per purchase.
         Currently: x${this.effect()}  
         Bought: ${bought}/${cap}  
-        Cost: ${format(this.cost(bought))} points`
+        Cost: ${format(this.cost(bought))} crystal`
     },
     cost() { 
         return new Decimal(1)
@@ -3869,7 +3883,7 @@ addLayer("bonus1", {
         let bought = getBuyableAmount("bonus1", 12)
         if (bought.gte(this.cap())) return // stop if capped
         player.bonus1.points = player.bonus1.points.sub(this.cost(bought))
-        setBuyableAmount("bonus", 12, bought.add(1))
+        setBuyableAmount("bonus1", 12, bought.add(1))
     },
     effect() {
     let amt = getBuyableAmount("bonus1", 12)  
@@ -3941,7 +3955,7 @@ addLayer("bonus1", {
         let bought = getBuyableAmount("bonus1", 22)
         if (bought.gte(this.cap())) return // stop if capped
         player.bonus1.points = player.bonus1.points.sub(this.cost(bought))
-        setBuyableAmount("b", 22, bought.add(1))
+        setBuyableAmount("bonus1", 22, bought.add(1))
     },
     effect() {
     let amt = getBuyableAmount("bonus1", 22)  
