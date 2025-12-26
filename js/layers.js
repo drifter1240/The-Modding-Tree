@@ -3406,24 +3406,40 @@ addLayer("g", {
     milestones: {
     0: {
         requirementDescription: "10 Generator Power",
-        effectDescription: "Boosts point gain by power^0.2.",
+        effect() {
+                player.g.power.add(1).pow(0.2).max(1)
+        },
+        effectDescription() {
+        return "Boosts point gain by power^0.2. Current boost: x" + format(this.effect())},
         done() { return player.g.power.gte(10) }
     },
 
     1: {
         requirementDescription: "100 Generator Power",
-        effectDescription: "Boosts money gain by power^0.175.",
+        effect() {
+                player.g.power.add(1).pow(0.175).max(1)
+        },
+        effectDescription() {
+        return "Boosts money gain by power^0.175. Current boost: x" + format(this.effect())},
         done() { return player.g.power.gte(100) },
     },
 
     2: {
         requirementDescription: "1,000 Generator Power",
-        effectDescription: "Boosts click gain by power^0.1.",
+        effect() {
+                player.g.power.add(1).pow(0.1).max(1)
+        },
+        effectDescription() {
+        return "Boosts click gain by power^0.1.. Current boost: x" + format(this.effect())},
         done() { return player.g.power.gte(1000) }
     },
     3: {
         requirementDescription: "10,000 Generator Power",
-        effectDescription: "Boosts subpoint gain by power^0.075",
+        effect() {
+                player.g.power.add(1).pow(0.075).max(1)
+        },
+        effectDescription() {
+        return "Boosts subpoint gain by power^0.075. Current boost: x" + format(this.effect())},
         done() { return player.g.power.gte(10000) }
     },
 },
