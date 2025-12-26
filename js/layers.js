@@ -125,7 +125,7 @@ addLayer("p", {
         row: 0, 
         layerShown() { return false },
          doReset(resettingLayer) {
-            let had101 = hasUpgrade(this.layer, 101)
+            let had101 = hasUpgrade("sp", 101)
             if (resettingLayer === "sp") {
                 if (!hasUpgrade("a", 72)) {
                 layerDataReset(this.layer) 
@@ -140,7 +140,7 @@ addLayer("p", {
                 layerDataReset(this.layer)
             } 
             if (had101) {
-            player[this.layer].upgrades.push(101)
+            player["sp"].upgrades.push(101)
             }
         },
 
@@ -2423,7 +2423,7 @@ addLayer("pr", {
     1: {
         requirementDescription: "3 Prestige Points",
          effect() {
-         return player.pr.points.sub(2).max(0)
+         return player.pr.points.sub(2).max(1)
          },
         effectDescription() { return "Boosts money gain by +100% additive per prestige point past 2 prestige points. Current boost: x" + format(this.effect()) },
         done() { return player.pr.points.gte(3) },
@@ -2432,25 +2432,34 @@ addLayer("pr", {
     2: {
         requirementDescription: "6 Prestige Points",
         effect() {
-         return player.pr.points.sub(2).max(0)
+         return new Decimal(1.1).pow(player.pr.points.sub(5)).max(1)
          },
-        effectDescription: "Boosts point gain by 1.1x compounding per prestige point past 5 prestige points.",
+        effectDescription() { return "Boosts point gain by 1.1x compounding per prestige point past 5 prestige points. Current boost: x" + format(this.effect()) },
         done() { return player.pr.points.gte(6) }
     },
     3: {
         requirementDescription: "8 Prestige Points",
-        effectDescription: "Boosts money gain by 1.125x compounding per prestige point past 7 prestige points",
+        effect() {
+         return new Decimal(1.125).pow(player.pr.points.sub(7)).max(1)
+         },
+        effectDescription() { return "Boosts money gain by 1.125x compounding per prestige point past 7 prestige points. Current boost: x" + format(this.effect()) },
         done() { return player.pr.points.gte(8) }
     },
     4: {
         requirementDescription: "15 Prestige Points",
-        effectDescription: "Boosts subpoint gain by +50% additive per prestige point past 14 prestige points.",
+        effect() {
+         return (player.pr.points.sub(14).times(0.5)).add(1).max(1)
+         },
+        effectDescription() { return "Boosts subpoint gain by +50% additive per prestige point past 14 prestige points. Current boost: x" + format(this.effect()) },
         done() { return player.pr.points.gte(15) && hasUpgrade("sp",11) },
         unlocked() {return hasUpgrade("sp",11)},
     },
     5: {
         requirementDescription: "18 Prestige Points",
-        effectDescription: "Boost click gain by 2x compounding per prestige point past 17 prestige points, ending at 26 prestige points.",
+        effect() {
+            return new Decimal(new Decimal(2).pow(player.pr.points.sub(17)).min(512).max(1));
+        },
+        effectDescription() { return "Boost click gain by 2x compounding per prestige point past 17 prestige points, ending at 26 prestige points. Current boost: x" + format(this.effect()) },
         done() { return player.pr.points.gte(18) && hasUpgrade("sp",11) },
         unlocked() {return hasUpgrade("sp",11)},
     },
@@ -2544,7 +2553,7 @@ addLayer("c", {
         gain = gain.times(globalMult())
         gain = gain.times(buyableEffect("b", 21))
     if (hasMilestone("pr", 5)) {
-        gain = gain.times(player.pr.points.sub(17).pow(2).min(512));
+        gain = gain.times(new Decimal(2).pow(player.pr.points.sub(17)).min(512).max(1));
     }
     if (hasMilestone("g", 2)) {
         gain = gain.times(player.g.power.pow(0.1));
@@ -2564,31 +2573,46 @@ addLayer("c", {
     milestones: {
     0: {
         requirementDescription: "100 Clicks",
+        effect() {
+            let base = hasUpgrade("a", 131) ? 0.165 : 0.15
+            return player.c.points.add(1).pow(base).max(1)
+        },
         effectDescription() {
-        if (hasUpgrade("a", 131)) return "Boosts point gain with a formula of clicks^0.165."
-        else return "Boosts point gain with a formula of clicks^0.15."},
+        if (hasUpgrade("a", 131)) return "Boosts point gain with a formula of clicks^0.165. Current boost: x" + format(this.effect())
+        else return "Boosts point gain with a formula of clicks^0.15. Current boost: x" + format(this.effect())},
         done() { return player.c.points.gte(100) }
     },
 
     1: {
         requirementDescription: "1,000 Clicks",
+        effect() {
+            let base = hasUpgrade("a", 131) ? 0.135 : 0.125
+            return player.c.points.add(1).pow(base).max(1)
+        },
         effectDescription() {
-        if (hasUpgrade("a", 131)) return "Boosts money gain with a formula of clicks^0.135."
-        else return "Boosts money gain with a formula of clicks^0.125."},
+        if (hasUpgrade("a", 131)) return "Boosts money gain with a formula of clicks^0.135. Current boost: x" + format(this.effect())
+        else return "Boosts money gain with a formula of clicks^0.125. Current boost: x" + format(this.effect())},
         done() { return player.c.points.gte(1000) },
     },
     2: {
         requirementDescription: "1,000,000 Clicks",
+        effect() {
+            let base = hasUpgrade("a", 131) ? 0.03 : 0.025
+            return player.c.points.add(1).pow(base).max(1)
+        },
         effectDescription() {
-        if (hasUpgrade("a", 131)) return "Boosts subpoint gain with a formula of clicks^0.03."
-        else return "Boosts subpoint gain with a formula of clicks^0.025."},
+        if (hasUpgrade("a", 131)) return "Boosts subpoint gain with a formula of clicks^0.03. Current boost: x" + format(this.effect())
+        else return "Boosts subpoint gain with a formula of clicks^0.025. Current boost: x" + format(this.effect())},
         done() { return player.c.points.gte(1000000) && hasUpgrade("sp",11)},
         unlocked() {return hasUpgrade("sp",11)},
     },
     3: {
-        requirementDescription: "1e20 Clicks",
-        effectDescription: "Boosts ascension gain with a formula of clicks^0.0175.",
-        done() { return player.c.points.gte(1e20) && hasUpgrade("a",131)},
+        requirementDescription: "1e19 Clicks",
+        effect() {
+            return player.c.points.add(1).pow(0.0175).max(1)
+        },
+        effectDescription() { return "Boosts ascension gain with a formula of clicks^0.0175. Current boost: x" + format(this.effect())},
+        done() { return player.c.points.gte(1e19) && hasUpgrade("a",131)},
         unlocked() {return hasUpgrade("a",131)},
     },
 },
