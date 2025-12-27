@@ -2016,7 +2016,7 @@ addLayer("m", {
         Cost: ${format(this.cost(bought))} points` */
         return `Multiply point gain by +25% additive each purchase. 
         After every 10 levels, the effect is multiplied by x1.5.
-        Currently: x${this.effect()}  
+        Currently: x${format(this.effect())}  
         Bought: ${bought}/${cap}  
         Cost: ${format(this.cost(bought))} dollars`
     },
@@ -2037,7 +2037,7 @@ addLayer("m", {
     let amt = getBuyableAmount("m", 11)  
     let base = new Decimal(1).add(amt.times(0.25))
     let bonus = Decimal.pow(1.5, Math.floor(amt / 10))
-    return format(base.times(bonus)) 
+    return base.times(bonus) 
 },
     cap() {
         let base = 100
@@ -2060,7 +2060,7 @@ addLayer("m", {
         Cost: ${format(this.cost(bought))} points` */
         return `Multiply money gain by +20% additive each purchase. 
         After every 10 levels, the effect is multiplied by x1.4.
-        Currently: x${this.effect()}  
+        Currently: x${format(this.effect())} 
         Bought: ${bought}/${cap}  
         Cost: ${format(this.cost(bought))} dollars`
     },
@@ -2081,7 +2081,7 @@ addLayer("m", {
     let amt = getBuyableAmount("m", 12)  
     let base = new Decimal(1).add(amt.times(0.2))
     let bonus = Decimal.pow(1.4, Math.floor(amt / 10))
-    return format(base.times(bonus))
+    return base.times(bonus)
 },
     cap() {
         let base = 100
@@ -2100,7 +2100,7 @@ addLayer("m", {
         Bought: ${bought}/${cap}  
         Cost: ${format(this.cost(bought))} points` */
         return `Increase base clicks by +1 per click.
-        Currently: +${this.effect()}  
+        Currently: +${format(this.effect())}  
         Bought: ${bought}/${cap}  
         Cost: ${format(this.cost(bought))} dollars`
     },
@@ -2120,7 +2120,7 @@ addLayer("m", {
     effect() {
     let amt = getBuyableAmount("m", 13)  
     let base = new Decimal(0).add(amt)
-    return base.times(100).round().div(100) // keep as Decimal
+    return base.times(100).round().div(100)
 },
     cap() {
         let base = 100
@@ -2140,7 +2140,7 @@ addLayer("m", {
         Bought: ${bought}/${cap}  
         Cost: ${format(this.cost(bought))} points` */
         return `Multiply point gain by x1.15 compounding each purchase. 
-        Currently: x${this.effect()}  
+        Currently: x${format(this.effect())}  
         Bought: ${bought}/${cap}  
         Cost: ${format(this.cost(bought))} dollars`
     },
@@ -2159,7 +2159,7 @@ addLayer("m", {
     },
     effect() {
     let amt = getBuyableAmount("m", 21)  
-    return format(new Decimal(0).add(new Decimal(1.15).pow(amt)))
+    return new Decimal(0).add(new Decimal(1.15).pow(amt))
 },
     cap() {
         let base = 100
@@ -2179,7 +2179,7 @@ addLayer("m", {
         Bought: ${bought}/${cap}  
         Cost: ${format(this.cost(bought))} points` */
         return `Multiply money gain by x1.125 compounding each purchase. 
-        Currently: x${this.effect()}  
+        Currently: x${format(this.effect())} 
         Bought: ${bought}/${cap}  
         Cost: ${format(this.cost(bought))} dollars`
     },
@@ -2198,7 +2198,7 @@ addLayer("m", {
     },
     effect() {
     let amt = getBuyableAmount("m", 22)  
-    return format(new Decimal(0).add(new Decimal(1.125).pow(amt)))
+    return new Decimal(0).add(new Decimal(1.125).pow(amt))
 },
     cap() {
         let base = 100
@@ -2219,7 +2219,7 @@ addLayer("m", {
         Cost: ${format(this.cost(bought))} points` */
         return `Multiply subpoint gain by +25% additive each purchase. 
         After every 10 levels, the effect is multiplied by x1.5.
-        Currently: x${this.effect()}  
+        Currently: x${format(this.effect())}  
         Bought: ${bought}/${cap}  
         Cost: ${format(this.cost(bought))} dollars`
     },
@@ -2240,7 +2240,7 @@ addLayer("m", {
     let amt = getBuyableAmount("m", 23)  
     let base = new Decimal(1).add(amt.times(0.25))
     let bonus = Decimal.pow(1.5, Math.floor(amt / 10))
-    return format(base.times(bonus))
+    return base.times(bonus)
 },
     cap() {
         let base = 100
@@ -2257,7 +2257,7 @@ addLayer("m", {
         let cap = this.cap()
         return `Multiply generator power gain by +10% additive each purchase. 
         After every 10 levels, the effect is multiplied by x1.25.
-        Currently: x${this.effect()}  
+        Currently: x${format(this.effect())}   
         Bought: ${bought}/${cap}  
         Cost: ${format(this.cost(bought))} dollars`
     },
@@ -2278,7 +2278,7 @@ addLayer("m", {
     let amt = getBuyableAmount("m", 31)  
     let base = new Decimal(1).add(amt.times(0.1))
     let bonus = Decimal.pow(1.25, Math.floor(amt / 10))
-    return format(base.times(bonus))
+    return base.times(bonus)
 },
     cap() {
         let base = 100
@@ -2293,7 +2293,7 @@ addLayer("m", {
         let cap = this.cap()
         return `Multiply ascension gain by +10% additive each purchase. 
         After every 10 levels, the effect is multiplied by x1.25.
-        Currently: x${this.effect()}  
+        Currently: x${format(this.effect())}  
         Bought: ${bought}/${cap}  
         Cost: ${format(this.cost(bought))} dollars`
     },
@@ -2314,7 +2314,7 @@ addLayer("m", {
     let amt = getBuyableAmount("m", 32)  
     let base = new Decimal(1).add(amt.times(0.1))
     let bonus = Decimal.pow(1.25, Math.floor(amt / 10))
-    return format(base.times(bonus))
+    return base.times(bonus)
 },
     cap() {
         let base = 100
@@ -3407,7 +3407,7 @@ addLayer("g", {
     0: {
         requirementDescription: "10 Generator Power",
         effect() {
-                player.g.power.add(1).pow(0.2).max(1)
+                return player.g.power.add(1).pow(0.2).max(1)
         },
         effectDescription() {
         return "Boosts point gain by power^0.2. Current boost: x" + format(this.effect())},
@@ -3417,7 +3417,7 @@ addLayer("g", {
     1: {
         requirementDescription: "100 Generator Power",
         effect() {
-                player.g.power.add(1).pow(0.175).max(1)
+                return player.g.power.add(1).pow(0.175).max(1)
         },
         effectDescription() {
         return "Boosts money gain by power^0.175. Current boost: x" + format(this.effect())},
@@ -3427,7 +3427,7 @@ addLayer("g", {
     2: {
         requirementDescription: "1,000 Generator Power",
         effect() {
-                player.g.power.add(1).pow(0.1).max(1)
+                return player.g.power.add(1).pow(0.1).max(1)
         },
         effectDescription() {
         return "Boosts click gain by power^0.1.. Current boost: x" + format(this.effect())},
@@ -3436,7 +3436,7 @@ addLayer("g", {
     3: {
         requirementDescription: "10,000 Generator Power",
         effect() {
-                player.g.power.add(1).pow(0.075).max(1)
+                return player.g.power.add(1).pow(0.075).max(1)
         },
         effectDescription() {
         return "Boosts subpoint gain by power^0.075. Current boost: x" + format(this.effect())},
