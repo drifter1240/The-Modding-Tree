@@ -2549,6 +2549,7 @@ addLayer("c", {
         if (hasUpgrade("g", 171)) gain = gain.times(1.25)
         
         if (hasUpgrade("a", 11)) gain = gain.times(10)
+        if (hasUpgrade("a", 21)) gain = gain.times(2)
 
         gain = gain.times(globalMult())
         gain = gain.times(buyableEffect("b", 21))
