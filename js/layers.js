@@ -1861,7 +1861,7 @@ addLayer("m", {
     if (hasUpgrade("p", 371)) gain = gain.times(1.5)
     if (hasUpgrade("p", 381)) gain = gain.times(7)
     if (hasUpgrade("p", 442)) gain = gain.times(upgradeEffect("p", 442))
-    if (hasUpgrade("p", 511)) gain = gain.times(3.5)
+    if (hasUpgrade("p", 511)) gain = gain.times(1.5)
     if (hasUpgrade("p", 542)) gain = gain.times(69)
     if (hasUpgrade("p", 581)) gain = gain.times(upgradeEffect("p", 581))
     if (hasUpgrade("p", 611)) gain = gain.times(2.5)
@@ -1872,6 +1872,7 @@ addLayer("m", {
     if (hasUpgrade("g", 61)) gain = gain.times(1.2)
     if (hasUpgrade("g", 101)) gain = gain.times(1.2)
     if (hasUpgrade("g", 121)) gain = gain.times(1.4)
+    if (hasUpgrade("g", 171)) gain = gain.times(1.3)
 
     if (hasUpgrade("a", 11)) gain = gain.times(10)
     if (hasUpgrade("a", 21)) gain = gain.times(2)
@@ -1885,8 +1886,9 @@ addLayer("m", {
     }
 
     if (hasMilestone("c", 1)) {
+        if (hasUpgrade("a", 131)) gain = gain.times(player.c.points.pow(0.135));
         gain = gain.times(player.c.points.pow(0.125));
-    }
+    } 
 
     if (hasMilestone("g", 1)) {
         gain = gain.times(player.g.power.pow(0.175));
@@ -1926,7 +1928,7 @@ addLayer("m", {
     if (hasUpgrade("p", 252)) gain = gain.div(0.4)
     if (hasUpgrade("p", 272)) gain = gain.times(6)
     if (hasUpgrade("p", 281)) {
-		if (hasUpgrade("sp", 101)) gain = gain.times(12)
+		if (hasUpgrade("sp", 102)) gain = gain.times(12)
 		else gain = gain.times(1.02)
 	}
     if (hasUpgrade("p", 311)) gain = gain.times(2)
@@ -1935,7 +1937,6 @@ addLayer("m", {
     if (hasUpgrade("p", 371)) gain = gain.times(1.5)
     if (hasUpgrade("p", 381)) gain = gain.times(7)
     if (hasUpgrade("p", 442)) gain = gain.times(upgradeEffect("p", 442))
-    if (hasUpgrade("p", 381)) gain = gain.times(2.5)
     if (hasUpgrade("p", 511)) gain = gain.times(1.5)
     if (hasUpgrade("p", 542)) gain = gain.times(69)
     if (hasUpgrade("p", 581)) gain = gain.times(upgradeEffect("p", 581))
