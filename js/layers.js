@@ -2352,7 +2352,7 @@ addLayer("pr", {
     1: {
         requirementDescription: "3 Prestige Points",
          effect() {
-         return player.pr.points.sub(2).max(1)
+         return player.pr.points.sub(1).max(1)
          },
         effectDescription() { return "Boosts money gain by +100% additive per prestige point past 2 prestige points. Current boost: x" + format(this.effect()) },
         done() { return player.pr.points.gte(3) },
@@ -2394,7 +2394,12 @@ addLayer("pr", {
     },
     6: {
         requirementDescription: "44 Prestige Points",
-        effectDescription: "Boost ascension gain by +15% additive per prestige point past 43 prestige points.",
+        effect() {
+        return player.pr.points.sub(43).times(0.15).add(1).max(1)
+    },
+    effectDescription() {
+        return "Boost ascension gain by +15% additive per prestige point past 43 prestige points. Current boost: x" + format(this.effect())
+    },
         done() { return player.pr.points.gte(44) && hasUpgrade("a",91) },
         unlocked() {return hasUpgrade("a",91)},
     },
