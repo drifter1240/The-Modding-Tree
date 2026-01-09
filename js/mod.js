@@ -130,8 +130,8 @@ function getPointGen() {
         gain = gain.times(new Decimal(1.1).pow(player.pr.points.sub(5)));
     }
 	if (hasMilestone("c", 0)) {
-        if (hasUpgrade("a", 131)) gain = gain.times(player.c.points.pow(0.165));
-		else gain = gain.times(player.c.points.pow(0.165));
+        if (hasUpgrade("a", 131)) gain = gain.times(player.c.points.pow(0.175));
+		else gain = gain.times(player.c.points.pow(0.155));
     }
 	if (hasMilestone("g", 0)) {
         gain = gain.times(player.g.power.pow(0.2));

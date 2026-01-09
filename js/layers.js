@@ -2513,8 +2513,8 @@ addLayer("c", {
             return player.c.points.add(1).pow(base).max(1)
         },
         effectDescription() {
-        if (hasUpgrade("a", 131)) return "Boosts point gain with a formula of clicks^0.165. Current boost: x" + format(this.effect())
-        else return "Boosts point gain with a formula of clicks^0.15. Current boost: x" + format(this.effect())},
+        if (hasUpgrade("a", 131)) return "Boosts point gain with a formula of clicks^0.175. Current boost: x" + format(this.effect())
+        else return "Boosts point gain with a formula of clicks^0.155. Current boost: x" + format(this.effect())},
         done() { return player.c.points.gte(100) }
     },
 
