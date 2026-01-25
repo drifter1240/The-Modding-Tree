@@ -1835,7 +1835,7 @@ addLayer("p", {
         infoboxes: {
             1: {
                 title() {return "You have " + format(player.points) + "p (Points) | +" + format(getPointGen()) + "/s‎"},
-                body() {return `Welcome to Drifter's Upgrade Tree, filled with a shit-ton of upgrades, layers & resets! It's recommended to play with offline mode off, but it's fine either way. Enjoy the game!<br><br>Note: If you don't like scrolling, you can flip the tree in settings.`}, // I am currently trying to make a fix but this is my temporary solution
+                body() {return `Welcome to Drifter's Upgrade Tree, filled with a shit-ton of upgrades, layers & resets! Note that offline gain is limited to 3 minutes. Enjoy the game!<br><br>Note: If you don't like scrolling, you can flip the tree in settings.`}, // I am currently trying to make a fix but this is my temporary solution
                 unlocked() {return true}
                 }
             },
