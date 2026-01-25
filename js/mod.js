@@ -4,19 +4,22 @@ let modInfo = {
 	pointsName: "points",
 	modFiles: ["layers.js", "tree.js"],
 
-	discordName: "",
-	discordLink: "",
+	discordName: "DUT Discord Server",
+	discordLink: "https://discord.gg/5eGuUgnz6t",
 	initialStartPoints: new Decimal (0), // Used for hard resets and new players
-	offlineLimit: 1,  // In hours
+	offlineLimit: 0.05,  // In hours
 }
 
 // Set your version in num and name
 let VERSION = {
-	num: "1.0",
-	name: "Ascension",
+	num: "2.0",
+	name: "Descension",
 }
 
 let changelog = `<h1>Changelog:</h1><br> <br>
+	<h3>v2.0</h3><br>
+		- Finished Layer 2 & added 4 new sub-layers. <br>
+		- Added Layer 3, Descension. Currently only has ?? upgrades + extras. <br> <br> <br>
 	<h3>v1.0</h3><br>
 		(The point of this update is to put a sort of 'finished' polish onto the demo from v0.1.) <br>
 		- Finished Layer 1 & added 2 new sub-layers. <br>
@@ -42,8 +45,9 @@ function canGenPoints(){
 }
 
 function globalMult() { // hi if ur seeing this its for a loop layer :3
-    let mult = new Decimal(1)
-    return mult
+    let gain = new Decimal(1)
+	gain = gain.times(buyableEffect("ins", 12))
+    return gain
 }
 
 // Calculate points/sec!
@@ -56,14 +60,21 @@ function getPointGen() {
 	if (hasUpgrade("p", 191)) gain = gain.add(2)
 	if (hasUpgrade("p", 351)) gain = gain.add(5)
 	if (hasUpgrade("p", 663)) gain = gain.add(8)
-	if (hasUpgrade("p", 701)) gain = gain.add(25)
+	if (hasUpgrade("p", 701)) {
+	if (hasUpgrade("sp", 141)) gain = gain.add(250)
+	else gain = gain.add(25)
+	} 
+	if (hasUpgrade("a", 652)) gain = gain.add(550)
 	// Base point increases
 	if (!hasUpgrade("p", 11)) gain = gain.times(0)
 	if (hasUpgrade("p", 21)) {
 		if (hasUpgrade("sp", 21)) gain = gain.times(5)
 		else gain = gain.times(2)
 	}
-	if (hasUpgrade("p", 22)) gain = gain.times(3)
+	if (hasUpgrade("p", 22)) {
+		if (hasUpgrade("sp", 201)) gain = gain.times(9)
+		else gain = gain.times(3)
+	}
 	if (hasUpgrade("p", 31)) gain = gain.times(upgradeEffect("p", 31))
 	if (hasUpgrade("p", 41)) gain = gain.times(2.5)
 	if (hasUpgrade("p", 51)) gain = gain.times(1.5)
@@ -121,31 +132,61 @@ function getPointGen() {
 	if (hasUpgrade("a", 41)) gain = gain.times(4)
 	if (hasUpgrade("a", 51)) gain = gain.times(upgradeEffect("a", 51))
 	if (hasUpgrade("a", 141)) gain = gain.times(2.5)
+	if (hasUpgrade("a", 161)) gain = gain.times(3)
+	if (hasUpgrade("a", 211)) gain = gain.times(1.5)
+	if (hasUpgrade("a", 281)) gain = gain.times(upgradeEffect("a", 281))
+	if (hasUpgrade("a", 291)) gain = gain.times(upgradeEffect("a", 291))
+	if (hasUpgrade("a", 301)) gain = gain.times(3)
+	if (hasUpgrade("a", 341)) gain = gain.times(2.25)
+	if (hasUpgrade("a", 381)) gain = gain.times(upgradeEffect("a", 381))
+	if (hasUpgrade("a", 412)) gain = gain.times(3)
+	if (hasUpgrade("a", 411)) gain = gain.times(1000000)
+	if (hasUpgrade("a", 461)) gain = gain.times(2.5)
+	if (hasUpgrade("a", 521)) gain = gain.times(3.5)
+	if (hasUpgrade("a", 581)) gain = gain.times(6.9)
+	if (hasUpgrade("a", 621)) gain = gain.times(2)
+	if (hasUpgrade("a", 701)) gain = gain.times(2)
+	if (hasUpgrade("a", 751)) gain = gain.times(5)
+	if (hasUpgrade("a", 841)) gain = gain.times(1.5)
+
+	if (hasUpgrade("d", 11)) gain = gain.times(25)
+	if (hasUpgrade("d", 22)) gain = gain.times(2.5)
+	if (hasUpgrade("d", 41)) gain = gain.times(3)
+	if (hasUpgrade("d", 51)) gain = gain.times(1.5)
 
 	if (hasMilestone("pr", 0)) {
-        if (hasUpgrade("sp", 41)) gain = gain.times(player.pr.points.add(1).times(2));
-		else gain = gain.times(player.pr.points.add(1));
+        if (hasUpgrade("sp", 41)) gain = gain.times(player.pr.points.times(2).add(1).max(1));
+		else gain = gain.times(player.pr.points.add(1).max(1));
     }
 	if (hasMilestone("pr", 2)) {
-        gain = gain.times(new Decimal(1.1).pow(player.pr.points.sub(5)));
+        if (hasUpgrade("a", 691)) gain = gain.times(new Decimal(1.125).pow(player.pr.points.sub(5)).max(1))
+        else gain = gain.times(new Decimal(1.1).pow(player.pr.points.sub(5)).max(1))
     }
 	if (hasMilestone("c", 0)) {
-        if (hasUpgrade("a", 131)) gain = gain.times(player.c.points.pow(0.175));
-		else gain = gain.times(player.c.points.pow(0.155));
+        if (hasUpgrade("a", 131)) gain = gain.times(player.c.points.pow(0.165).max(1));
+		else gain = gain.times(player.c.points.pow(0.15).max(1));
     }
 	if (hasMilestone("g", 0)) {
-        gain = gain.times(player.g.power.pow(0.2));
+         if (hasUpgrade("a", 241)) gain = gain.times(player.g.power.pow(0.225).max(1));
+		 else gain = gain.times(player.g.power.pow(0.2).max(1));
+    }
+	if (hasMilestone("sac", 0)) {
+         gain = gain.times(new Decimal(2).pow(player.sac.points));
     }
 
 	gain = gain.times(buyableEffect("m", 11))
 	gain = gain.times(buyableEffect("m", 21))
 	gain = gain.times(buyableEffect("b", 11))
-	gain = gain.times(buyableEffect("bonus1", 11))
+	gain = gain.times(buyableEffect("gold", 11))
 
 	if (hasUpgrade("p", 131)) gain = gain.add(25000)
 	if (hasUpgrade("p", 361)) gain = gain.add(2.5e13)
 
 	gain = gain.times(globalMult())
+
+	if (hasUpgrade("a", 411)) gain = gain.pow(0.925)
+
+	if (inChallenge("ins", 11)) gain = gain.pow(0.95)
 		
 	return gain
 }

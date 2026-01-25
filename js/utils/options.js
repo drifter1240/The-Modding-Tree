@@ -15,7 +15,7 @@ function getStartOptions() {
 		oldStyle: false,
 		forceTooltips: true,
 		hideMilestonePopups: false,
-		inverseTree: false,
+		inverseTree: true,
 	}
 }
 
