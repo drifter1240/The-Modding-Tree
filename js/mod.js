@@ -12,11 +12,14 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "2.0",
-	name: "Descension",
+	num: "2.1",
+	name: "'Small' update",
 }
 
 let changelog = `<h1>Changelog:</h1><br> <br>
+	<h3>v2.1</h3><br>
+		- Just a lot of rebalancing & QOL changes. Automation is now available earlier. <br>
+		- Added 10 new upgrades + 1 new sublayer. <br> <br> <br>
 	<h3>v2.0</h3><br>
 		- Finished Layer 2 & added 4 new sub-layers. <br>
 		- Added Layer 3, Descension. Currently only has ?? upgrades + extras. <br> <br> <br>
@@ -153,6 +156,10 @@ function getPointGen() {
 	if (hasUpgrade("d", 22)) gain = gain.times(2.5)
 	if (hasUpgrade("d", 41)) gain = gain.times(3)
 	if (hasUpgrade("d", 51)) gain = gain.times(1.5)
+	if (hasUpgrade("d", 81)) gain = gain.times(upgradeEffect("d", 81))
+	if (hasUpgrade("d", 91)) gain = gain.times(upgradeEffect("d", 91))
+	if (hasUpgrade("d", 111)) gain = gain.times(2)
+	if (hasUpgrade("d", 141)) gain = gain.times(4)
 
 	if (hasMilestone("pr", 0)) {
         if (hasUpgrade("sp", 41)) gain = gain.times(player.pr.points.times(2).add(1).max(1));
