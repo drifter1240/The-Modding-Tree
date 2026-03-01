@@ -1852,7 +1852,8 @@ addLayer("p", {
                 currencyLayer: "",
                 unlocked() {return hasUpgrade(this.layer,581)},
                 canAfford() { // fix logic later
-                    return (!hasUpgrade(this.layer, 592) && !player.extraoptions.disable75 && !player.g.points.gt(0) && !player.g.power.gt(0))       
+                    if ((player.g.points.gt(0) || player.g.power.gt(0)) && (player.b.points.gt(0) || player.b.money.gt(0) || player.b.subpoints.gt(0) || player.b.clicks.gt(0))) return true
+                    if (!hasUpgrade(this.layer, 592) && !player.extraoptions.disable75 && !player.g.points.gt(0) && !player.g.power.gt(0)) return true       
                 },
                 onPurchase() {
                     player.b.unlocked = true
@@ -1869,6 +1870,7 @@ addLayer("p", {
                 currencyLayer: "",
                 unlocked() {return hasUpgrade(this.layer,581)},
                 canAfford() {
+                    if ((player.g.points.gt(0) || player.g.power.gt(0)) && (player.b.points.gt(0) || player.b.money.gt(0) || player.b.subpoints.gt(0) || player.b.clicks.gt(0))) return true
                     return (!hasUpgrade(this.layer, 591) && !player.extraoptions.disable76 && !player.b.points.gt(0) && !player.b.money.gt(0) && !player.b.subpoints.gt(0) && !player.b.clicks.gt(0))
                 },
                 onPurchase() {
