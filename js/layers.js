@@ -2085,6 +2085,8 @@ addLayer("p", {
                 unlocked() {return hasUpgrade(this.layer,701)},
                 onPurchase() {
                 player.p.upgrades.push(591, 592)
+                player.b.unlocked = true
+                player.g.unlocked = true
                 },
                 branches: [721],
             },
