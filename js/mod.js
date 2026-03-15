@@ -12,11 +12,16 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "2.1",
-	name: "'Small' update",
+	num: "3.0",
+	name: "Final Descent",
 }
 
 let changelog = `<h1>Changelog:</h1><br> <br>
+	<h3>v3.0</h3><br>
+		- Music! <br>
+		- Finished Layer 3 & added 5 new sub-layers. No Layer 4 yet... <br>
+		- Uhh some balancing i guess <br>
+		(Reset sublayer upgrades are no longer hidden before reset, gens can hold buy, crystal reset is nerfed again) <br> <br> <br>
 	<h3>v2.1</h3><br>
 		- Just a lot of rebalancing & QOL changes. Automation is now available earlier. <br>
 		- Added 10 new upgrades + 1 new sublayer. <br> <br> <br>
@@ -32,7 +37,7 @@ let changelog = `<h1>Changelog:</h1><br> <br>
 		- Added the first 55 upgrades & 4 sub-layers.<br>
 		- Absolutely not balanced.`
 
-let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
+let winText = `How do you even see this?`
 
 // If you add new functions anywhere inside of a layer, and those functions have an effect when called, add them here.
 // (The ones here are examples, all official functions are already taken care of)
@@ -49,9 +54,98 @@ function canGenPoints(){
 
 function globalMult() { // hi if ur seeing this its for a loop layer :3
     let gain = new Decimal(1)
-	gain = gain.times(buyableEffect("ins", 12))
+	if (player.l.dead) gain = gain.times(0)
+	if (inChallenge("trials", 11)) gain = gain.times(0.8)
+	if (inChallenge("trials", 12)) {
+	let t = player.trials.timer
+    let duration = new Decimal(750)
+    
+    let progress = t.div(duration).min(1)
+    let mult = new Decimal(10).minus(new Decimal(9.7).times(progress))
+    gain = gain.times(mult)
+	}
+	gain = gain.times(new Decimal(2).pow(player.trials.points))
     return gain
 }
+
+var musicLayer1 = new Audio("resources/layer1.mp3");
+var musicLayer2 = new Audio("resources/layer2.mp3");
+var musicLayer3 = new Audio("resources/layer3.mp3");
+
+musicLayer1.loop = true;
+musicLayer2.loop = true;
+musicLayer3.loop = true;
+
+musicLayer1.volume = 0;
+musicLayer2.volume = 0;
+musicLayer3.volume = 0;
+
+var musicMaxVolumes = {
+    musicLayer1: 0.25,
+    musicLayer2: 0.25,
+    musicLayer3: 0.25,
+};
+
+var currentMusic = null;
+
+function updateMusic() {
+    let layer = player.tab;
+
+    let nextMusic = null;
+    let maxVolume = 1;
+	
+	if (player.extraoptions.disableMusic) { 
+    } 
+    else if (layer == "layer1") {
+        nextMusic = musicLayer1;
+        maxVolume = musicMaxVolumes.musicLayer1;
+    } else if(layer == "layer2") {
+        nextMusic = musicLayer2;
+        maxVolume = musicMaxVolumes.musicLayer2;
+    } else if (layer == "layer3") { 
+        nextMusic = musicLayer3;
+        maxVolume = musicMaxVolumes.musicLayer3;
+    } else { 
+        nextMusic = musicLayer1;
+        maxVolume = musicMaxVolumes.musicLayer1;
+    } 
+
+    if(currentMusic !== nextMusic){
+        // fade out current music
+        if(currentMusic){
+            fadeAudio(currentMusic, 0, 500);
+        }
+
+        // play next track if not playing
+        if(nextMusic && nextMusic.paused){
+            nextMusic.play();
+        }
+
+        // fade in new track to max volume
+        fadeAudio(nextMusic, maxVolume, 500);
+
+        currentMusic = nextMusic;
+    }
+}
+
+function fadeAudio(audio, targetVolume, duration = 1000) {
+    if (!audio) return;
+    const startVolume = audio.volume;
+    const volumeChange = targetVolume - startVolume;
+    const steps = 30;
+    let step = 0;
+    const interval = duration / steps;
+
+    const fadeInterval = setInterval(() => {
+        step++;
+        audio.volume = startVolume + (volumeChange * step / steps);
+        if (step >= steps) {
+            audio.volume = targetVolume;
+            clearInterval(fadeInterval);
+        }
+    }, interval);
+}
+
 
 // Calculate points/sec!
 function getPointGen() {
@@ -68,6 +162,7 @@ function getPointGen() {
 	else gain = gain.add(25)
 	} 
 	if (hasUpgrade("a", 652)) gain = gain.add(550)
+	if (hasUpgrade("d", 531)) gain = gain.add(2750)
 	// Base point increases
 	if (!hasUpgrade("p", 11)) gain = gain.times(0)
 	if (hasUpgrade("p", 21)) {
@@ -129,6 +224,7 @@ function getPointGen() {
 	if (hasUpgrade("g", 101)) gain = gain.times(1.2)
 	if (hasUpgrade("g", 111)) gain = gain.times(1.5)
 	if (hasUpgrade("g", 161)) gain = gain.times(1.4)
+	if (hasUpgrade("g", 221)) gain = gain.times(1.3)
 
 	if (hasUpgrade("a", 11)) gain = gain.times(10)
 	if (hasUpgrade("a", 21)) gain = gain.times(2)
@@ -160,6 +256,13 @@ function getPointGen() {
 	if (hasUpgrade("d", 91)) gain = gain.times(upgradeEffect("d", 91))
 	if (hasUpgrade("d", 111)) gain = gain.times(2)
 	if (hasUpgrade("d", 141)) gain = gain.times(4)
+	if (hasUpgrade("d", 241)) gain = gain.times(3)
+	if (hasUpgrade("d", 321)) gain = gain.times(3.5)
+	if (hasUpgrade("d", 381)) gain = gain.times(3)
+	if (hasUpgrade("d", 411)) gain = gain.times(3)
+	if (hasUpgrade("d", 441)) gain = gain.times(1.03)
+	if (hasUpgrade("d", 591)) gain = gain.times(4)
+	if (hasUpgrade("d", 611)) gain = gain.times(upgradeEffect("d", 611))
 
 	if (hasMilestone("pr", 0)) {
         if (hasUpgrade("sp", 41)) gain = gain.times(player.pr.points.times(2).add(1).max(1));
@@ -180,11 +283,19 @@ function getPointGen() {
 	if (hasMilestone("sac", 0)) {
          gain = gain.times(new Decimal(2).pow(player.sac.points));
     }
+	if (hasMilestone("overcharge", 0)) {
+         if (player.overcharge.points.gte(10)) gain = gain.times(new Decimal(4).times(new Decimal(1.1).pow(player.overcharge.points.sub(10))).max(1))
+    }
+	if (hasMilestone("prism", 4)) {
+         gain = gain.times(player.prism.points.pow(0.04).max(1));
+    }
 
 	gain = gain.times(buyableEffect("m", 11))
 	gain = gain.times(buyableEffect("m", 21))
 	gain = gain.times(buyableEffect("b", 11))
 	gain = gain.times(buyableEffect("gold", 11))
+	gain = gain.times(buyableEffect("sap", 12))
+	gain = gain.times(buyableEffect("l", 12))
 
 	if (hasUpgrade("p", 131)) gain = gain.add(25000)
 	if (hasUpgrade("p", 361)) gain = gain.add(2.5e13)
@@ -192,8 +303,6 @@ function getPointGen() {
 	gain = gain.times(globalMult())
 
 	if (hasUpgrade("a", 411)) gain = gain.pow(0.925)
-
-	if (inChallenge("ins", 11)) gain = gain.pow(0.95)
 		
 	return gain
 }

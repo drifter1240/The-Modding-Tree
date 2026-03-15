@@ -13,12 +13,15 @@ addLayer("extraoptions", {
         unlocked: true,
         points: new Decimal(0),
         disableRiskyUpgrade: false,
+        disableMusic: false,
         unlocked1: false,
         unlocked2: false,
         unlocked3: false,
         unlocked4: false,
         unlocked5: false,
         unlocked6: false,
+        unlocked7: false,
+        unlocked8: false,
         disable33: false,
         disable34: false,
         disable57: false,
@@ -31,7 +34,14 @@ addLayer("extraoptions", {
         disable153: false,
         disable187: false,
         disable188: false,
+        disable239: false,
+        disable240: false,
+        disable274: false,
+        disable275: false,
         }
+    },
+    update() {
+	updateMusic()
     },
     infoboxes: {        
             1: {
@@ -53,6 +63,26 @@ addLayer("extraoptions", {
         },
         onClick() {
             player.extraoptions.disableRiskyUpgrade = !player.extraoptions.disableRiskyUpgrade
+        },
+        style() {
+            return {
+                "margin": "0px",
+                "min-height": "120px",
+	            "width": "120px",
+                "font-size": "11px",
+            }
+        }
+      },
+    12: {
+        title: "Disable Music",
+        display() {
+            return player.extraoptions.disableMusic ? "Disables music playing: ON" : "Disables music playing: OFF"
+        },
+        canClick() {
+            return true
+        },
+        onClick() {
+            player.extraoptions.disableMusic = !player.extraoptions.disableMusic
         },
         style() {
             return {
@@ -315,6 +345,90 @@ addLayer("extraoptions", {
             }
         }
       },
+      81: {
+        title: "Disable Upgrade #239",
+        display() {
+            return player.extraoptions.disable239 ? "Disables purchasing Upgrade #239: ON" : "Disables purchasing Upgrade #239: OFF"
+        },
+        canClick() {
+            return true
+        },
+        onClick() {
+            player.extraoptions.disable239 = !player.extraoptions.disable239
+        },
+        unlocked() {return player.extraoptions.unlocked7},
+        style() {
+             return {
+                "margin": "0px",
+                "min-height": "120px",
+	            "width": "120px",
+                "font-size": "11px",
+            }
+        }
+      },
+    82: {
+        title: "Disable Upgrade #240",
+        display() {
+            return player.extraoptions.disable240 ? "Disables purchasing Upgrade #240: ON" : "Disables purchasing Upgrade #240: OFF"
+        },
+        canClick() {
+            return true
+        },
+        onClick() {
+            player.extraoptions.disable240 = !player.extraoptions.disable240
+        },
+        unlocked() {return player.extraoptions.unlocked7},
+        style() {
+             return {
+                "margin": "0px",
+                "min-height": "120px",
+	            "width": "120px",
+                "font-size": "10px",
+            }
+        }
+      },
+      91: {
+        title: "Disable Upgrade #274",
+        display() {
+            return player.extraoptions.disable274 ? "Disables purchasing Upgrade #274: ON" : "Disables purchasing Upgrade #274: OFF"
+        },
+        canClick() {
+            return true
+        },
+        onClick() {
+            player.extraoptions.disable274 = !player.extraoptions.disable274
+        },
+        unlocked() {return player.extraoptions.unlocked8},
+        style() {
+             return {
+                "margin": "0px",
+                "min-height": "120px",
+	            "width": "120px",
+                "font-size": "11px",
+            }
+        }
+      },
+    92: {
+        title: "Disable Upgrade #275",
+        display() {
+            return player.extraoptions.disable275 ? "Disables purchasing Upgrade #275: ON" : "Disables purchasing Upgrade #275: OFF"
+        },
+        canClick() {
+            return true
+        },
+        onClick() {
+            player.extraoptions.disable275 = !player.extraoptions.disable275
+        },
+        unlocked() {return player.extraoptions.unlocked8},
+        style() {
+             return {
+                "margin": "0px",
+                "min-height": "120px",
+	            "width": "120px",
+                "font-size": "10px",
+            }
+        }
+      },
     },
     tabFormat: [
     ["row", [
@@ -322,6 +436,7 @@ addLayer("extraoptions", {
     ]],
     ["row", [
         ["clickable", 11],
+        ["clickable", 12],
     ]],
     ["row", [
         ["clickable", 21],
@@ -346,6 +461,14 @@ addLayer("extraoptions", {
     ["row", [
         ["clickable", 71],
         ["clickable", 72],
+    ]],
+    ["row", [
+        ["clickable", 81],
+        ["clickable", 82],
+    ]],
+    ["row", [
+        ["clickable", 91],
+        ["clickable", 92],
     ]]
 ]
 })
@@ -520,16 +643,6 @@ addLayer("layer3", {
             },
             glowColor: "#ffffffff",
         },
-         "Insanity": {
-            embedLayer: "ins",
-            unlocked() {if (hasUpgrade('d', 171) || player.ins.points.gt(0) || getBuyableAmount("ins", 11).gt(0) || getBuyableAmount("ins", 12).gt(0)) return true // rework these damn things
-            else return false},
-            buttonStyle: {
-                "color": "rgb(60, 5, 82)",
-                "border": "2px solid rgb(60, 5, 82)"
-            },
-            glowColor: "rgb(60, 5, 82)"
-        },
         "Mega-Boosters": {
             embedLayer: "mb",
             unlocked() {if (hasUpgrade('d', 71) || player.mb.totalBoosters.gt(0)) return true
@@ -539,6 +652,51 @@ addLayer("layer3", {
                 "border": "2px solid rgb(26, 40, 233)"
             },
             glowColor: "rgb(26, 40, 233)"
+        },
+        "Life": {
+            embedLayer: "l",
+            unlocked() {return (hasUpgrade('d', 211)) || player.l.points.gt(0)},
+            buttonStyle: {
+                "color": "rgb(43, 233, 26)",
+                "border": "2px solid rgb(43, 233, 26)"
+            },
+            glowColor: "rgb(43, 233, 26)"
+        },  
+        "Trials": {
+            embedLayer: "trials",
+            unlocked() {return (hasUpgrade('d', 802)) || player.trials.unlocked},
+            buttonStyle: {
+                "color": "rgb(151, 151, 129)",
+                "border": "2px solid rgb(151, 151, 129)"
+            },
+            glowColor: "rgb(151, 151, 129)"
+        }, 
+        "Overcharger": {
+            embedLayer: "overcharge",
+            unlocked() {return (hasUpgrade('d', 331))},
+            buttonStyle: {
+                "color": "rgb(223, 223, 129)",
+                "border": "2px solid rgb(223, 223, 129)"
+            },
+            glowColor: "rgba(0,0,0,0)"
+        },   
+        "Prism": {
+            embedLayer: "prism",
+            unlocked() {return (hasUpgrade('d', 451))},
+            buttonStyle: {
+                "color": "rgb(151, 151, 129)",
+                "border": "2px solid rgb(151, 151, 129)"
+            },
+            glowColor: "rgb(151, 151, 129)"
+        }, 
+        "Sapphires": {
+            embedLayer: "sap",
+            unlocked() {return (hasUpgrade('d', 601))},
+            buttonStyle: {
+                "color": "rgb(16, 138, 219)",
+                "border": "2px solid rgb(16, 138, 219)"
+            },
+            glowColor: "rgb(16, 138, 219)"
         }, 
     }
 })
@@ -573,8 +731,6 @@ addLayer("p", {
             } else if (resettingLayer === "sac") {
                 player.points = new Decimal(0)
             } else if (resettingLayer === "d") {
-                layerDataReset(this.layer)
-            } else if (resettingLayer === "ins") {
                 layerDataReset(this.layer)
             }
         },
@@ -1037,13 +1193,15 @@ addLayer("p", {
             },
             162: {
                 title: "Upgrade #19-X",
-                description: "First risky upgrade! x2 point gain but x0.5 money gain.       *NOTE: UPGRADE-X UPGRADES ARE NOT REQUIRED FOR PROGRESSION.",
+                description() { 
+                    if (inChallenge("trials", 11) || inChallenge("trials", 12) || inChallenge("trials", 13)) return "DISABLED"
+                    return "First risky upgrade! x2 point gain but x0.5 money gain. *NOTE: UPGRADE-X UPGRADES ARE NOT REQUIRED FOR PROGRESSION." },
                 cost: new Decimal(60000000),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
                 currencyLayer: "",
                 unlocked() {return hasUpgrade(this.layer,161)},
-                canAfford() {return !player.extraoptions.disableRiskyUpgrade},
+                canAfford() {return !player.extraoptions.disableRiskyUpgrade && !inChallenge("trials", 11) && !inChallenge("trials", 12) && !inChallenge("trials", 13)},
             },
             171: {
                 title: "Upgrade #20",
@@ -1411,13 +1569,16 @@ addLayer("p", {
             },
             331: {
                 title: "Upgrade #41-X",
-                description: "+10 base clicks, but x0.4 money and points.",
+                description() {
+                    if (inChallenge("trials", 11) || inChallenge("trials", 12) || inChallenge("trials", 13)) return "DISABLED"
+                    return "+10 base clicks, but x0.4 money and points."
+                },
                 cost: new Decimal(4e14),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
                 currencyLayer: "",
                 unlocked() {return hasUpgrade(this.layer,332)},
-                canAfford() {return !player.extraoptions.disableRiskyUpgrade},
+                canAfford() {return !player.extraoptions.disableRiskyUpgrade && !inChallenge("trials", 11) && !inChallenge("trials", 12) && !inChallenge("trials", 13)},
                 branches: [],
             },
             342: {
@@ -1756,13 +1917,16 @@ addLayer("p", {
             },
             542: {
                 title: "Upgrade #69-X",
-                description: "x69 money gain but /6.9 point gain. Is it worth it?",
+                description() {
+                    if (inChallenge("trials", 11) || inChallenge("trials", 12) || inChallenge("trials", 13)) return "DISABLED"
+                    return "x69 money gain but /6.9 point gain. Is it worth it?"
+                },
                 cost: new Decimal(6.9e24),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
                 currencyLayer: "",
                 unlocked() {return hasUpgrade(this.layer,541) },
-                canAfford() {return !player.extraoptions.disableRiskyUpgrade},
+                canAfford() {return !player.extraoptions.disableRiskyUpgrade && !inChallenge("trials", 11) && !inChallenge("trials", 12) && !inChallenge("trials", 13)},
                 branches: [],
             },
              551: {
@@ -1843,7 +2007,7 @@ addLayer("p", {
                     },
                 branches: [591, 592],
             },
-            591: {
+             591: {
                 title: "Upgrade #75",
                 description: "Unlock Boosters. Disables Upgrade #76.",
                 cost: new Decimal(1e28),
@@ -2225,8 +2389,8 @@ addLayer("p", {
 
         infoboxes: {
             1: {
-                title() {return "You have " + format(player.points) + "p (Points) | +" + format(getPointGen()) + "/s‎"},
-                body() {return `Welcome to Drifter's Upgrade Tree, filled with a shit-ton of upgrades, layers & resets! Note that offline gain is limited to 3 minutes. Enjoy the game!<br><br>Note: If you don't like scrolling, you can flip the tree in settings.`}, // I am currently trying to make a fix but this is my temporary solution
+                title() {return "You have " + format(player.points) + "p (Points) | +" + format(getPointGen()) + "/s"},
+                body() {return `Welcome to Drifter's Upgrade Tree, filled with a bunch of upgrades, layers & resets! Note that offline gain is limited to 3 minutes. Enjoy the game!<br><br>Note: If you don't like scrolling, you can flip the tree in settings.`}, // I am currently trying to make a fix but this is my temporary solution
                 unlocked() {return true}
                 }
             },
@@ -2432,8 +2596,6 @@ addLayer("m", {
                 player.m.points = new Decimal(0)
             } else if (resettingLayer === "d") {
                 layerDataReset(this.layer)
-            } else if (resettingLayer === "ins") {
-                layerDataReset(this.layer)
             }
         },
 
@@ -2447,6 +2609,7 @@ addLayer("m", {
     if (hasUpgrade("p", 192)) gain = gain.add(2)
     if (hasUpgrade("p", 352)) gain = gain.add(4)
     if (hasUpgrade("p", 662)) gain = gain.add(6)
+    if (hasUpgrade("d", 521)) gain = gain.add(35)
     gain = gain.times(buyableEffect("m", 12))
     gain = gain.times(buyableEffect("m", 22))
     gain = gain.times(buyableEffect("b", 12))
@@ -2477,7 +2640,6 @@ addLayer("m", {
     if (hasUpgrade("p", 371)) gain = gain.times(1.5)
     if (hasUpgrade("p", 381)) gain = gain.times(7)
     if (hasUpgrade("p", 442)) gain = gain.times(upgradeEffect("p", 442))
-    if (hasUpgrade("p", 381)) gain = gain.times(2.5)
     if (hasUpgrade("p", 511)) gain = gain.times(1.5)
     if (hasUpgrade("p", 542)) gain = gain.times(69)
     if (hasUpgrade("p", 581)) gain = gain.times(upgradeEffect("p", 581))
@@ -2491,6 +2653,7 @@ addLayer("m", {
     if (hasUpgrade("g", 101)) gain = gain.times(1.2)
     if (hasUpgrade("g", 121)) gain = gain.times(1.4)
     if (hasUpgrade("g", 171)) gain = gain.times(1.3)
+    if (hasUpgrade("g", 241)) gain = gain.times(1.3)
 
     if (hasUpgrade("a", 11)) gain = gain.times(10)
     if (hasUpgrade("a", 21)) gain = gain.times(2)
@@ -2516,6 +2679,11 @@ addLayer("m", {
     if (hasUpgrade("d", 42)) gain = gain.times(3)
     if (hasUpgrade("d", 51)) gain = gain.times(1.5)
     if (hasUpgrade("d", 111)) gain = gain.times(2)
+    if (hasUpgrade("d", 171)) gain = gain.times(7.5)
+    if (hasUpgrade("d", 321)) gain = gain.times(3.5)
+    if (hasUpgrade("d", 361)) gain = gain.times(3)
+    if (hasUpgrade("d", 381)) gain = gain.times(3)
+    if (hasUpgrade("d", 411)) gain = gain.times(3)
 
     if (hasMilestone("pr", 1)) {
         gain = gain.times(player.pr.points.minus(1).max(1));
@@ -2533,6 +2701,10 @@ addLayer("m", {
     if (hasMilestone("g", 1)) {
          if (hasUpgrade("a", 241)) gain = gain.times(player.g.power.pow(0.19).max(1));
 		 else gain = gain.times(player.g.power.pow(0.175).max(1));
+    }
+
+    if (hasMilestone("overcharge", 1)) {
+         if (player.overcharge.points.gte(20)) gain = gain.times(new Decimal(4).times(new Decimal(1.1).pow(player.overcharge.points.sub(20))).max(1))
     }
 
     if (hasUpgrade("p", 362)) gain = gain.add(1e9)
@@ -2629,6 +2801,7 @@ addLayer("m", {
         Currently: x${this.effect()}  
         Bought: ${bought}/${cap}  
         Cost: ${format(this.cost(bought))} points` */
+        if (inChallenge("trials", 13)) return "DISABLED"
         return `Multiply point gain by +25% additive each purchase. 
         After every 10 levels, the effect is multiplied by x1.5.
         Currently: x${format(this.effect())}  
@@ -2640,6 +2813,7 @@ addLayer("m", {
     },
     canAfford() { 
         let bought = getBuyableAmount("m", 11)
+        if (inChallenge("trials", 13)) return false
         return player.m.points.gte(this.cost(bought)) && bought.lt(this.cap())
     },
     buy() {
@@ -2675,6 +2849,7 @@ addLayer("m", {
         Currently: x${this.effect()}  
         Bought: ${bought}/${cap}  
         Cost: ${format(this.cost(bought))} points` */
+        if (inChallenge("trials", 13)) return "DISABLED"
         return `Multiply money gain by +20% additive each purchase. 
         After every 10 levels, the effect is multiplied by x1.4.
         Currently: x${format(this.effect())} 
@@ -2686,6 +2861,7 @@ addLayer("m", {
     },
     canAfford() { 
         let bought = getBuyableAmount("m", 12)
+        if (inChallenge("trials", 13)) return false
         return player.m.points.gte(this.cost(bought)) && bought.lt(this.cap())
     },
     buy() {
@@ -3056,8 +3232,6 @@ addLayer("pr", {
                 player.pr.points = new Decimal(0)
     } else if (resettingLayer === "d") {
                 layerDataReset(this.layer)
-    } else if (resettingLayer === "ins") {
-                layerDataReset(this.layer)
     }
 },
     autoPrestige() {
@@ -3185,8 +3359,6 @@ addLayer("c", {
                 if (player.sac.points.gte(1)) player.c.points = new Decimal(0)
             } else if (resettingLayer === "d") {
                 layerDataReset(this.layer)
-            } else if (resettingLayer === "ins") {
-                layerDataReset(this.layer)
             }
         },
     autoclicker() { // ze autoclicker
@@ -3201,6 +3373,12 @@ addLayer("c", {
             
             if (hasUpgrade("a", 21)) gain = gain.times(2)
             if (hasUpgrade("a", 31)) gain = gain.times(10)
+
+            gain = gain.times(globalMult())
+
+            if (hasMilestone("prism", 0)) {
+                gain = gain.times(player.prism.points.add(1).pow(0.175).max(1));
+            }
             
             return gain
         } else return new Decimal(0)
@@ -3229,6 +3407,7 @@ addLayer("c", {
 		if (hasUpgrade("sp", 111)) gain = gain.times(10)
 		else gain = gain.times(2)
 	    }
+        if (!hasUpgrade("p", 301)) gain = gain.times(0)
         if (hasUpgrade("p", 371)) gain = gain.times(1.5)
         if (hasUpgrade("p", 421)) gain = gain.times(3)
         if (hasUpgrade("p", 461)) gain = gain.times(upgradeEffect("p", 461))
@@ -3243,6 +3422,7 @@ addLayer("c", {
         if (hasUpgrade("g", 101)) gain = gain.times(1.2)
         if (hasUpgrade("g", 131)) gain = gain.times(1.3)
         if (hasUpgrade("g", 171)) gain = gain.times(1.25)
+        if (hasUpgrade("g", 251)) gain = gain.times(1.3)
         
         if (hasUpgrade("a", 11)) gain = gain.times(10)
         if (hasUpgrade("a", 21)) gain = gain.times(2)
@@ -3256,9 +3436,17 @@ addLayer("c", {
         if (hasUpgrade("d", 22)) gain = gain.times(2.5)
         if (hasUpgrade("d", 51)) gain = gain.times(1.5)
         if (hasUpgrade("d", 111)) gain = gain.times(2)
+        if (hasUpgrade("d", 201)) gain = gain.times(10)
+        if (hasUpgrade("d", 321)) gain = gain.times(3.5)
+        if (hasUpgrade("d", 381)) gain = gain.times(3)
+        if (hasUpgrade("d", 411)) gain = gain.times(3)
 
         if (hasMilestone("sac", 1)) {
          gain = gain.times(new Decimal(2).pow(player.sac.points.sub(1).max(1)));
+        }
+
+        if (hasMilestone("c", 4)) {
+        gain = gain.times(player.c.points.add(1).div(1e49).pow(0.5).max(1));
         }
 
         gain = gain.times(globalMult())
@@ -3278,7 +3466,7 @@ addLayer("c", {
             title: "Click Button",
             display() {return `Click for ${format(tmp.c.clickMult)} clicks.`},
             canClick() {return true},
-            onClick() {player.c.points = player.c.points.add(tmp.c.clickMult)}
+            onClick() {player.c.points = player.c.points.add(tmp.c.clickMult)},
         },
         21: {
             title: "Super Click Button",
@@ -3295,10 +3483,10 @@ addLayer("c", {
         },
         22: {
             title: "Ascension Click Button",
-            display() {return `Click for ${format(getResetGain("a").div(6.66))} ascensions but halve your clicks.`},
+            display() {return `Click for ${format(getResetGain("a").div(3))} ascensions but halve your clicks.`},
             canClick() {return true},
             onClick() {
-                player.a.points = player.a.points.add(getResetGain("a").div(6.66))
+                player.a.points = player.a.points.add(getResetGain("a").div(3))
                 player.c.points = player.c.points.div(2)
             },
             unlocked() {return hasUpgrade("cr",81)},
@@ -3357,6 +3545,16 @@ addLayer("c", {
         done() { return player.c.points.gte(1e19) && hasUpgrade("a",131)},
         unlocked() {return hasUpgrade("a",131)},
     },
+    4: {
+        requirementDescription: "1e50 Clicks",
+        effect() {
+            return player.c.points.add(1).div(1e49).pow(0.5).max(1)
+        },
+        effectDescription() {
+        return "Boosts click gain with a formula of clicks/1e49^0.5. Current boost: x" + format(this.effect())},
+        done() { return player.c.points.gte(1e50) && hasUpgrade("d", 201)},
+        unlocked() {return hasUpgrade("d", 201)},
+    },
 },
 }) 
 
@@ -3382,8 +3580,6 @@ addLayer("sp", {
             } else if (resettingLayer === "sac") {
                 if (player.sac.points.gte(1)) player.sp.points = new Decimal(0)
             } else if (resettingLayer === "d") {
-                layerDataReset(this.layer)
-            } else if (resettingLayer === "ins") {
                 layerDataReset(this.layer)
             }
     },
@@ -3422,6 +3618,9 @@ addLayer("sp", {
     if (hasUpgrade("d", 22)) gain = gain.times(2.5)
     if (hasUpgrade("d", 51)) gain = gain.times(1.5)
     if (hasUpgrade("d", 111)) gain = gain.times(2)
+    if (hasUpgrade("d", 321)) gain = gain.times(3.5)
+    if (hasUpgrade("d", 411)) gain = gain.times(3)
+    if (hasUpgrade("d", 721)) gain = gain.times(10)
 
     if (hasMilestone("pr", 4)) {
         gain = gain.times((player.pr.points.minus(14).times(0.5)).add(1).max(1));
@@ -3509,7 +3708,6 @@ addLayer("sp", {
                 currencyInternalName: "points",
                 branches: [21],
                 currencyLayer: "sp",
-                unlocked() { return player.sp && player.sp.points.gte(0.01) || hasUpgrade(this.layer,11)},
             },
             21: {
                 title: "Upgrade #2-S",
@@ -3791,12 +3989,6 @@ addLayer("b", {
                 player.b.money = new Decimal(0)
                 player.b.clicks = new Decimal(0)
                 player.b.subpoints = new Decimal(0)
-            } else if (resettingLayer === "ins") {
-                layerDataReset(this.layer)
-                player.b.points = new Decimal(0)
-                player.b.money = new Decimal(0)
-                player.b.clicks = new Decimal(0)
-                player.b.subpoints = new Decimal(0)
             } else if (resettingLayer === "mb") {
                 layerDataReset(this.layer)
                 player.b.points = new Decimal(0)
@@ -3861,7 +4053,7 @@ addLayer("b", {
     buy() {
         let bought = getBuyableAmount("b", 11)
         if (bought.gte(this.cap())) return // stop if capped
-        player.points = player.points.sub(this.cost(bought))
+        if (!hasUpgrade("d", 691)) player.points = player.points.sub(this.cost(bought))
         player.b.points = player.b.points.add(1)
         if (!player.points.gt(0)) player.points = new Decimal(0)
         setBuyableAmount("b", 11, bought.add(1))
@@ -3916,7 +4108,7 @@ addLayer("b", {
     buy() {
         let bought = getBuyableAmount("b", 12)
         if (bought.gte(this.cap())) return // stop if capped
-        player.points = player.points.sub(this.cost(bought))
+        if (!hasUpgrade("d", 691)) player.points = player.points.sub(this.cost(bought))
         player.b.money = player.b.money.add(1)
         if (!player.points.gt(0)) player.points = new Decimal(0)
         setBuyableAmount("b", 12, bought.add(1))
@@ -3971,7 +4163,7 @@ addLayer("b", {
     buy() {
         let bought = getBuyableAmount("b", 21)
         if (bought.gte(this.cap())) return // stop if capped
-        player.points = player.points.sub(this.cost(bought))
+        if (!hasUpgrade("d", 691)) player.points = player.points.sub(this.cost(bought))
         player.b.clicks = player.b.clicks.add(1)
         if (!player.points.gt(0)) player.points = new Decimal(0)
         setBuyableAmount("b", 21, bought.add(1))
@@ -4026,7 +4218,7 @@ addLayer("b", {
     buy() {
         let bought = getBuyableAmount("b", 22)
         if (bought.gte(this.cap())) return // stop if capped
-        player.points = player.points.sub(this.cost(bought))
+        if (!hasUpgrade("d", 691)) player.points = player.points.sub(this.cost(bought))
         player.b.subpoints = player.b.subpoints.add(1)
         if (!player.points.gt(0)) player.points = new Decimal(0)
         setBuyableAmount("b", 22, bought.add(1))
@@ -4077,6 +4269,8 @@ function boosterCostMult() {
     let exponent = new Decimal(1.425)
     if (hasUpgrade("p", 771)) exponent = exponent.sub(0.05)
     exponent = exponent.times(new Decimal(1).add(new Decimal(0.035).times(player.mb.totalBoosters)).max(1))
+    if (hasUpgrade("d", 371)) exponent = exponent.div(1.1)
+    exponent = exponent.div(buyableEffect("sap", 13))
     return Decimal.pow(exponent, total)
 }
 
@@ -4102,8 +4296,6 @@ addLayer("g", {
             }
             else if (resettingLayer === "d") {
                 layerDataReset(this.layer)
-            } else if (resettingLayer === "ins") {
-                layerDataReset(this.layer)
             }
     },
     color: "#b0dc13ff",
@@ -4112,6 +4304,16 @@ addLayer("g", {
     baseResource: "points", 
     baseAmount() {return player.points},
     layerShown() {return false},
+    automate() {
+            if (hasUpgrade("d", 192)) {
+                const upgradesToBuy = [11, 21, 31, 41, 51, 61, 71, 81, 91, 101, 111, 121, 131, 141, 151, 161, 171, 181, 191, 201]
+                for (const id of upgradesToBuy) {
+                if (canAffordUpgrade(this.layer, id) && !hasUpgrade(this.layer, id)) {
+                    buyUpg(this.layer, id)
+                    }
+                }
+            }
+        },
     clickables: {
     11: {
         title: "Buy Generator",
@@ -4133,9 +4335,30 @@ addLayer("g", {
         },
 
         onClick() {
-            player.points = player.points.sub(this.cost());
+            if (hasUpgrade("d", 401)) {
+                while (true) {
+                    if (this.cost().gt(player.points)) break
+                    player.g.points = player.g.points.add(1);
+                }
+            }
+            else {
+            if (!hasUpgrade("d", 191)) player.points = player.points.sub(this.cost());
             if (!player.points.gt(0)) player.points = new Decimal(0)
             player.g.points = player.g.points.add(1);
+            }
+        },
+        onHold() {
+            if (hasUpgrade("d", 401)) {
+                while (true) {
+                    if (this.cost().gt(player.points)) break
+                    player.g.points = player.g.points.add(1);
+                }
+            }
+            else {
+            if (!hasUpgrade("d", 191)) player.points = player.points.sub(this.cost());
+            if (!player.points.gt(0)) player.points = new Decimal(0)
+            player.g.points = player.g.points.add(1);
+            }
         },
       },
     },
@@ -4144,7 +4367,9 @@ addLayer("g", {
         if (player.g.points.eq(0) && !hasUpgrade("a", 122)) {
             gain = new Decimal(0);
             } else {
-            let exponent = new Decimal(2).add(getBuyableAmount("mb", 11).times(0.015))
+            let buyables = getBuyableAmount("mb", 11)
+            if (hasUpgrade("d", 191)) buyables = buyables.add(1)
+            let exponent = new Decimal(2).add(buyables.times(0.015))
             if (hasUpgrade("a", 122)) gain = gain.times(Decimal.pow(exponent, (player.g.points.add(1))));
             else gain = gain.times(Decimal.pow(exponent, player.g.points));
             }
@@ -4157,6 +4382,7 @@ addLayer("g", {
             if (hasUpgrade("g", 91)) gain = gain.times(upgradeEffect("g", 91))
             if (hasUpgrade("g", 141)) gain = gain.times(1.5)
             if (hasUpgrade("g", 191)) gain = gain.times(1.4)
+            if (hasUpgrade("g", 231)) gain = gain.times(1.3)
 
             if (hasUpgrade("a", 21)) gain = gain.times(2)
             if (hasUpgrade("a", 101)) gain = gain.times(3)
@@ -4170,6 +4396,11 @@ addLayer("g", {
             if (hasUpgrade("d", 22)) gain = gain.times(2.5)
             if (hasUpgrade("d", 51)) gain = gain.times(1.5)
             if (hasUpgrade("d", 111)) gain = gain.times(2)
+            if (hasUpgrade("d", 192)) gain = gain.times(5)
+            if (hasUpgrade("d", 321)) gain = gain.times(3.5)
+            if (hasUpgrade("d", 411)) gain = gain.times(3)
+            if (hasUpgrade("d", 592)) gain = gain.times(4)
+            if (hasUpgrade("d", 701)) gain = gain.times(10)
                 
             if (hasMilestone("sac", 2)) {
             gain = gain.times(new Decimal(2).pow(player.sac.points.sub(2).max(1)));
@@ -4183,6 +4414,11 @@ addLayer("g", {
     },
     update(diff) {
         player.g.power = player.g.power.add(this.genPowerGain().times(diff))
+        if (hasUpgrade("d", 681)) {
+        if (player.points.gte(layers.g.clickables[11].cost())) {
+            layers.g.clickables[11].onClick()
+        }
+    }
     },
     infoboxes: {        
             1: {
@@ -4190,19 +4426,23 @@ addLayer("g", {
                 let perSec = layers["g"].genPowerGain()
                 return "You have " + format(player.g.points) + " Generators, and " + format(player.g.power) + " Generator Power | " + format(perSec) + " power/s"
             },
-                body() {return "Generators generate power at a rate of 2^gen/2, and is used to boost currencies through milestones. Generator power can also be used to buy weak but noticable upgrades."},
+                body() {return "Generators generate power at a rate of 2^gen/2, and is used to boost currencies through milestones. Generator power can also be used to buy weak but noticable upgrades. <br> Tip: You can hold down the buy button."},
                 unlocked() {return true}
                 }
             },
     upgrades: {
             11: {
                 title: "Upgrade #1-G",
-                description: "1.3x point gain.",
+                description() {
+                if (inChallenge("trials", 13)) return "DISABLED"
+                return "1.3x point gain."
+                },
                 cost: new Decimal(50),
                 currencyDisplayName: "power",
                 currencyInternalName: "power",
                 currencyLayer: "g",
                 branches: [21],
+                canAfford() {return !inChallenge("trials", 13)}
                 },
             21: {
                 title: "Upgrade #2-G",
@@ -4396,6 +4636,126 @@ addLayer("g", {
                 currencyInternalName: "power",
                 currencyLayer: "g",
                 unlocked() {return hasUpgrade(this.layer,191)},
+                branches: [211],
+                },
+            211: {
+                title: "Upgrade #21-G",
+                description: "x1.3 descension gain.",
+                cost: new Decimal(1e73),
+                currencyDisplayName: "power",
+                currencyInternalName: "power",
+                currencyLayer: "g",
+                unlocked() {return hasUpgrade(this.layer,201) && hasUpgrade("d",751)},
+                branches: [221],
+                },
+            221: {
+                title: "Upgrade #22-G",
+                description: "x1.3 point gain.",
+                cost: new Decimal(2e73),
+                currencyDisplayName: "power",
+                currencyInternalName: "power",
+                currencyLayer: "g",
+                unlocked() {return hasUpgrade(this.layer,211)},
+                branches: [231],
+                },
+            231: {
+                title: "Upgrade #23-G",
+                description: "x1.3 power gain.",
+                cost: new Decimal(3e73),  
+                currencyDisplayName: "power",
+                currencyInternalName: "power",
+                currencyLayer: "g",
+                unlocked() {return hasUpgrade(this.layer,221)},
+                branches: [241],
+                },
+            241: {
+                title: "Upgrade #24-G",
+                description: "x1.3 money gain.",
+                cost: new Decimal(4e73),  
+                currencyDisplayName: "power",
+                currencyInternalName: "power",
+                currencyLayer: "g",
+                unlocked() {return hasUpgrade(this.layer,231)},
+                branches: [251],
+                },
+            251: {
+                title: "Upgrade #25-G",
+                description: "x1.3 click gain.",
+                cost: new Decimal(5e73),  
+                currencyDisplayName: "power",
+                currencyInternalName: "power",
+                currencyLayer: "g",
+                unlocked() {return hasUpgrade(this.layer,241)},
+                branches: [261],
+                },
+            261: {
+                title: "Upgrade #26-G",
+                description: "x1.3 ascension gain.",
+                cost: new Decimal(6e73),  
+                currencyDisplayName: "power",
+                currencyInternalName: "power",
+                currencyLayer: "g",
+                unlocked() {return hasUpgrade(this.layer,251)},
+                branches: [271],
+                },
+            271: {
+                title: "Upgrade #27-G",
+                description: "x1.3 crystal gain.",
+                cost: new Decimal(7e73),  
+                currencyDisplayName: "power",
+                currencyInternalName: "power",
+                currencyLayer: "g",
+                unlocked() {return hasUpgrade(this.layer,261)},
+                branches: [281],
+                },
+            281: {
+                title: "Upgrade #28-G",
+                description: "x1.3 gemstone gain.",
+                cost: new Decimal(8e73),  
+                currencyDisplayName: "power",
+                currencyInternalName: "power",
+                currencyLayer: "g",
+                unlocked() {return hasUpgrade(this.layer,271)},
+                branches: [291],
+                },
+            291: {
+                title: "Upgrade #29-G",
+                description: "x1.3 life gain and hardcap.",
+                cost: new Decimal(9e73),  
+                currencyDisplayName: "power",
+                currencyInternalName: "power",
+                currencyLayer: "g",
+                unlocked() {return hasUpgrade(this.layer,281)},
+                branches: [301],
+                },
+            301: {
+                title: "Upgrade #30-G",
+                description: "x1.3 prism power.",
+                cost: new Decimal(1e74),  
+                currencyDisplayName: "power",
+                currencyInternalName: "power",
+                currencyLayer: "g",
+                unlocked() {return hasUpgrade(this.layer,291)},
+                branches: [311],
+                },
+            311: {
+                title: "Upgrade #31-G",
+                description: "x1.3 sapphires.",
+                cost: new Decimal(2e74),  
+                currencyDisplayName: "power",
+                currencyInternalName: "power",
+                currencyLayer: "g",
+                unlocked() {return hasUpgrade(this.layer,301)},
+                branches: [321],
+                },
+            321: {
+                title: "Upgrade #32-G",
+                description: "Final upgrade again again... x1.35 descensions.",
+                cost: new Decimal(3e74),  
+                currencyDisplayName: "power",
+                currencyInternalName: "power",
+                currencyLayer: "g",
+                unlocked() {return hasUpgrade(this.layer,311)},
                 branches: [],
                 },
          },
@@ -4473,6 +4833,18 @@ addLayer("g", {
         ["row", [["infobox", 1]]],
         "milestones",
         ["row", [["clickable", 11]]],
+        ["row", [["upgrade", 321]]],
+        ["row", [["upgrade", 311]]],
+        ["row", [["upgrade", 301]]],
+        ["row", [["upgrade", 291]]],
+        ["row", [["upgrade", 281]]],
+        ["row", [["upgrade", 271]]],
+        ["row", [["upgrade", 261]]],
+        ["row", [["upgrade", 251]]],
+        ["row", [["upgrade", 241]]],
+        ["row", [["upgrade", 231]]],
+        ["row", [["upgrade", 221]]],
+        ["row", [["upgrade", 211]]],
         ["row", [["upgrade", 201]]],
         ["row", [["upgrade", 191]]],
         ["row", [["upgrade", 181]]],
@@ -4540,22 +4912,25 @@ addLayer("a", {
     baseAmount() {return player.points},
     layerShown() {return false},
     doReset(resettingLayer) {
-        if (resettingLayer === "cr") {
+            if (resettingLayer === "cr") {
                 layerDataReset(this.layer)
                 player.points = playerPoints // took me three days to finally find a solution to saving points. How to kill myself?
-                if (hasUpgrade("cr", 21)) player.a.upgrades.push(41,42,43)
+                if (hasUpgrade("cr", 11)) player.a.upgrades.push(41,42,43)
+                if (hasUpgrade("cr", 21)) player.a.upgrades.push(61, 71)
             } else if (resettingLayer === "sac") {
-                if (player.sac.points.gte(2)) player.a.points = new Decimal(0)
+                if (player.sac.points.gte(2)) {
+                    player.a.points = new Decimal(0)
+                    player.a.bestAscensionGain = new Decimal(1)
+                    }
             } else if (resettingLayer === "gem") {
-                layerDataReset(this.layer)
+                let keep = []
+                if (hasUpgrade("d", 742)) keep.push("upgrades")
+                layerDataReset(this.layer, keep)
                 player.points = playerPoints
                 player.a.bestAscensionGain = new Decimal(1)
             } else if (resettingLayer === "d") {
                 layerDataReset(this.layer)
                 if (hasUpgrade("d", 11)) player.a.upgrades.push(11)
-                player.a.bestAscensionGain = new Decimal(1)
-            } else if (resettingLayer === "ins") {
-                layerDataReset(this.layer)
                 player.a.bestAscensionGain = new Decimal(1)
             }
     },
@@ -4569,8 +4944,17 @@ addLayer("a", {
     let gain = new Decimal(1)
     if (hasUpgrade("a", 541)) gain = gain.add(1)
     if (hasUpgrade("a", 651)) gain = gain.add(3)
+    if (hasUpgrade("d", 522)) gain = gain.add(9)
     let base2 = player.points.div("1e49")
-    while(true) {
+    if (hasUpgrade("gem", 71)) {
+        while(true) {
+            if (base2.gt(850)) {
+                gain = gain.times(2.15)
+                base2 = base2.div(850)
+            } else break;
+        }
+    }
+    else while(true) {
             if (base2.gt(1000)) {
                 gain = gain.times(2)
                 base2 = base2.div(1000)
@@ -4582,6 +4966,7 @@ addLayer("a", {
     if (hasUpgrade("a", 141)) gain = gain.times(2.5)
     if (hasUpgrade("g", 151)) gain = gain.times(1.5)
     if (hasUpgrade("g", 201)) gain = gain.times(1.5)
+    if (hasUpgrade("g", 261)) gain = gain.times(1.3)
     if (hasUpgrade("a", 151)) gain = gain.times(upgradeEffect("a", 151))
     if (hasUpgrade("a", 191)) gain = gain.times(upgradeEffect("a", 191))
     if (hasUpgrade("a", 261)) gain = gain.times(2)
@@ -4607,6 +4992,7 @@ addLayer("a", {
     if (hasUpgrade("cr", 51)) gain = gain.times(1.01)
     if (hasUpgrade("cr", 61)) gain = gain.times(2)
     if (hasUpgrade("cr", 71)) gain = gain.times(upgradeEffect("cr", 71))
+    if (hasUpgrade("cr", 91)) gain = gain.times(upgradeEffect("cr", 91))
     
     if (hasUpgrade("d", 11)) gain = gain.times(25)
     if (hasUpgrade("d", 22)) gain = gain.times(2.5)
@@ -4615,16 +5001,29 @@ addLayer("a", {
     if (hasUpgrade("d", 91)) gain = gain.times(upgradeEffect("d", 91))
     if (hasUpgrade("d", 112)) gain = gain.times(2)
 	if (hasUpgrade("d", 161)) gain = gain.times(upgradeEffect("d", 161))
+    if (hasUpgrade("d", 241)) gain = gain.times(3)
+    if (hasUpgrade("d", 242)) gain = gain.times(15)
+    if (hasUpgrade("d", 261)) gain = gain.times(upgradeEffect("d", 261))
+    if (hasUpgrade("d", 322)) gain = gain.times(3.5)
+    if (hasUpgrade("d", 411)) gain = gain.times(3)
+    if (hasUpgrade("d", 441)) gain = gain.times(1.03)
+    if (hasUpgrade("d", 491)) gain = gain.times(upgradeEffect("d", 491))
+    if (hasUpgrade("d", 591)) gain = gain.times(4)
 
     if (hasUpgrade("gem", 11)) gain = gain.times(15)
     if (hasUpgrade("gem", 31)) gain = gain.times(4)
     if (hasUpgrade("gem", 41)) gain = gain.times(upgradeEffect("gem", 41))
+    if (hasUpgrade("gem", 51)) gain = gain.times(1.02)
+    if (hasUpgrade("gem", 61)) gain = gain.times(1.25)
+    if (hasUpgrade("gem", 81)) gain = gain.times(7.5)
     
     gain = gain.times(globalMult())
     gain = gain.times(buyableEffect("m", 32))
     gain = gain.times(buyableEffect("gold", 21))
     gain = gain.times(buyableEffect("gold", 31))
     gain = gain.times(buyableEffect("mb", 12))
+    gain = gain.times(buyableEffect("l", 13))
+    gain = gain.times(buyableEffect("l", 23))
     if (hasMilestone("pr", 6)) {
         if (hasUpgrade("a", 691) && hasUpgrade("gem", 21)) gain = gain.times(new Decimal(1.15).pow(player.pr.points.sub(43)).max(1))
         else if (hasUpgrade("gem", 21)) gain = gain.times( new Decimal(1.075).pow(player.pr.points.sub(43)).max(1))
@@ -4643,8 +5042,13 @@ addLayer("a", {
     if (hasMilestone("sac", 2)) {
         gain = gain.times(new Decimal(2).pow(player.sac.points.sub(2).max(1)));
     }
+    if (hasMilestone("overcharge", 2)) {
+         if (player.overcharge.points.gte(30)) gain = gain.times(new Decimal(4).times(new Decimal(1.1).pow(player.overcharge.points.sub(30))).max(1))
+    }
+    if (hasMilestone("prism", 3)) {
+        gain = gain.times(player.prism.points.pow(0.05).max(1));
+    }
     if (hasUpgrade("a", 411)) gain = gain.pow(0.925)
-    if (inChallenge("ins", 11)) gain = gain.pow(0.95)
 
     gain = gain.floor();
     if (hasUpgrade("cr", 42) && gain.gt(player.a.bestAscensionGain)) player.a.bestAscensionGain = gain
@@ -4661,6 +5065,7 @@ addLayer("a", {
 
     if (hasUpgrade("d", 11)) gain = gain.add(0.01)
     if (hasUpgrade("d", 121)) gain = gain.add(0.025)
+    if (hasUpgrade("d", 661)) gain = gain.add(0.1)
 
     if (hasUpgrade("gem", 31)) gain = gain.times(2)
     if (hasUpgrade("gem", 51)) gain = gain.times(1.02)
@@ -4672,11 +5077,44 @@ addLayer("a", {
             gain = gain.times(player.a.bestAscensionGain.div(current))
         }
     }
+    gain = gain.max(1)
     return gain
     },
     automate() {
             if (hasUpgrade("d", 121)) {
                 const upgradesToBuy = [11, 21, 31, 41, 42, 43, 51, 61, 62, 71, 72, 81, 91, 101, 111, 121, 122, 131, 141, 151]
+                for (const id of upgradesToBuy) {
+                if (canAffordUpgrade(this.layer, id) && !hasUpgrade(this.layer, id)) {
+                buyUpg(this.layer, id)
+                }
+                }
+            }
+            if (hasUpgrade("d", 241)) {
+                const upgradesToBuy = [161, 171, 181, 191, 201, 211, 221, 231, 232, 241, 251, 261, 271, 281, 282, 291, 301, 302, 311, 321]
+                for (const id of upgradesToBuy) {
+                if (canAffordUpgrade(this.layer, id) && !hasUpgrade(this.layer, id)) {
+                buyUpg(this.layer, id)
+                }
+                }
+            }
+            if (hasUpgrade("d", 341)) {
+                const upgradesToBuy = [331, 341, 351, 361, 371, 381, 391, 401, 402, 412, 421, 431, 432, 441, 451, 461, 462, 463, 471, 481]
+                for (const id of upgradesToBuy) {
+                if (canAffordUpgrade(this.layer, id) && !hasUpgrade(this.layer, id)) {
+                buyUpg(this.layer, id)
+                }
+                }
+            }
+            if (hasUpgrade("d", 441)) {
+                const upgradesToBuy = [491, 501, 511, 521, 531, 541, 551, 561, 571, 581, 591, 592, 593, 601, 611, 621, 631, 641, 651, 652]
+                for (const id of upgradesToBuy) {
+                if (canAffordUpgrade(this.layer, id) && !hasUpgrade(this.layer, id)) {
+                buyUpg(this.layer, id)
+                }
+                }
+            }
+            if (hasUpgrade("d", 501)) {
+                const upgradesToBuy = [661, 671, 681, 691, 701, 711, 721, 722, 731, 741, 751, 761, 771, 781, 791, 801, 811, 821, 831, 841]
                 for (const id of upgradesToBuy) {
                 if (canAffordUpgrade(this.layer, id) && !hasUpgrade(this.layer, id)) {
                 buyUpg(this.layer, id)
@@ -5025,14 +5463,17 @@ addLayer("a", {
                 },
             242: {
                 title: "Upgrade #130-X",
-                description: "x100 generator power, but double the exponential pricing scale of Generators.",
+                description()  {
+                    if (inChallenge("trials", 11) || inChallenge("trials", 12) || inChallenge("trials", 13)) return "DISABLED"
+                    return "x100 generator power, but double the exponential pricing scale of Generators."
+                },
                 cost: new Decimal(3.05e6),
                 currencyDisplayName: "ascensions",
                 currencyInternalName: "points",
                 currencyLayer: "a",
                 branches: [],
                 unlocked() {return hasUpgrade(this.layer,241)},
-                canAfford() {return !player.extraoptions.disableRiskyUpgrade},
+                canAfford() {return !player.extraoptions.disableRiskyUpgrade && !inChallenge("trials", 11) && !inChallenge("trials", 12) && !inChallenge("trials", 13)},
                 },
             251: {
                 title: "Upgrade #131",
@@ -5227,7 +5668,7 @@ addLayer("a", {
                 effect() {
                     let pointUpgrades = player[this.layer].upgrades.length
                     let multiplier = new Decimal(0)
-                    if (hasUpgrade("gem", 51)) multiplier = multiplier.add(new Decimal(1.075).pow(pointUpgrades))
+                    if (hasUpgrade("gem", 51)) multiplier = multiplier.add(new Decimal(1.06).pow(pointUpgrades))
                     else multiplier = multiplier.add(new Decimal(1.04).pow(pointUpgrades))
             
                     return multiplier
@@ -5298,14 +5739,17 @@ addLayer("a", {
                 },
             411: {
                 title: "Upgrade #150-X",
-                description: "Feeling hopeless? Want a short-term dopamine buff but long-term consequence? x50 ascension gain, x100,000 money gain & x1,000,000 point gain but ^0.925 ascensions, points & money.",
+                description() {
+                 if (inChallenge("trials", 11) || inChallenge("trials", 12) || inChallenge("trials", 13)) return "DISABLED"
+                 return "Feeling hopeless? Want a short-term dopamine buff but long-term consequence? x50 ascension gain, x100,000 money gain & x1,000,000 point gain but ^0.925 ascensions, points & money."
+                },
                 cost: new Decimal(7.5e13),
                 currencyDisplayName: "ascensions",
                 currencyInternalName: "points",
                 currencyLayer: "a",
                 branches: [],
                 unlocked() {return hasUpgrade(this.layer,412)},
-                canAfford() {return !player.extraoptions.disableRiskyUpgrade},
+                canAfford() {return !player.extraoptions.disableRiskyUpgrade && !inChallenge("trials", 11) && !inChallenge("trials", 12) && !inChallenge("trials", 13)},
                 },
             421: {
                 title: "Upgrade #151",
@@ -6064,15 +6508,13 @@ addLayer("cr", {
     row: 1,
     doReset(resettingLayer) {
             if (resettingLayer === "gem") {
-                layerDataReset(this.layer)
+                if (!hasUpgrade("d", 251)) layerDataReset(this.layer)
                 if (hasUpgrade("gem", 11)) player.cr.upgrades.push(32)
             } else if (resettingLayer === "sac") {
                 if (player.sac.points.gte(3)) {
                     player.cr.points = new Decimal(0)
                 } 
             } else if (resettingLayer === "d") {
-                layerDataReset(this.layer)
-            } else if (resettingLayer === "ins") {
                 layerDataReset(this.layer)
             }
     },
@@ -6083,7 +6525,9 @@ addLayer("cr", {
     if (player.a.points.lt("5000")) {
         return new Decimal(0)
     }
-    let gain = player.a.points.div(new Decimal("5000")).pow(0.7)
+    let gain = new Decimal(0)
+    if (hasUpgrade("d", 532)) gain = gain.add(player.a.points.div(new Decimal("5000")).pow(0.72))
+    else gain = gain.add(player.a.points.div(new Decimal("5000")).pow(0.7))
 
     if (hasUpgrade("a", 391)) gain = gain.times(3)
     if (hasUpgrade("a", 471)) gain = gain.times(1.5)
@@ -6091,14 +6535,23 @@ addLayer("cr", {
     if (hasUpgrade("a", 791)) gain = gain.times(5)
 
     if (hasUpgrade("gem", 11)) gain = gain.times(15)
+    if (hasUpgrade("gem", 81)) gain = gain.times(7.5)
+    if (hasUpgrade("g", 271)) gain = gain.times(1.3)
     
     if (hasUpgrade("d", 11)) gain = gain.times(25)
     if (hasUpgrade("d", 22)) gain = gain.times(2.5)
     if (hasUpgrade("d", 51)) gain = gain.times(1.5)
     if (hasUpgrade("d", 112)) gain = gain.times(2)
+    if (hasUpgrade("d", 251)) gain = gain.times(2)
+    if (hasUpgrade("d", 322)) gain = gain.times(3.5)
+    if (hasUpgrade("d", 401)) gain = gain.times(10)
+    if (hasUpgrade("d", 411)) gain = gain.times(3)
+    if (hasUpgrade("d", 431)) gain = gain.times(upgradeEffect("d", 431))
+    if (hasUpgrade("d", 523)) gain = gain.times(3)
+    if (hasUpgrade("d", 592)) gain = gain.times(4)
 
     if (hasMilestone("sac", 3)) {
-        gain = gain.times(new Decimal(2).pow(player.sac.points.sub(4)));
+            gain = gain.times(new Decimal(2).pow(player.sac.points.sub(3).max(1)));
     }
 
     gain = gain.times(buyableEffect("gold", 22))
@@ -6116,9 +6569,23 @@ addLayer("cr", {
     passiveGeneration() {
     let gain = new Decimal(0)
     if (hasUpgrade("d", 21)) gain = gain.add(0.001)
+    if (hasUpgrade("d", 311)) gain = gain.add(0.001)
+    if (hasUpgrade("d", 661)) gain = gain.add(0.01)
     gain = gain.add(getBuyableAmount("mb", 13).times(0.001))
+
+    if (hasUpgrade("d", 242)) gain = new Decimal(0)
     return gain
     },
+    automate() {
+            if (hasUpgrade("d", 311)) {
+                const upgradesToBuy = [11, 21, 31, 32, 41, 42]
+                for (const id of upgradesToBuy) {
+                if (canAffordUpgrade(this.layer, id) && !hasUpgrade(this.layer, id)) {
+                    buyUpg(this.layer, id)
+                    }
+                }
+            }
+        },
     layerShown() { return false },
     infoboxes: {        
             1: {
@@ -6134,24 +6601,26 @@ addLayer("cr", {
      upgrades: {
             11: {
                 title: "Upgrade #1-C",
-                description: "x10 ascensions.",
+                description: "x10 ascensions, and keep Upgrade #104-106.",
                 cost: new Decimal(1),
                 currencyDisplayName: "crystals",
                 currencyInternalName: "points",
                 branches: [21],
+                onPurchase() {
+                player.a.upgrades.push(41,42,43)
+                },
                 currencyLayer: "cr",
-                unlocked() { return player.c && player.c.points.gte(0.01) || hasUpgrade(this.layer,11)},
             },
             21: {
                 title: "Upgrade #2-C",
-                description: "Unlock a new Generator milestone, and keep Upgrade #104-106.",
+                description: "Unlock a new Generator milestone, and keep Upgrade #108 & #110.",
                 cost: new Decimal(15000),
                 currencyDisplayName: "crystals",
                 currencyInternalName: "points",
                 branches: [31, 32],
                 currencyLayer: "cr",
                 onPurchase() {
-                player.a.upgrades.push(41,42,43)
+                player.a.upgrades.push(61, 71)
                 },
                 unlocked() { return hasUpgrade(this.layer,11)},
             },
@@ -6208,7 +6677,7 @@ addLayer("cr", {
             61: {
                 title: "Upgrade #8-C",
                 description: "Unlock a new Gold Buyable, and x2 ascensions.",
-                cost: new Decimal(6e28),
+                cost: new Decimal(9e28),
                 currencyDisplayName: "crystals",
                 currencyInternalName: "points",
                 branches: [71],
@@ -6218,7 +6687,7 @@ addLayer("cr", {
             71: {
                 title: "Upgrade #9-C",
                 description: "Crystals boost Ascensions. Formula: crystals^0.03",
-                cost: new Decimal(3e38),
+                cost: new Decimal(3e39),
                 currencyDisplayName: "crystals",
                 currencyInternalName: "points",
                 branches: [81],
@@ -6231,13 +6700,37 @@ addLayer("cr", {
             },
             81: {
                 title: "Upgrade #10-C",
-                description: "Unlock an Ascension Clicker that halves your clicks but gives 15% of ascension per click. Also buffs the super clicker to x5,000 clicks.",
-                cost: new Decimal(6e45),
+                description: "Unlock an Ascension Clicker that halves your clicks but gives 33% of ascension per click. Also buffs the super clicker to x5,000 clicks.",
+                cost: new Decimal(6e46),
+                currencyDisplayName: "crystals",
+                currencyInternalName: "points",
+                branches: [91],
+                currencyLayer: "cr",
+                unlocked() { return hasUpgrade(this.layer,71)},
+            },
+            91: {
+                title: "Upgrade #11-C",
+                description: "Crystals boost Ascensions, again. Formula: log4(crystals)/10",
+                cost: new Decimal(4e61),
+                currencyDisplayName: "crystals",
+                currencyInternalName: "points",
+                branches: [101],
+                currencyLayer: "cr",
+                effect() {
+                    return player.c.points.max(1).log(4).max(1).div(10)
+                },
+                effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+                unlocked() { return hasUpgrade(this.layer,81)},
+            },
+            101: {
+                title: "Upgrade #12-C",
+                description: "Improve the gold buyable to x1.125 compounding. Also doubles the cap.",
+                cost: new Decimal(7e79),
                 currencyDisplayName: "crystals",
                 currencyInternalName: "points",
                 branches: [],
                 currencyLayer: "cr",
-                unlocked() { return hasUpgrade(this.layer,71)},
+                unlocked() { return hasUpgrade(this.layer,81)},
             },
     },
     tabFormat: () => { 
@@ -6245,6 +6738,8 @@ addLayer("cr", {
         if (inverseTree) { return [
         ["row", [["infobox", 1]]],
         "prestige-button",
+        ["row", [["upgrade", 101]]],
+        ["row", [["upgrade", 91]]],
         ["row", [["upgrade", 81]]],
         ["row", [["upgrade", 71]]],
         ["row", [["upgrade", 61]]],
@@ -6294,8 +6789,6 @@ addLayer("gold", {
                 if (player.sac.points.gte(2)) player.gold.points = new Decimal(0)
             } else if (resettingLayer === "d") {
                 layerDataReset(this.layer)
-            } else if (resettingLayer === "ins") {
-                layerDataReset(this.layer)
             }
         },
         canReset() {
@@ -6315,6 +6808,9 @@ addLayer("gold", {
         if (hasUpgrade("d", 22)) gain = gain.times(2.5)
         if (hasUpgrade("d", 51)) gain = gain.times(4.5)
         if (hasUpgrade("d", 112)) gain = gain.times(2)
+        if (hasUpgrade("d", 322)) gain = gain.times(3.5)
+        if (hasUpgrade("d", 361)) gain = gain.times(3)
+        if (hasUpgrade("d", 411)) gain = gain.times(3)
 
         if (hasMilestone("sac", 2)) {
             gain = gain.times(new Decimal(2).pow(player.sac.points.sub(2)));
@@ -6330,19 +6826,46 @@ addLayer("gold", {
         onPrestige() {
         playerPoints = player.points
         },
-    
-        upgrades: {
+        passiveGeneration() {
+            let gain = new Decimal(0)
+            gain = gain.add(buyableEffect("sap", 22).div(100))
+            return gain
         },
+        automate() {
+    if (hasUpgrade("d", 361)) {
+            while (canBuyBuyable(this.layer, 11)) {
+                buyBuyable(this.layer, 11)
+            }
+            while (canBuyBuyable(this.layer, 12)) {
+                buyBuyable(this.layer, 12)
+            }
+            while (canBuyBuyable(this.layer, 13)) {
+                buyBuyable(this.layer, 13)
+            }
+            while (canBuyBuyable(this.layer, 21)) {
+                buyBuyable(this.layer, 21)
+            }
+            while (canBuyBuyable(this.layer, 22)) {
+                buyBuyable(this.layer, 22)
+            }
+            while (canBuyBuyable(this.layer, 23)) {
+                buyBuyable(this.layer, 23)
+            }
+        } 
+    },
 
         infoboxes: {        
             1: {
                 title() {
-                return "You have " + format(player.gold.points) + "G (Gold)"
+                let perSec = layers["gold"].getResetGain().times(layers["cr"].passiveGeneration())
+                if (layers["gold"].passiveGeneration().gt(0)) return "You have " + format(player.gold.points) + "G (Gold) | " + format(perSec) + "/s" 
+                else return "You have " + format(player.gold.points) + "G (Gold)"
             },
                 body() {return "Gold resets money & money buyables but unlocks new & more powerful buyables. You must have at least 1e51 money to convert. Gold converts at a ratio of 1:1e51. (Can change with upgrades)"},
                 unlocked() {return true}
                 }
             },
+        
 
         buyables: {
             11: {
@@ -6366,7 +6889,7 @@ addLayer("gold", {
     buy() {
         let bought = getBuyableAmount("gold", 11)
         if (bought.gte(this.cap())) return // stop if capped
-        player.gold.points = player.gold.points.sub(this.cost(bought))
+        if (!getBuyableAmount("sap", 23).gte(0)) player.gold.points = player.gold.points.sub(this.cost(bought))
         setBuyableAmount("gold", 11, bought.add(1))
     },
     effect() {
@@ -6388,6 +6911,7 @@ addLayer("gold", {
     display() { 
         let bought = getBuyableAmount("gold", 12)
         let cap = this.cap()
+        if (inChallenge("trials", 12) || inChallenge("trials", 13)) return "DISABLED"
         return `Increase passive subpoint generation by +0.1% per level.
         Currently: +${format(this.effect().times(100))}%
         Bought: ${bought}/${cap}  
@@ -6398,12 +6922,13 @@ addLayer("gold", {
     },
     canAfford() { 
         let bought = getBuyableAmount("gold", 12)
+        if (inChallenge("trials", 12) || inChallenge("trials", 13)) return false
         return player.gold.points.gte(this.cost(bought)) && bought.lt(this.cap())
     },
     buy() {
         let bought = getBuyableAmount("gold", 12)
         if (bought.gte(this.cap())) return
-        player.gold.points = player.gold.points.sub(this.cost(bought))
+        if (!getBuyableAmount("sap", 23).gte(0)) player.gold.points = player.gold.points.sub(this.cost(bought))
         setBuyableAmount("gold", 12, bought.add(1))
     },
     effect() {
@@ -6436,7 +6961,7 @@ addLayer("gold", {
     buy() {
         let bought = getBuyableAmount("gold", 13)
         if (bought.gte(this.cap())) return
-        player.gold.points = player.gold.points.sub(this.cost(bought))
+        if (!getBuyableAmount("sap", 23).gte(0)) player.gold.points = player.gold.points.sub(this.cost(bought))
         setBuyableAmount("gold", 13, bought.add(1))
     },
     effect() {
@@ -6470,7 +6995,7 @@ addLayer("gold", {
     buy() {
         let bought = getBuyableAmount("gold", 21)
         if (bought.gte(this.cap())) return // stop if capped
-        player.gold.points = player.gold.points.sub(this.cost(bought))
+        if (!getBuyableAmount("sap", 23).gte(0)) player.gold.points = player.gold.points.sub(this.cost(bought))
         setBuyableAmount("gold", 21, bought.add(1))
     },
     effect() {
@@ -6491,6 +7016,7 @@ addLayer("gold", {
     display() { 
         let bought = getBuyableAmount("gold", 22)
         let cap = this.cap()
+        if (inChallenge("trials", 13)) return "DISABLED"
         return `Multiply crystal gain by +20% additive each purchase. 
         After every 10 levels, the effect is multiplied by x1.4.
         Currently: x${format(this.effect())}  
@@ -6502,12 +7028,13 @@ addLayer("gold", {
     },
     canAfford() { 
         let bought = getBuyableAmount("gold", 22)
+        if (inChallenge("trials", 13)) return false
         return player.gold.points.gte(this.cost(bought)) && bought.lt(this.cap())
     },
     buy() {
         let bought = getBuyableAmount("gold", 22)
         if (bought.gte(this.cap())) return // stop if capped
-        player.gold.points = player.gold.points.sub(this.cost(bought))
+        if (!getBuyableAmount("sap", 23).gte(0)) player.gold.points = player.gold.points.sub(this.cost(bought))
         setBuyableAmount("gold", 22, bought.add(1))
     },
     effect() {
@@ -6526,6 +7053,7 @@ addLayer("gold", {
     display() { 
         let bought = getBuyableAmount("gold", 23)
         let cap = this.cap()
+        if (inChallenge("trials", 11) || inChallenge("trials", 12) || inChallenge("trials", 13)) return "DISABLED"
         return `Automate the middle three money buyables. <br> Bought: ${bought}/${cap} <br> Cost: 100 gold`
     },
     cost(x) { 
@@ -6533,12 +7061,13 @@ addLayer("gold", {
     },
     canAfford() { 
         let bought = getBuyableAmount("gold", 23)
+        if (inChallenge("trials", 11) || inChallenge("trials", 12) || inChallenge("trials", 13)) return false
         return player.gold.points.gte(this.cost(bought)) && bought.lt(this.cap())
     },
     buy() {
         let bought = getBuyableAmount("gold", 23)
         if (bought.gte(this.cap())) return 
-        player.gold.points = player.gold.points.sub(this.cost(bought))
+        if (!getBuyableAmount("sap", 23).gte(0)) player.gold.points = player.gold.points.sub(this.cost(bought))
         setBuyableAmount("gold", 23, bought.add(1))
     },
     cap() {
@@ -6566,19 +7095,55 @@ addLayer("gold", {
     buy() {
         let bought = getBuyableAmount("gold", 31)
         if (bought.gte(this.cap())) return // stop if capped
-        player.gold.points = player.gold.points.sub(this.cost(bought))
+        if (!getBuyableAmount("sap", 23).gte(0)) player.gold.points = player.gold.points.sub(this.cost(bought))
         setBuyableAmount("gold", 31, bought.add(1))
     },
     effect() {
     let amt = getBuyableAmount("gold", 31)  
-    let base = new Decimal(1.1).pow(amt)
+    let base = new Decimal(0)
+    if (hasUpgrade("cr", 101)) base = new Decimal(1.125).pow(amt)
+    else base = new Decimal(1.1).pow(amt)
     return base
+},
+    cap() {
+        let base = new Decimal(100)
+        if (hasUpgrade("cr", 101)) base = base.add(100)
+        return base
+    },
+    unlocked() {return hasUpgrade("cr",61)},
+},
+32: {
+    title: "#8G: Sapphires",
+    display() { 
+        let bought = getBuyableAmount("gold", 32)
+        let cap = this.cap()
+        return `Increase base sapphire gain by +1 per level.
+        Currently: +${format(this.effect())}  
+        Bought: ${bought}/${cap}  
+        Cost: ${format(this.cost(bought))} gold`
+    },
+    cost(x) { 
+        return new Decimal(1e108).times(Decimal.pow(10, x))
+    },
+    canAfford() { 
+        let bought = getBuyableAmount("gold", 32)
+        return player.gold.points.gte(this.cost(bought)) && bought.lt(this.cap())
+    },
+    buy() {
+        let bought = getBuyableAmount("gold", 32)
+        if (bought.gte(this.cap())) return // stop if capped
+        if (!getBuyableAmount("sap", 23).gte(0)) player.gold.points = player.gold.points.sub(this.cost(bought))
+        setBuyableAmount("gold", 32, bought.add(1))
+    },
+    effect() {
+    let amt = getBuyableAmount("gold", 32)  
+    return amt
 },
     cap() {
         let base = 100
         return base
     },
-    unlocked() {return hasUpgrade("cr",61)},
+    unlocked() {return hasUpgrade("d",601)},
 },
         },
         
@@ -6619,9 +7184,6 @@ addLayer("sac", {
     baseResource: "points", 
     baseAmount() {return player.points},
     doReset(resettingLayer) {
-            if (resettingLayer === "ins") {
-                if (!player.sac.points.gte(6)) layerDataReset(this.layer)
-            }
         },
     type: "normal", 
     row: 1,
@@ -6637,7 +7199,11 @@ addLayer("sac", {
     } else if (player.sac.points.eq(4)) {
     return (player.points.gte("1e124") && player.m.points.gte("1e110") && player.c.points.gte("1e45") && player.sp.points.gte("1e123") && player.a.points.gte("1e51") && player.gold.points.gte("1e63") && player.g.power.gte("1e43") && player.cr.points.gte("1e40") && player.gem.points.gte("1e21") && player.d.points.gte("100"))
     } else if (player.sac.points.eq(5)) {
-    return (player.points.gte("1e140") && player.m.points.gte("1e125") && player.c.points.gte("1e54") && player.sp.points.gte("1e142") && player.a.points.gte("1e67") && player.gold.points.gte("1e82") && player.g.power.gte("1e58") && player.cr.points.gte("1e54") && player.gem.points.gte("1e30") && player.d.points.gte("100000000") && player.ins.points.gte("100000"))
+    return (player.points.gte("1e149") && player.m.points.gte("1e132") && player.c.points.gte("1e57") && player.sp.points.gte("1e149") && player.a.points.gte("1e68") && player.gold.points.gte("1e89") && player.g.power.gte("1e57") && player.cr.points.gte("1e54") && player.gem.points.gte("1e35") && player.d.points.gte("1e9") && player.l.points.gte("1000"))
+    } else if (player.sac.points.eq(6)) {
+    return (player.points.gte("1e163") && player.m.points.gte("1e146") && player.c.points.gte("1e70") && player.sp.points.gte("1e164") && player.a.points.gte("1e84") && player.gold.points.gte("1e106") && player.g.power.gte("1e63") && player.cr.points.gte("1e70") && player.gem.points.gte("1e50") && player.d.points.gte("1e17") && player.l.points.gte("100000") && player.prism.points.gte("100000"))
+    } else if (player.sac.points.eq(7)) {
+    return (player.points.gte("1e179") && player.m.points.gte("1e158") && player.c.points.gte("1e79") && player.sp.points.gte("1e181") && player.a.points.gte("1e98") && player.gold.points.gte("1e120") && player.g.power.gte("1e71") && player.cr.points.gte("1e85") && player.gem.points.gte("1e63") && player.d.points.gte("1e25") && player.l.points.gte("1000000") && player.prism.points.gte("100000000") && player.sap.points.gte("100000"))
     }
     },
     getResetGain() {
@@ -6705,11 +7271,29 @@ addLayer("sac", {
     5: {
         requirementDescription: "Sacrifice Tier 6",
         effect() {
-         return new Decimal(1)
+         return new Decimal(2).pow(player.sac.points.sub(5))
          },
-        effectDescription() { return "Sacrifice your own willpower. How long did you spend doing this? Insanity no longer resets sacrifice."},
+        effectDescription() { return "Boosts life gain and hardcap by 2x compounding per sacrifice tier past 5 sacrifices. Current boost: x" + format(this.effect())},
         done() { return player.sac.points.gte(6) },
         unlocked() {return player.sac.points.gte(5)},
+    },
+    6: {
+        requirementDescription: "Sacrifice Tier 7",
+        effect() {
+         return new Decimal(2).pow(player.sac.points.sub(6))
+         },
+        effectDescription() { return "Boosts prism power & prism descension clicks by 2x compounding per sacrifice tier past 6 sacrifices. Current boost: x" + format(this.effect())},
+        done() { return player.sac.points.gte(7) },
+        unlocked() {return player.sac.points.gte(6)},
+    },
+    7: {
+        requirementDescription: "Sacrifice Tier 8",
+        effect() {
+         return new Decimal(2).pow(player.sac.points.sub(7))
+         },
+        effectDescription() { return "Boosts sapphire gain by 2x compounding per sacrifice tier past 7 sacrifices. Current boost: x" + format(this.effect())},
+        done() { return player.sac.points.gte(8) },
+        unlocked() {return player.sac.points.gte(7)},
     },
 },
 tabFormat: [
@@ -6834,41 +7418,124 @@ tabFormat: [
         } else if (player.sac.points.eq(5)) {
             return `
             <div>Sacrifice requirements:</div>
-            <div style="color:${player.points.gte(1e140) ? 'lime' : 'red'}">
-                1e140 points
+            <div style="color:${player.points.gte(1e149) ? 'lime' : 'red'}">
+                1e149 points
             </div>
-            <div style="color:${player.m.points.gte(1e125) ? 'lime' : 'red'}">
-                1e125 money
+            <div style="color:${player.m.points.gte(1e132) ? 'lime' : 'red'}">
+                1e132 money
             </div>
-            <div style="color:${player.c.points.gte(1e54) ? 'lime' : 'red'}">
-                1e54 clicks
+            <div style="color:${player.c.points.gte(1e57) ? 'lime' : 'red'}">
+                1e57 clicks
             </div>
-            <div style="color:${player.sp.points.gte(1e142) ? 'lime' : 'red'}">
-                1e142 subpoints
+            <div style="color:${player.sp.points.gte(1e149) ? 'lime' : 'red'}">
+                1e149 subpoints
             </div>
-            <div style="color:${player.a.points.gte(1e67) ? 'lime' : 'red'}"> 
-                1e67 ascensions
+            <div style="color:${player.a.points.gte(1e68) ? 'lime' : 'red'}"> 
+                1e68 ascensions
             </div>
-            <div style="color:${player.gold.points.gte(1e82) ? 'lime' : 'red'}">
-                1e82 gold
+            <div style="color:${player.gold.points.gte(1e89) ? 'lime' : 'red'}">
+                1e89 gold
             </div>
-            <div style="color:${player.g.power.gte(1e58) ? 'lime' : 'red'}">
-                1e58 generator power
+            <div style="color:${player.g.power.gte(1e57) ? 'lime' : 'red'}">
+                1e57 generator power
             </div>
             <div style="color:${player.cr.points.gte(1e54) ? 'lime' : 'red'}">
                 1e54 crystals
             </div>
-            <div style="color:${player.gem.points.gte(1e30) ? 'lime' : 'red'}">
-                1e30 gemstones
+            <div style="color:${player.gem.points.gte(1e35) ? 'lime' : 'red'}">
+                1e35 gemstones
             </div>
-            <div style="color:${player.d.points.gte(100000000) ? 'lime' : 'red'}">
-                100,000,000 descensions
+            <div style="color:${player.d.points.gte(1e9) ? 'lime' : 'red'}">
+                1e9 descensions
             </div>
-            <div style="color:${player.ins.points.gte(100000) ? 'lime' : 'red'}">
-                100,000 insanities
+            <div style="color:${player.l.points.gte(1000) ? 'lime' : 'red'}">
+                1,000 life points
+            </div>
+            ` // sac 6 at post-overcharge
+        } else if (player.sac.points.eq(6)) {
+            return `
+            <div>Sacrifice requirements:</div>
+            <div style="color:${player.points.gte(1e163) ? 'lime' : 'red'}">
+                1e163 points
+            </div>
+            <div style="color:${player.m.points.gte(1e146) ? 'lime' : 'red'}">
+                1e146 money
+            </div>
+            <div style="color:${player.c.points.gte(1e70) ? 'lime' : 'red'}">
+                1e70 clicks
+            </div>
+            <div style="color:${player.sp.points.gte(1e164) ? 'lime' : 'red'}">
+                1e164 subpoints
+            </div>
+            <div style="color:${player.a.points.gte(1e84) ? 'lime' : 'red'}"> 
+                1e84 ascensions
+            </div>
+            <div style="color:${player.gold.points.gte(1e106) ? 'lime' : 'red'}">
+                1e106 gold
+            </div>
+            <div style="color:${player.g.power.gte(1e63) ? 'lime' : 'red'}">
+                1e63 generator power
+            </div>
+            <div style="color:${player.cr.points.gte(1e70) ? 'lime' : 'red'}">
+                1e70 crystals
+            </div>
+            <div style="color:${player.gem.points.gte(1e50) ? 'lime' : 'red'}">
+                1e50 gemstones
+            </div>
+            <div style="color:${player.d.points.gte(1e17) ? 'lime' : 'red'}">
+                1e17 descensions
+            </div>
+            <div style="color:${player.l.points.gte(100000) ? 'lime' : 'red'}">
+                100,000 life points
+            </div>
+            <div style="color:${player.prism.points.gte(100000) ? 'lime' : 'red'}">
+                100,000 prism power
             </div>
             `
-        } else if (player.sac.points.eq(6)) {
+        } else if (player.sac.points.eq(7)) {
+            return `
+            <div>Sacrifice requirements:</div>
+            <div style="color:${player.points.gte(1e179) ? 'lime' : 'red'}">
+                1e179 points
+            </div>
+            <div style="color:${player.m.points.gte(1e158) ? 'lime' : 'red'}">
+                1e158 money
+            </div>
+            <div style="color:${player.c.points.gte(1e79) ? 'lime' : 'red'}">
+                1e79 clicks
+            </div>
+            <div style="color:${player.sp.points.gte(1e181) ? 'lime' : 'red'}">
+                1e181 subpoints
+            </div>
+            <div style="color:${player.a.points.gte(1e98) ? 'lime' : 'red'}"> 
+                1e98 ascensions
+            </div>
+            <div style="color:${player.gold.points.gte(1e120) ? 'lime' : 'red'}">
+                1e120 gold
+            </div>
+            <div style="color:${player.g.power.gte(1e71) ? 'lime' : 'red'}">
+                1e71 generator power
+            </div>
+            <div style="color:${player.cr.points.gte(1e85) ? 'lime' : 'red'}">
+                1e85 crystals
+            </div>
+            <div style="color:${player.gem.points.gte(1e63) ? 'lime' : 'red'}">
+                1e63 gemstones
+            </div>
+            <div style="color:${player.d.points.gte(1e25) ? 'lime' : 'red'}">
+                1e25 descensions
+            </div>
+            <div style="color:${player.l.points.gte(100000) ? 'lime' : 'red'}">
+                100,000 life points
+            </div>
+            <div style="color:${player.prism.points.gte(100000000) ? 'lime' : 'red'}">
+                100,000,000 prism power
+            </div>
+            <div style="color:${player.sap.points.gte(100000) ? 'lime' : 'red'}">
+                100,000 sapphires
+            </div>
+            `
+        } else if (player.sac.points.eq(8)) {
             return `
             <div>Sacrifice requirements:</div>
             <div>Your soul</div>
@@ -6894,14 +7561,12 @@ addLayer("gem", {
     type: "normal", 
     row: 1,
     doReset(resettingLayer) {
-        if (resettingLayer === "sac") {
+         if (resettingLayer === "sac") {
                 if (player.sac.points.gte(3)) {
-                    player.gem.points = new Decimal(0)
+                   player.gem.points = new Decimal(0)
                 }
             } else if (resettingLayer === "d") {
                     layerDataReset(this.layer)
-            } else if (resettingLayer === "ins") {
-                layerDataReset(this.layer)
             }
     },
     canReset() {
@@ -6911,15 +7576,26 @@ addLayer("gem", {
     if (player.a.points.lt("1e24")) {
         return new Decimal(0)
     }
-    let gain = player.a.points.div(new Decimal("1e24")).pow(0.7)
+    let gain = new Decimal(0)
+    if (hasUpgrade("d", 533)) gain = gain.add(player.a.points.div(new Decimal("1e24")).pow(0.72))
+    else gain = gain.add(player.a.points.div(new Decimal("1e24")).pow(0.7))
 
     if (hasUpgrade("d", 11)) gain = gain.times(25)
     if (hasUpgrade("d", 22)) gain = gain.times(2.5)
     if (hasUpgrade("d", 51)) gain = gain.times(1.5)
     if (hasUpgrade("d", 112)) gain = gain.times(2)
+    if (hasUpgrade("d", 251)) gain = gain.times(2)
+    if (hasUpgrade("d", 271)) gain = gain.times(upgradeEffect("d", 271))
+    if (hasUpgrade("d", 322)) gain = gain.times(3.5)
+    if (hasUpgrade("d", 411)) gain = gain.times(3)
+    if (hasUpgrade("d", 523)) gain = gain.times(3)
+    if (hasUpgrade("d", 592)) gain = gain.times(4)
+    if (hasUpgrade("d", 731)) gain = gain.times(5)
+    if (hasUpgrade("d", 741)) gain = gain.times(upgradeEffect("d", 741))
+    if (hasUpgrade("g", 281)) gain = gain.times(1.3)
 
     if (hasMilestone("sac", 3)) {
-        gain = gain.times(new Decimal(2).pow(player.sac.points.sub(4)));
+        gain = gain.times(new Decimal(2).pow(player.sac.points.sub(3)));
     }
     gain = gain.times(globalMult())
     gain = gain.floor();
@@ -6931,10 +7607,18 @@ addLayer("gem", {
     onPrestige() {
         playerPoints = player.points
     },
+    passiveGeneration() {
+        let gain = new Decimal(0)
+        if (hasUpgrade("d", 732)) gain = gain.add(0.001)
+        if (hasUpgrade("d", 742)) gain = gain.add(0.001)
+        return gain
+    },
     layerShown() { return false },
     infoboxes: {        
             1: {
                 title() {
+                let perSec = layers["gem"].getResetGain().times(layers["gem"].passiveGeneration())
+                if (layers["gem"].passiveGeneration().gt(0)) return "You have " + format(player.gem.points) + "GM (Gemstones) | " + format(perSec) + "/s" 
                 return "You have " + format(player.gem.points) + "GM (Gemstones)" 
             },
                 body() {return "Gemstones reset everything crystals reset as well as crystals & crystal upgrades but grant gemstones which is used to massively boost ascensions, again. You must have Upgrade #175 and at least 1e24 ascensions to reset. (you should absolutely get Upgrade #100 before resetting...) Formula: ascensions/1e24^0.7"},
@@ -6953,7 +7637,6 @@ addLayer("gem", {
                 onPurchase() {
                 player.cr.upgrades.push(32)
                 },
-                unlocked() { return player.c && player.c.points.gte(0.01) || hasUpgrade(this.layer,11)},
             },
             21: {
                 title: "Upgrade #2-GM",
@@ -6991,13 +7674,53 @@ addLayer("gem", {
             },
             51: {
                 title: "Upgrade #5-GM",
-                description: "Improve the exponent of Upgrade #136 and #145 by x1.5. Also x1.02 ascensions and descensions.",
-                cost: new Decimal(5e27),
+                description: "Improve the exponent of Upgrade #136 and #145 by x1.4. Also x1.02 ascensions and descensions.",
+                cost: new Decimal(1e28),
+                currencyDisplayName: "gemstones",
+                currencyInternalName: "points",
+                branches: [61],
+                currencyLayer: "gem",
+                unlocked() { return hasUpgrade(this.layer,41)},
+            },
+            61: {
+                title: "Upgrade #6-GM",
+                description: "Unlock another Ascension life buyable. Also +250 life hardcap and x1.25 ascensions and descensions.",
+                cost: new Decimal(8e33),
+                currencyDisplayName: "gemstones",
+                currencyInternalName: "points",
+                branches: [71],
+                currencyLayer: "gem",
+                unlocked() { return hasUpgrade(this.layer,51)},
+            },
+            71: {
+                title: "Upgrade #7-GM",
+                description: "Improve the base formula of ascensions from x2 every x1,000 above base threshold to x2.15 every x850 above base threshold.",
+                cost: new Decimal(1.5e48),
+                currencyDisplayName: "gemstones",
+                currencyInternalName: "points",
+                branches: [81],
+                currencyLayer: "gem",
+                unlocked() { return hasUpgrade(this.layer,61)},
+            },
+            81: {
+                title: "Upgrade #8-GM",
+                description: "x7.5 ascensions and crystals.",
+                cost: new Decimal(7.5e59),
+                currencyDisplayName: "gemstones",
+                currencyInternalName: "points",
+                branches: [91],
+                currencyLayer: "gem",
+                unlocked() { return hasUpgrade(this.layer,71)},
+            },
+            91: {
+                title: "Upgrade #9-GM",
+                description: "Get a free Ascension Mega Booster, and improve the formula by +^0.45.",
+                cost: new Decimal(1.65e69),
                 currencyDisplayName: "gemstones",
                 currencyInternalName: "points",
                 branches: [],
                 currencyLayer: "gem",
-                unlocked() { return hasUpgrade(this.layer,41)},
+                unlocked() { return hasUpgrade(this.layer,81)},
             },
     },
     tabFormat: () => { 
@@ -7005,6 +7728,10 @@ addLayer("gem", {
         if (inverseTree) { return [
         ["row", [["infobox", 1]]],
         "prestige-button",
+        ["row", [["upgrade", 91]]],
+        ["row", [["upgrade", 81]]],
+        ["row", [["upgrade", 71]]],
+        ["row", [["upgrade", 61]]],
         ["row", [["upgrade", 51]]],
         ["row", [["upgrade", 41]]],
         ["row", [["upgrade", 31], ["upgrade", 32]]],
@@ -7036,14 +7763,12 @@ addLayer("d", {
     baseResource: "points", 
     baseAmount() {return player.a.points},
     type: "normal", 
-    row: 1,
+    row: 2,
     doReset(resettingLayer) {
         if (resettingLayer === "sac") {
                 if (player.sac.points.gte(5)) {
                     player.d.points = new Decimal(0)
                 }
-            } else if (resettingLayer === "ins") {
-                layerDataReset(this.layer)
             }
     },
     canReset() {
@@ -7058,18 +7783,37 @@ addLayer("d", {
     if (hasUpgrade("d", 31)) gain = gain.times(upgradeEffect("d", 31))
     if (hasUpgrade("d", 61)) gain = gain.times(2)
     if (hasUpgrade("d", 101)) gain = gain.times(upgradeEffect("d", 101))
+    if (hasUpgrade("d", 181)) gain = gain.times(upgradeEffect("d", 181))
+    if (hasUpgrade("d", 262)) gain = gain.times(upgradeEffect("d", 262))
+    if (hasUpgrade("d", 291)) gain = gain.times(upgradeEffect("d", 291))
+    if (hasUpgrade("d", 341)) gain = gain.times(2.5)
+    if (hasUpgrade("d", 411)) gain = gain.times(3)
+    if (hasUpgrade("d", 422)) gain = gain.times(0.05)
+    if (hasUpgrade("d", 441)) gain = gain.times(1.03)
+    if (hasUpgrade("d", 461)) gain = gain.times(upgradeEffect("d", 461))
+    if (hasUpgrade("d", 501)) gain = gain.times(2)
+    if (hasUpgrade("d", 542)) gain = gain.times(6.9)
+    if (hasUpgrade("d", 581)) gain = gain.times(upgradeEffect("d", 581))
+    if (hasUpgrade("d", 591)) gain = gain.times(2)
+    if (hasUpgrade("g", 211)) gain = gain.times(1.3)
+    if (hasUpgrade("g", 321)) gain = gain.times(1.3)
 
     if (hasUpgrade("gem", 51)) gain = gain.times(1.02)
+    if (hasUpgrade("gem", 61)) gain = gain.times(1.25)
 
-    if (hasChallenge("ins", 11)) gain = gain.times(2)
+    gain = gain.times(buyableEffect("l", 21))
+    gain = gain.times(buyableEffect("sap", 21))
 
     if (hasMilestone("sac", 4)) {
-        gain = gain.times(new Decimal(2).pow(player.sac.points.sub(5)));
+        gain = gain.times(new Decimal(2).pow(player.sac.points.sub(4)));
     }
     if (hasMilestone("g", 5)) {
          gain = gain.times(player.g.power.pow(0.01).max(1));
     }
-    // gain = gain.times(globalMult())
+    if (hasMilestone("prism", 2)) {
+         gain = gain.times(player.prism.points.pow(0.075).max(1));
+    }
+    gain = gain.times(globalMult())
     if (inChallenge("ins", 11)) gain = gain.pow(0.95)
     gain = gain.floor();
     return gain
@@ -7080,19 +7824,27 @@ addLayer("d", {
     onPrestige() {
         player.d.timeOwned = new Decimal(0)
     },
+    passiveGeneration() {
+        let gain = new Decimal(0)
+        if (hasMilestone("overcharge", 3)) {
+            if (player.overcharge.points.gte(40)) gain = gain.add(new Decimal(0.001).add(new Decimal(0.001).times(player.overcharge.points.sub(40))).max(0.001))
+        }
+        return gain
+    },
     update(diff) {
     if (hasUpgrade("d", 101)) {
         player.d.timeOwned = player.d.timeOwned.add(diff)
-        console.log(player.d.timeOwned.toString())
     }
 }, 
     layerShown() { return false },
     infoboxes: {        
             1: {
                 title() {
+                let perSec = layers["d"].getResetGain().times(layers["d"].passiveGeneration())
+                if (layers["d"].passiveGeneration().gt(0)) return "You have " + format(player.d.points) + "DP (Descension Points) | " + format(perSec) + "/s"
                 return "You have " + format(player.d.points) + "DP (Descension Points)" 
             },
-                body() {return "Welcome to the third layer! Descension resets everything so far (excluding sacrifice) but grant descensions which is used to get massive boosts, again. You must have Upgrade #200 and at least 1e108 points to reset. Formula: points/1e111^0.1"},
+                body() {return "Welcome to the third layer! Descension resets everything so far (excluding sacrifice) but grant descensions which is used to get massive boosts, again. Hopefully you are prepared because this layer is much more active than Layer 2 :) <br> You must have Upgrade #200 and at least 1e108 points to reset. Formula: points/1e111^0.1"},
                 unlocked() {return true}
                 }
             },
@@ -7206,7 +7958,7 @@ addLayer("d", {
             81: {
                 title: "Upgrade #211",
                 description: "Unspent descensions boost point gain. Formula: descensions^0.15x3",
-                cost: new Decimal(200),
+                cost: new Decimal(250),
                 currencyDisplayName: "descensions",
                 currencyInternalName: "points",
                 branches: [91],
@@ -7229,7 +7981,7 @@ addLayer("d", {
                     return `For every upgrade in this layer unlocked, multiply point & ascension gain by 1.1 (compounding).
                     Current multiplier: x${format(multiplier)}`
                 },
-                cost: new Decimal(325),
+                cost: new Decimal(375),
                 currencyDisplayName: "descensions",
                 currencyInternalName: "points",
                 effect() {
@@ -7246,12 +7998,13 @@ addLayer("d", {
             101: {
                 title: "Upgrade #213",
                 description: "Increases descension gain based on how long you've spent in a descension. Formula: time/100^0.4",
-                cost: new Decimal(450),
+                cost: new Decimal(550),
                 currencyDisplayName: "descensions",
                 currencyInternalName: "points",
                 branches: [111, 112],
                 currencyLayer: "d",
                 effect() {
+                    if (hasUpgrade("d", 421)) return player.d.timeOwned.add(25).div(25).pow(0.4);
                     return player.d.timeOwned.add(100).div(100).pow(0.4);
                 }, 
                 effectDisplay() {
@@ -7262,7 +8015,7 @@ addLayer("d", {
             111: {
                 title: "Upgrade #214",
                 description: "x2 Layer 1 currencies.",
-                cost: new Decimal(1000),
+                cost: new Decimal(1750),
                 currencyDisplayName: "descensions",
                 currencyInternalName: "points",
                 branches: [121],
@@ -7272,7 +8025,7 @@ addLayer("d", {
             112: {
                 title: "Upgrade #215",
                 description: "x2 Layer 2 currencies.",
-                cost: new Decimal(1000),
+                cost: new Decimal(1750),
                 currencyDisplayName: "descensions",
                 currencyInternalName: "points",
                 branches: [121],
@@ -7282,7 +8035,7 @@ addLayer("d", {
             121: {
                 title: "Upgrade #216",
                 description: "+2.5% passive ascension gain, and automate Upgrade 101-120.",
-                cost: new Decimal(2500),
+                cost: new Decimal(3500),
                 currencyDisplayName: "descensions",
                 currencyInternalName: "points",
                 branches: [131],
@@ -7292,7 +8045,7 @@ addLayer("d", {
             131: {
                 title: "Upgrade #217",
                 description: "You can now buy both Upgrade #187 and #188.",
-                cost: new Decimal(4000),
+                cost: new Decimal(6000),
                 currencyDisplayName: "descensions",
                 currencyInternalName: "points",
                 branches: [141],
@@ -7302,7 +8055,7 @@ addLayer("d", {
             141: {
                 title: "Upgrade #218",
                 description: "x4 points.",
-                cost: new Decimal(6250),
+                cost: new Decimal(9250),
                 currencyDisplayName: "descensions",
                 currencyInternalName: "points",
                 branches: [151],
@@ -7312,7 +8065,7 @@ addLayer("d", {
             151: {
                 title: "Upgrade #219",
                 description: "Decrease the exponential scaling of generators again. Also unlock yet another generator milestone.",
-                cost: new Decimal(7500),
+                cost: new Decimal(12500),
                 currencyDisplayName: "descensions",
                 currencyInternalName: "points",
                 branches: [161],
@@ -7322,7 +8075,7 @@ addLayer("d", {
             161: {
                 title: "Upgrade #220",
                 description: "Unspent descensions boost ascension gain. Formula: descensions^0.155",
-                cost: new Decimal(15000),
+                cost: new Decimal(35000),
                 currencyDisplayName: "descensions",
                 currencyInternalName: "points",
                 branches: [171],
@@ -7334,14 +8087,949 @@ addLayer("d", {
                 unlocked() { return hasUpgrade(this.layer,151)},
             },
             171: {
-                title: "Temp End",
-                description: "You have reached the temp end! Unlock a new sub-layer, Insanity. Note that this sublayer will be reset next update.",
-                cost: new Decimal(100000),
+                title: "Upgrade #221",
+                description: "x7.5 money.",
+                cost: new Decimal(60000),
                 currencyDisplayName: "descensions",
                 currencyInternalName: "points",
                 branches: [181],
                 currencyLayer: "d",
                 unlocked() { return hasUpgrade(this.layer,161)},
+            },
+            181: {
+                title: "Upgrade #222",
+                description: "Descension boosts itself. Formula: log30(descensions)",
+                cost: new Decimal(100000),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [191, 192],
+                currencyLayer: "d",
+                effect() {
+                    return player.d.points.max(1).log(30).max(1)
+                },
+                effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+                unlocked() { return hasUpgrade(this.layer,171)},
+            },
+            191: {
+                title: "Upgrade #223",
+                description: "Buying generators no longer takes away points. Also grants a free Generator Mega-booster.",
+                cost: new Decimal(300000),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [201],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,181)},
+            },
+            192: {
+                title: "Upgrade #224",
+                description: "Automate all Generator Upgrades. Also x5 generator power.",
+                cost: new Decimal(300000),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [201],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,181)},
+            },
+            201: {
+                title: "Upgrade #225",
+                description: "Unlock a new Click milestone. Also x10 clicks.",
+                cost: new Decimal(5.5e134),
+                currencyDisplayName: "points",
+                currencyInternalName: "points",
+                branches: [211],
+                currencyLayer: "",
+                unlocked() { return hasUpgrade(this.layer,191) && hasUpgrade(this.layer,192)},
+            },
+            211: {
+                title: "Upgrade #226",
+                description: "Unlock Life.",
+                cost: new Decimal(1.75e136),
+                currencyDisplayName: "points",
+                currencyInternalName: "points",
+                branches: [221],
+                currencyLayer: "",
+                onPurchase() {
+                    player.l.unlocked = true
+                },
+                unlocked() { return hasUpgrade(this.layer,201)},
+            },
+            221: {
+                title: "Upgrade #227",
+                description: "x1.2 life gain.",
+                cost: new Decimal(1200000),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [231],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,211)},
+            },
+            231: {
+                title: "Upgrade #228",
+                description: "+100 life hardcap.",
+                cost: new Decimal(2000000),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [241],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,221)},
+            },
+            241: {
+                title: "Upgrade #229",
+                description: "x3 point and ascension gain, and automate Upgrade 121-140.",
+                cost: new Decimal(3000000),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [251, 242],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,231)},
+            },
+            242: {
+                title: "Upgrade #229-X",
+                description() {
+                    if (inChallenge("trials", 11) || inChallenge("trials", 12) || inChallenge("trials", 13)) return "DISABLED"
+                    return "Disable passive crystal generation, but x15 ascensions. Are you willing to work for it?"
+                },
+                cost: new Decimal(3000000),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,241)},
+                canAfford() {return !player.extraoptions.disableRiskyUpgrade && !inChallenge("trials", 11) && !inChallenge("trials", 12) && !inChallenge("trials", 13)},
+            },
+            251: {
+                title: "Upgrade #230",
+                description: "Gemstones no longer reset crystals or crystal upgrades. Also x2 crystals and gemstones.",
+                cost: new Decimal(6000000),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [261, 262],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,241)},
+            },
+            261: {
+                title: "Upgrade #231",
+                description: "Gemstones boost ascensions. Formula: gemstones^0.04",
+                cost: new Decimal(9000000),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [271],
+                currencyLayer: "d",
+                effect() {
+                    return player.gem.points.pow(0.04).max(1)
+                },
+                effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+                unlocked() { return hasUpgrade(this.layer,251)},
+            },
+            262: {
+                title: "Upgrade #232",
+                description: "Gemstones boost descensions. Formula: gemstones^0.02",
+                cost: new Decimal(15000000),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [271],
+                currencyLayer: "d",
+                effect() {
+                    return player.gem.points.pow(0.02).max(1)
+                },
+                effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+                unlocked() { return hasUpgrade(this.layer,251)},
+            },
+            271: {
+                title: "Upgrade #233",
+                description: "Gemstones boost themselves. Formula: gemstones^0.05",
+                cost: new Decimal(50000000),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [281],
+                currencyLayer: "d",
+                effect() {
+                    return player.gem.points.pow(0.05).max(1)
+                },
+                effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+                unlocked() { return hasUpgrade(this.layer,261) && hasUpgrade(this.layer,262)},
+            },
+            281: {
+                title: "Upgrade #234",
+                description: "x5 gemstones.",
+                cost: new Decimal(200000000),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [291],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,271)},
+            },
+            291: {
+                title: "Upgrade #235",
+                 description() {
+                    if (!hasUpgrade("d", 91)) 
+                        return "For every upgrade in this layer unlocked, multiply descension gain by 1.05 (compounding)."
+            
+                    let pointUpgrades = player[this.layer].upgrades.length
+                    let multiplier = new Decimal(1.05).pow(pointUpgrades)
+            
+                    return `For every upgrade in this layer unlocked, multiply descension gain by 1.05 (compounding).
+                    Current multiplier: x${format(multiplier)}`
+                },
+                cost: new Decimal(400000000),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                effect() {
+                    let pointUpgrades = player[this.layer].upgrades.length
+                    let multiplier = new Decimal(0)
+                    multiplier = multiplier.add(new Decimal(1.05).pow(pointUpgrades))
+            
+                    return multiplier
+                },
+                branches: [301, 302],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,281)},
+            },
+            301: {
+                title: "Upgrade #236",
+                description: "+300 life hardcap.",
+                cost: new Decimal(2.5e9),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [311],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,291)},
+            },
+            302: {
+                title: "Upgrade #237",
+                description: "x1.15 life gain.",
+                cost: new Decimal(2.5e9),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [311],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,291)},
+            },
+            311: {
+                title: "Upgrade #238",
+                description: "Get a free Crystal Mega-Booster, and automate Upgrade 1-6C.",
+                cost: new Decimal(3.75e9),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [321, 322],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,301) && hasUpgrade(this.layer,302)},
+            },
+            321: {
+                title: "Upgrade #239",
+                description: "x3.5 Layer 1 currencies. Disables Upgrade #240.",
+                cost: new Decimal(4.75e9),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [331],
+                currencyLayer: "d",
+                onPurchase() {
+                    player.extraoptions.unlocked7 = true
+                },
+                unlocked() { return hasUpgrade(this.layer,311)},
+                canAfford() { return !hasUpgrade(this.layer,322) && !player.extraoptions.disable239}
+            },
+            322: {
+                title: "Upgrade #240",
+                description: "x3.5 Layer 2 currencies. Disables Upgrade #239.",
+                cost: new Decimal(4.75e9),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [331],
+                onPurchase() {
+                    player.extraoptions.unlocked7 = true
+                },
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,311)},
+                canAfford() { return !hasUpgrade(this.layer,321) && !player.extraoptions.disable240}
+            },
+            331: {
+                title: "Upgrade #241",
+                description: "Unlock the Overcharger.",
+                cost: new Decimal(8e9),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [341],
+                currencyLayer: "d",
+                onPurchase() {
+                    player.overcharge.unlocked = true
+                },
+                unlocked() { return hasUpgrade(this.layer,321) || hasUpgrade(this.layer,322)},
+            },
+            341: {
+                title: "Upgrade #242",
+                description: "x2.5 descensions, and automate Upgrade 141-160.",
+                cost: new Decimal(3e10),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [351, 352],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,331)},
+            },
+            351: {
+                title: "Upgrade #243",
+                description: "Reduce the base exponent drain on overcharge by -0.02.",
+                cost: new Decimal(7.55e10),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [361],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,341)},
+            },
+            352: {
+                title: "Upgrade #244",
+                description: "x2 life gain.",
+                cost: new Decimal(9.15e10),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [361],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,341)},
+            },
+            361: {
+                title: "Upgrade #245",
+                description: "Automate the first six gold buyables. Also x3 money and gold.",
+                cost: new Decimal(1.11e149),
+                currencyDisplayName: "points",
+                currencyInternalName: "points",
+                branches: [371],
+                currencyLayer: "",
+                unlocked() { return hasUpgrade(this.layer,351) && hasUpgrade(this.layer,352)},
+            },
+            371: {
+                title: "Upgrade #246",
+                description: "Slightly decrease the exponential scaling cost of Boosters. Time for more Mega-Boosters.", // divide this time
+                cost: new Decimal(2e11),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [381],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,361)},
+            },
+            381: {
+                title: "Upgrade #247",
+                description: "x3 points, money and clicks.",
+                cost: new Decimal(3e11),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [391],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,371)},
+            },
+            391: {
+                title: "Upgrade #248",
+                description: "x2.5 life gain and x1.5 life hardcap.",
+                cost: new Decimal(4.3e11),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [401],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,381)},
+            },
+            401: {
+                title: "Upgrade #249",
+                description: "x10 crystals, and generators buy max.",
+                cost: new Decimal(6.2e11),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [411],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,391)},
+            },
+            411: {
+                title: "Upgrade #250",
+                description: "x3 descensions, Layer 1 & 2 currencies, and life gain & hardcap. The tree keeps growing...",
+                cost: new Decimal(1e12),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [421],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,401)},
+            },
+            421: {
+                title: "Upgrade #251",
+                description: "Upgrade #213's time is sped up by x4.",
+                cost: new Decimal(3.5e12),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [422, 431],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,411)},
+            },
+            422: {
+                title: "Upgrade #251-X",
+                description() {
+                    if (inChallenge("trials", 11) || inChallenge("trials", 12) || inChallenge("trials", 13)) return "DISABLED"
+                    return "Prefer to play the waiting game? Remove the exponent on #213 but x0.05 descension gain."
+                },
+                cost: new Decimal(9e12),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,421)},
+                canAfford() {return !player.extraoptions.disableRiskyUpgrade && !inChallenge("trials", 11) && !inChallenge("trials", 12) && !inChallenge("trials", 13)},
+            },
+            431: {
+                title: "Upgrade #252",
+                description: "Crystals boost themselves. Formula: crystals^0.02",
+                cost: new Decimal(9e12),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [441],
+                currencyLayer: "d",
+                effect() {
+                    return player.c.points.pow(0.02).max(1)
+                },
+                effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+                unlocked() { return hasUpgrade(this.layer,421)},
+            },
+            441: {
+                title: "Upgrade #253",
+                description: "x1.03 points, ascension & descension. Also automate Upgrade 161-180.",
+                cost: new Decimal(1.8e13),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [451],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,431)},
+            },
+            451: {
+                title: "Upgrade #254",
+                description: "Unlock the Prism.",
+                cost: new Decimal(2.5e13),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [461],
+                currencyLayer: "d",
+                onPurchase() {
+                    player.prism.unlocked = true
+                },
+                unlocked() { return hasUpgrade(this.layer,441)},
+            },
+            461: {
+                title: "Upgrade #255",
+                description: "Crystals boost descensions. Formula: crystals^0.01",
+                cost: new Decimal(3.5e13),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [471, 472],
+                currencyLayer: "d",
+                effect() {
+                    return player.c.points.pow(0.01).max(1)
+                },
+                effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+                unlocked() { return hasUpgrade(this.layer,451)},
+            },
+            471: {
+                title: "Upgrade #256",
+                description: "x2 prism power.",
+                cost: new Decimal(2e14),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [481],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,461)},
+            },
+            472: {
+                title: "Upgrade #257",
+                description: "x2 prism descensions clicks.",
+                cost: new Decimal(2e14),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [481],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,461)},
+            },
+            481: {
+                title: "Upgrade #258",
+                description: "x2.5 life hardcap.",
+                cost: new Decimal(3.6e14),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [491],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,471) && hasUpgrade(this.layer,472)},
+            },
+            491: {
+                title: "Upgrade #259",
+                description: "Crystals boost ascensions. Formula: log50(crystals)^1.25/10",
+                cost: new Decimal(5e14),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [501],
+                currencyLayer: "d",
+                effect() {
+                    return player.c.points.max(1).log(50).pow(1.25).div(10).max(1)
+                },
+                effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+                unlocked() { return hasUpgrade(this.layer,481)},
+            },
+            501: {
+                title: "Upgrade #260",
+                description: "/0.5 descensions, and automate Upgrade 181-200.", // technically does x2 but Whatever lmao
+                cost: new Decimal(8e14),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [511],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,491)},
+            },
+            511: {
+                title: "Upgrade #261",
+                description: "x3 prism power gain.",
+                cost: new Decimal(2.5e15),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [521, 522, 523],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,501)},
+            },
+            521: {
+                title: "Upgrade #262",
+                description: "+35 base money gain.",
+                cost: new Decimal(5e15),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [531],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,511)},
+            },
+            522: {
+                title: "Upgrade #263",
+                description: "+9 base ascension gain.",
+                cost: new Decimal(1e16),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [532],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,511)},
+            },
+            523: {
+                title: "Upgrade #264",
+                description: "x3 crystals and gemstones.",
+                cost: new Decimal(2e16),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [533],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,511)},
+            },
+            531: {
+                title: "Upgrade #265",
+                description: "+2750 base point gain.",
+                cost: new Decimal(3e16),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [541],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,521)},
+            },
+            532: {
+                title: "Upgrade #266",
+                description: "Improve the exponent on crystal gain by +0.02.",
+                cost: new Decimal(4e16),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [541],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,522)},
+            },
+            533: {
+                title: "Upgrade #268",
+                description: "Improve the exponent on gemstone gain by +0.02.",
+                cost: new Decimal(5e16),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [541],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,523)},
+            },
+            541: {
+                title: "Upgrade #268.5",
+                description: "Unspent descensions boosts prism power. Formula: descensions^0.075/5.",
+                cost: new Decimal(2e17),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [542],
+                currencyLayer: "d",
+                effect() {
+                    return player.d.points.pow(0.075).div(5).max(1)
+                },
+                effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+                unlocked() { return hasUpgrade(this.layer,531) && hasUpgrade(this.layer,532) && hasUpgrade(this.layer,533)},
+            },
+            542: {
+                title: "Upgrade #269",
+                description: "Guess what time it is... x6.9 descensions.",
+                cost: new Decimal(6.9e17),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [551],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,541)},
+            },
+            551: {
+                title: "Upgrade #270",
+                description: "x1.5 prism descension clicks.",
+                cost: new Decimal(9.5e18),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [561],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,542)},
+            },
+            561: {
+                title: "Upgrade #271",
+                description: "Prism power boosts itself. Formula: prismpower^0.08",
+                cost: new Decimal(2.15e19),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [571],
+                currencyLayer: "d",
+                effect() {
+                    return player.prism.points.pow(0.08).max(1)
+                },
+                effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+                unlocked() { return hasUpgrade(this.layer,551)},
+            },
+            571: {
+                title: "Upgrade #272",
+                description: "Boost the descension autoclicker to 7.5/s.",
+                cost: new Decimal(4.6e19),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [581],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,561)},
+            },
+            581: {
+                title: "Upgrade #273",
+                description: "Descensions boosts itself, again. Formula: log5(descensions)/5",
+                cost: new Decimal(8.2e19),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [591, 592],
+                currencyLayer: "d",
+                effect() {
+                    return player.d.points.max(1).log(5).div(5).max(1)
+                },
+                effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+                unlocked() { return hasUpgrade(this.layer,571)},
+            },
+            591: {
+                title: "Upgrade #274",
+                description: "Going for the main stats? x4 points, ascensions & x2 descensions. Disables Upgrade #275.",
+                cost: new Decimal(3e20),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [601],
+                currencyLayer: "d",
+                onPurchase() {
+                    player.extraoptions.unlocked8 = true
+                },
+                unlocked() { return hasUpgrade(this.layer,581)},
+                canAfford() { return !hasUpgrade(this.layer,592) && !player.extraoptions.disable274}
+            },
+            592: {
+                title: "Upgrade #275",
+                description: "...or going for the side stats? x4 life gain & hardcap, prism power, generator power, crystals & gemstones. Disables Upgrade #274.",
+                cost: new Decimal(3e20),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [601],
+                currencyLayer: "d",
+                onPurchase() {
+                    player.extraoptions.unlocked8 = true
+                },
+                unlocked() { return hasUpgrade(this.layer,581)},
+                canAfford() { return !hasUpgrade(this.layer,591) && !player.extraoptions.disable275}
+            },
+            601: {
+                title: "Upgrade #276",
+                description: "Unlock Sapphires.",
+                cost: new Decimal(1e21),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [611],
+                currencyLayer: "d",
+                onPurchase() {
+                    player.sap.unlocked = true
+                },
+                unlocked() { return hasUpgrade(this.layer,591) || hasUpgrade(this.layer,592)},
+            },
+            611: {
+                title: "Upgrade #277",
+                description: "Points boost itself. Formula: points^0.02/350",
+                cost: new Decimal(5.5e168),
+                currencyDisplayName: "points",
+                currencyInternalName: "points",
+                branches: [621],
+                currencyLayer: "",
+                effect() {
+                    return player.points.pow(0.02).div(350).max(1)
+                },
+                effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+                unlocked() { return hasUpgrade(this.layer,601)},
+            },
+            621: {
+                title: "Upgrade #278",
+                description: "x3 life gain.",
+                cost: new Decimal(1e22),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [631, 622],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,611)},
+            },
+            622: {
+                title: "Upgrade #279-X",
+                description() {
+                    if (inChallenge("trials", 11) || inChallenge("trials", 12) || inChallenge("trials", 13)) return "DISABLED"
+                    return "Life generating too slow? x3 life gain again but /15 hardcap."
+                },
+                cost: new Decimal(2.5e22),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [],
+                currencyLayer: "d",
+                unlocked() { return !player.extraoptions.disableRiskyUpgrade && hasUpgrade(this.layer,611) && !inChallenge("trials", 11) && !inChallenge("trials", 12) && !inChallenge("trials", 13)},
+            },
+            631: {
+                title: "Upgrade #279",
+                description: "Purchases both Upgrade #239 and #240.",
+                cost: new Decimal(2.5e22),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [641],
+                currencyLayer: "d",
+                onPurchase() {
+                player.d.upgrades.push(321,322)
+                },
+                unlocked() { return hasUpgrade(this.layer,621)},
+            },
+            641: {
+                title: "Upgrade #280",
+                description: "Life generates at 10% efficiency while being drained.",
+                cost: new Decimal(4.95e22),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [651],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,631)},
+            },
+            651: {
+                title: "Upgrade #281",
+                description: "x2 sapphires.",
+                cost: new Decimal(7.5e22),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [661],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,641)},
+            },
+            661: {
+                title: "Upgrade #282",
+                description: "+10% passive ascension gain, +1% passive crystal gain.",
+                cost: new Decimal(2.85e23),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [671, 672],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,651)},
+            },
+            671: {
+                title: "Upgrade #283",
+                description: "x3 prism power.",
+                cost: new Decimal(4.75e23),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [681],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,661)},
+            },
+            672: {
+                title: "Upgrade #284",
+                description: "Start passively generating prism power at a rate of 1%/s.",
+                cost: new Decimal(7.75e23),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [681],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,661)},
+            },
+            681: {
+                title: "Upgrade #285",
+                description: "Automates purchasing Generators.",
+                cost: new Decimal(1.9e24),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [691],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,671) && hasUpgrade(this.layer,672)},
+            },
+            691: {
+                title: "Upgrade #286",
+                description: "Boosters no longer spend points on purchase.",
+                cost: new Decimal(3.3e24),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [701],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,681)},
+            },
+            701: {
+                title: "Upgrade #287",
+                description: "x10 generator power.",
+                cost: new Decimal(5.6e24),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [711],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,691)},
+            },
+            711: {
+                title: "Upgrade #288",
+                description: "Descensions boost sapphires. Formula: descensions^0.02",
+                cost: new Decimal(7.65e24),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [721],
+                currencyLayer: "d",
+                effect() {
+                    return player.d.points.pow(0.02).max(1)
+                },
+                effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+                unlocked() { return hasUpgrade(this.layer,701)},
+            },
+            721: {
+                title: "Upgrade #289",
+                description: "x10 subpoints. Do you even remember this currency?",
+                cost: new Decimal(7.75e178),
+                currencyDisplayName: "points",
+                currencyInternalName: "points",
+                branches: [731, 732],
+                currencyLayer: "",
+                unlocked() { return hasUpgrade(this.layer,711)},
+            },
+            731: {
+                title: "Upgrade #290",
+                description: "x5 gemstones.",
+                cost: new Decimal(2e63),
+                currencyDisplayName: "gemstones",
+                currencyInternalName: "points",
+                branches: [741],
+                currencyLayer: "gem",
+                unlocked() { return hasUpgrade(this.layer,721)},
+            },
+            732: {
+                title: "Upgrade #291",
+                description: "Start passively generating gemstones at a rate of 0.1%/s.",
+                cost: new Decimal(2.25e25),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [742],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,721)},
+            },
+            741: {
+                title: "Upgrade #292",
+                description: "Gemstones boost themselves again. Formula: log5(gemstones)/10",
+                cost: new Decimal(2e64),
+                currencyDisplayName: "gemstones",
+                currencyInternalName: "points",
+                branches: [751],
+                currencyLayer: "gem",
+                effect() {
+                    return player.gem.points.max(1).log(5).div(10).max(1)
+                },
+                effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+                unlocked() { return hasUpgrade(this.layer,731)},
+            },
+            742: {
+                title: "Upgrade #293",
+                description: "Increase the generation rate to 0.2%, and gemstones no longer reset ascension upgrades.",
+                cost: new Decimal(4.8e25),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [751],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,732)},
+            },
+            751: {
+                title: "Upgrade #294",
+                description: "Unlock new Generator upgrades, again. New generator upgrades are not automated.",
+                cost: new Decimal(9.15e25),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [761],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,741) && hasUpgrade(this.layer,742)},
+            },
+            761: {
+                title: "Upgrade #295",
+                description: "Improve the prism autoclicker to 30/s.",
+                cost: new Decimal(2.85e26),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [771],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,751)},
+            },
+            771: {
+                title: "Upgrade #296",
+                description: "Improve prism power generation to 5%/s.",
+                cost: new Decimal(5.9e26),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [781],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,761)},
+            },
+            781: {
+                title: "Upgrade #297",
+                description: "x2.5 sapphires.",
+                cost: new Decimal(1.01e27),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [791, 792],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,771)},
+            },
+            791: {
+                title: "Upgrade #298",
+                description: "Want a fast-paced layer but with lots of resets, including brutal resets? Unlock Layer 4A: Demonic, and disables Upgrade #299.",
+                cost: new Decimal(3e27),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [802],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,781)},
+                canAfford() { return !hasUpgrade(this.layer,792)}
+            },
+            792: {
+                title: "Upgrade #299",
+                description: "Want a slow-paced layer with timewally content? Unlock Layer 4B: Angelic, and disables Upgrade #298.",
+                cost: new Decimal(3e27),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [802],
+                currencyLayer: "d",
+                unlocked() { return hasUpgrade(this.layer,781)},
+                canAfford() { return !hasUpgrade(this.layer,791)}
+            },
+            802: {
+                title: "Temp End",
+                description: "You have reached the temp end! Unlock Trials. Note that this sublayer will be reset next update.",
+                cost: new Decimal(6.66e27),
+                currencyDisplayName: "descensions",
+                currencyInternalName: "points",
+                branches: [],
+                currencyLayer: "d",
+                 onPurchase() {
+                    player.trials.unlocked = true
+                },
+                unlocked() { return hasUpgrade(this.layer,791) || hasUpgrade(this.layer,792)},
             },
     },
     tabFormat: () => { 
@@ -7349,6 +9037,69 @@ addLayer("d", {
         if (inverseTree) { return [
         ["row", [["infobox", 1]]],
         "prestige-button",
+        ["row", [["upgrade", 802]]],
+        ["row", [["upgrade", 791], ["upgrade", 792]]],
+        ["row", [["upgrade", 781]]],
+        ["row", [["upgrade", 771]]],
+        ["row", [["upgrade", 761]]],
+        ["row", [["upgrade", 751]]],
+        ["row", [["upgrade", 741], ["upgrade", 742]]],
+        ["row", [["upgrade", 731], ["upgrade", 732]]],
+        ["row", [["upgrade", 721]]],
+        ["row", [["upgrade", 711]]],
+        ["row", [["upgrade", 701]]],
+        ["row", [["upgrade", 691]]],
+        ["row", [["upgrade", 681]]],
+        ["row", [["upgrade", 671], ["upgrade", 672]]],
+        ["row", [["upgrade", 661]]],
+        ["row", [["upgrade", 651]]],
+        ["row", [["upgrade", 641]]],
+        ["row", [["upgrade", 631]]],
+        ["row", [["upgrade", 621], ["upgrade", 622]]],
+        ["row", [["upgrade", 611]]],
+        ["row", [["upgrade", 601]]],
+        ["row", [["upgrade", 591], ["upgrade", 592]]],
+        ["row", [["upgrade", 581]]],
+        ["row", [["upgrade", 571]]],
+        ["row", [["upgrade", 561]]],
+        ["row", [["upgrade", 551]]],
+        ["row", [["upgrade", 541], ["upgrade", 542]]],
+        ["row", [["upgrade", 531], ["upgrade", 532], ["upgrade", 533]]],
+        ["row", [["upgrade", 521], ["upgrade", 522], ["upgrade", 523]]],
+        ["row", [["upgrade", 511]]],
+        ["row", [["upgrade", 501]]],
+        ["row", [["upgrade", 491]]],
+        ["row", [["upgrade", 481]]],
+        ["row", [["upgrade", 471], ["upgrade", 472]]],
+        ["row", [["upgrade", 461]]],
+        ["row", [["upgrade", 451]]],
+        ["row", [["upgrade", 441]]],
+        ["row", [["upgrade", 431]]],
+        ["row", [["upgrade", 421], ["upgrade", 422]]],
+        ["row", [["upgrade", 411]]],
+        ["row", [["upgrade", 401]]],
+        ["row", [["upgrade", 391]]],
+        ["row", [["upgrade", 381]]],
+        ["row", [["upgrade", 371]]],
+        ["row", [["upgrade", 361]]],
+        ["row", [["upgrade", 351], ["upgrade", 352]]],
+        ["row", [["upgrade", 341]]],
+        ["row", [["upgrade", 331]]],
+        ["row", [["upgrade", 321], ["upgrade", 322]]],
+        ["row", [["upgrade", 311]]],
+        ["row", [["upgrade", 301], ["upgrade", 302]]],
+        ["row", [["upgrade", 291]]],
+        ["row", [["upgrade", 281]]],
+        ["row", [["upgrade", 271]]],
+        ["row", [["upgrade", 261], ["upgrade", 262]]],
+        ["row", [["upgrade", 251]]],
+        ["row", [["upgrade", 241], ["upgrade", 242]]],
+        ["row", [["upgrade", 231]]],
+        ["row", [["upgrade", 221]]],
+        ["row", [["upgrade", 211]]],
+        ["row", [["upgrade", 201]]],
+        ["row", [["upgrade", 191], ["upgrade", 192]]],
+        ["row", [["upgrade", 181]]],
         ["row", [["upgrade", 171]]],
         ["row", [["upgrade", 161]]],
         ["row", [["upgrade", 151]]],
@@ -7382,138 +9133,6 @@ addLayer("d", {
     },
 })
 
-addLayer("ins", {
-        name: "insanity",
-        position: 13, 
-        startData() { 
-            return {
-                unlocked: false,
-                points: new Decimal(0),
-            }
-        },
-        color: "rgb(60, 5, 82)",
-        row: 0,
-        layerShown() { return false },
-        resource: "insanity points",
-        type: "normal", 
-        row: 1,
-        baseAmount() {
-            return player.d.points
-        },
-        canReset() {
-        return (player.d.points.gte("100000") && hasUpgrade("d",171))
-        },
-        doReset(resettingLayer) {
-        },
-        getResetGain() {
-        let gain = player.d.points.pow(0.11)
-        gain = gain.times(buyableEffect("ins", 11))
-        gain = gain.floor();
-        return gain
-        },
-        prestigeButtonText() {
-            return "Reset for " + format(getResetGain("ins")) + " insanities"
-        },
-    
-        upgrades: {
-        },
-
-        infoboxes: {        
-            1: {
-                title() {
-                return "You have " + format(player.ins.points) + "I (Insanities)"
-            },
-                body() {return "Welcome to the bonus layer, once again :) Insanity resets EVERYTHING but grants insanities to boost nearly everything. You must have the Temp End upgrade & 100,000 descensions to perform an insanity reset. This sublayer will be removed in the next update, so reset if you dare. Note that the true endgame is Sacrifice tier 6. (Also I have not balanced this layer.) Formula: descensions^0.11"},
-                unlocked() {return true}
-                }
-            },
-
-        buyables: {
-            11: {
-    title: "#1I: Insanity Boost",
-    display() { 
-        let bought = getBuyableAmount("ins", 11)
-        let cap = this.cap()
-        return `x1.5 insanity gain compounding per level.
-        Currently: x${format(this.effect())}  
-        Bought: ${bought}/${cap}  
-        Cost: ${format(this.cost(bought))} insanities`
-    },
-    cost(x) { 
-        return new Decimal(2).times(Decimal.pow(2.5, x))
-    },
-    canAfford() { 
-        let bought = getBuyableAmount("ins", 11)
-        return player.ins.points.gte(this.cost(bought)) && bought.lt(this.cap())
-    },
-    buy() {
-        let bought = getBuyableAmount("ins", 11)
-        if (bought.gte(this.cap())) return // stop if capped
-        player.ins.points = player.ins.points.sub(this.cost(bought))
-        setBuyableAmount("ins", 11, bought.add(1))
-    },
-    effect() {
-    let amt = getBuyableAmount("ins", 11)
-    let base = new Decimal(1.5).pow(amt)
-    return base
-},
-    cap() {
-        let base = 10
-        return base
-    },
-},
-12: {
-    title: "#2I: Global Boost",
-    display() { 
-        let bought = getBuyableAmount("ins", 12)
-        let cap = this.cap()
-        return `Multiply all currencies by 1.5x compounding. (excluding descension & insanity).
-        Currently: x${format(this.effect())} 
-        Bought: ${bought}/${cap}  
-        Cost: ${format(this.cost(bought))} insanities`
-    },
-    cost(x) { 
-        return new Decimal(2).times(Decimal.pow(2.5, x))
-    },
-    canAfford() { 
-        let bought = getBuyableAmount("ins", 12)
-        return player.ins.points.gte(this.cost(bought)) && bought.lt(this.cap())
-    },
-    buy() {
-        let bought = getBuyableAmount("ins", 12)
-        if (bought.gte(this.cap())) return
-        player.ins.points = player.ins.points.sub(this.cost(bought))
-        setBuyableAmount("ins", 12, bought.add(1))
-    },
-    effect() {
-    let amt = getBuyableAmount("ins", 12)
-    let base = new Decimal(1.5).pow(amt)
-    return base
-},
-    cap() {
-        let base = 10
-        return base
-    },
-}
-        },
-    challenges: {
-    11: {
-        name: "Insane Challenge",
-        challengeDescription: "^0.95 points, ascensions & descensions. Performs an Insanity Reset on start.",
-        goalDescription: "Reach 100,000 descensions.",
-        rewardDescription: "x2 descensions",
-        onEnter() {
-        doReset("ins"); 
-        },
-        canComplete: function() {
-        return player.d.points.gte(100000)
-        },
-        
-    },
-}     
-
-    })
-
 addLayer("mb", {
     name: "megaboosters",
     symbol: "MB", 
@@ -7530,7 +9149,7 @@ addLayer("mb", {
     baseResource: "points",  
     baseAmount() {return player.points},
     type: "normal", 
-    row: 1,
+    row: 2,
     canReset() {
     return (player.b.points.add(player.b.money).add(player.b.clicks).add(player.b.subpoints).gte("600") && hasUpgrade("d", 71))
     },
@@ -7548,9 +9167,6 @@ addLayer("mb", {
     },
     layerShown() {return false},
     doReset(resettingLayer) {
-        if (resettingLayer === "ins") {
-                layerDataReset(this.layer)
-        }
     },
     infoboxes: {        
             1: {
@@ -7610,6 +9226,7 @@ addLayer("mb", {
     },
     effect() {
     let amt = getBuyableAmount("mb", 11) 
+    if (hasUpgrade("d", 191)) amt = amt.add(1)
     let base = new Decimal(amt.add(1).pow(0.8))
     return format(base) 
     },
@@ -7682,6 +9299,7 @@ addLayer("mb", {
     },
     effect() {
     let amt = getBuyableAmount("mb", 13) 
+    if (hasUpgrade("d", 311)) amt = amt.add(1)
     let base = new Decimal(amt.add(1).pow(0.8))
     return format(base) 
     },
@@ -7709,3 +9327,1156 @@ tabFormat: [
     ]],
 ]
 })
+
+addLayer("l", {
+    name: "life",
+    symbol: "L", 
+    position: 14, 
+    startData() { return {
+        unlocked: false,
+        points: new Decimal(0),
+        hardcap: new Decimal(250),
+        drain: false,
+        dead: false,
+        deadTimer: new Decimal(0),
+    }},
+    color: "rgb(43, 233, 26)",
+    resource: "life points",
+    baseResource: "points",  
+    baseAmount() {return player.points},
+    type: "normal", 
+    row: 2,
+    layerShown() {return false},
+    doReset(resettingLayer) {
+        if (resettingLayer === "sac") {
+            if (player.sac.points.gte(6)) {
+                 player.l.points = new Decimal(0)
+                }
+        }
+    },
+
+    getLifePerSecond() { 
+    let gain = new Decimal(1)
+    if (!hasUpgrade("d", 211) && !player.l.points.gt(0)) gain = gain.times(0)
+    if (hasUpgrade("d", 221)) gain = gain.times(1.2)
+    if (hasUpgrade("d", 302)) gain = gain.times(1.15)
+    if (hasUpgrade("d", 352)) gain = gain.times(2)
+    if (hasUpgrade("d", 391)) gain = gain.times(2.5)
+    if (hasUpgrade("d", 411)) gain = gain.times(3)
+    if (hasUpgrade("d", 592)) gain = gain.times(4)
+    if (hasUpgrade("d", 621)) gain = gain.times(3)
+    if (hasUpgrade("d", 622)) gain = gain.times(3)
+    if (hasUpgrade("g", 291)) gain = gain.times(1.3)
+
+    gain = gain.times(buyableEffect("l", 11))
+
+    if (globalMult().gt(0)) gain = gain.times(globalMult())
+
+    if (hasMilestone("sac", 5)) {
+         gain = gain.times(new Decimal(2).pow(player.sac.points.sub(5)));
+    }
+
+    if (player.l.drain) {
+        if (hasUpgrade("d", 641)) gain = gain.times(0.1)
+        else gain = gain.times(0)
+    }
+    return gain                    
+    },
+
+    getHardcapPerSecond() { 
+    let gain = new Decimal(250)
+    gain = gain.add(buyableEffect("l", 22))
+    if (hasUpgrade("d", 231)) gain = gain.add(100)
+    if (hasUpgrade("gem", 61)) gain = gain.add(250)
+    if (hasUpgrade("d", 301)) gain = gain.add(300)
+
+    if (hasUpgrade("d", 391)) gain = gain.times(1.5)
+    if (hasUpgrade("d", 411)) gain = gain.times(3)
+    if (hasUpgrade("d", 481)) gain = gain.times(2.5)
+    if (hasUpgrade("d", 592)) gain = gain.times(4)
+    if (hasUpgrade("d", 622)) gain = gain.div(15)
+    if (hasUpgrade("g", 291)) gain = gain.times(1.3)
+
+    if (globalMult().gt(0)) gain = gain.times(globalMult())
+
+    if (hasMilestone("sac", 5)) {
+         gain = gain.times(new Decimal(2).pow(player.sac.points.sub(5)));
+    }
+    if (hasMilestone("prism", 1)) {
+                gain = gain.times(player.prism.points.add(1).pow(0.15).max(1));
+    }
+    return gain                    
+    },
+
+    update(diff) {
+        player.l.points = player.l.points.add(this.getLifePerSecond().times(diff))
+        player.l.hardcap = this.getHardcapPerSecond()
+        if (player.l.points.gte(player.l.hardcap)) player.l.points = player.l.hardcap
+        if (!player.l.points.gte(0)) {
+            player.l.points = new Decimal(0)
+            player.l.dead = true
+        }
+        if (player.l.dead) {
+            player.l.deadTimer = player.l.deadTimer.add(diff)
+            if (player.l.deadTimer.gte(10)) {
+                player.l.dead = false
+                player.l.deadTimer = new Decimal(0)
+            }
+        }
+    },
+    infoboxes: {        
+            1: {
+                title() {
+                let perSec = layers["l"].getLifePerSecond()  // use the layer reference
+                return "You have " + format(player.l.points) + "LP (Life Points) | +" + format(perSec) + "/s"
+            },
+                body() {return "Life Points acts similar to Money, but have a hard cap. If Life Points ever go negative, all currencies (excluding Life) will stop generating until after a 10s cooldown. (Bar will turn red while this is occuring.) Life Points also cannot generate while being depleted. This may come in useful for a different mechanic later :)"},
+                unlocked() {return true}
+                }
+            },
+    bars: {
+        11: {
+        direction: RIGHT,
+        width: 500,
+        height: 50,
+        progress() { return player.l.points.div(player.l.hardcap) },
+        display() { return format(player.l.points) + "/" + format(player.l.hardcap) + " Life"},
+        fillStyle() {
+                if (player.l.dead) return {
+                            "background-color": "rgb(238, 79, 79)",
+                         }
+                else return {
+                            "background-color": "#7cee4fff",
+                         }
+                 },
+    },
+    },
+    buyables: {
+        11: {
+    title: "#1L: Life Increase",
+    display() { 
+        let bought = getBuyableAmount("l", 11)
+        let cap = this.cap()
+        if (inChallenge("trials", 13)) return "DISABLED"
+        return `Doubles life gain per level.
+        Currently: x${this.effect()}  
+        Bought: ${bought}/${cap}  
+        Cost: ${format(this.cost(bought))} life points`
+    },
+    cost(x) { 
+        return new Decimal(10).times(Decimal.pow(100, x))
+    },
+    canAfford() { 
+        let bought = getBuyableAmount("l", 11)
+        if (inChallenge("trials", 13)) return false
+        return player.l.points.gte(this.cost(bought)) && bought.lt(this.cap())
+    },
+    buy() {
+        let bought = getBuyableAmount("l", 11)
+        if (bought.gte(this.cap())) return // stop if capped
+        player.l.points = player.l.points.sub(this.cost(bought))
+        setBuyableAmount("l", 11, bought.add(1))
+    },
+    effect() {
+    let amt = getBuyableAmount("l", 11) 
+    let base = new Decimal(2).pow(amt)
+    return format(base) 
+    },
+    cap() {
+        let base = new Decimal(100)
+        return base
+    },
+    currency() { 
+        return player.l.points
+    },
+    },
+        12: {
+    title: "#2L: Point Increase",
+    display() { 
+        let bought = getBuyableAmount("l", 12)
+        let cap = this.cap()
+        return `Boosts point gain by x1.2 per level.
+        Currently: x${this.effect()}  
+        Bought: ${bought}/${cap}  
+        Cost: ${format(this.cost(bought))} life points`
+    },
+    cost(x) { 
+        return new Decimal(10).times(Decimal.pow(3, x))
+    },
+    canAfford() { 
+        let bought = getBuyableAmount("l", 12)
+        return player.l.points.gte(this.cost(bought)) && bought.lt(this.cap())
+    },
+    buy() {
+        let bought = getBuyableAmount("l", 12)
+        if (bought.gte(this.cap())) return // stop if capped
+        player.l.points = player.l.points.sub(this.cost(bought))
+        setBuyableAmount("l", 12, bought.add(1))
+    },
+    effect() {
+    let amt = getBuyableAmount("l", 12)  
+    let base = new Decimal(1.2).pow(amt)
+    return format(base) 
+    },
+    cap() {
+        let base = new Decimal(100)
+        return base
+    },
+    currency() { 
+        return player.l.points
+    },
+    },
+    13: {
+    title: "#3L: Ascension Increase",
+    display() { 
+        let bought = getBuyableAmount("l", 13)
+        let cap = this.cap()
+        return `Boosts ascension gain by x1.2 per level.
+        Currently: x${this.effect()}  
+        Bought: ${bought}/${cap}  
+        Cost: ${format(this.cost(bought))} life points`
+    },
+    cost(x) { 
+        return new Decimal(25).times(Decimal.pow(3, x))
+    },
+    canAfford() { 
+        let bought = getBuyableAmount("l", 13)
+        return player.l.points.gte(this.cost(bought)) && bought.lt(this.cap())
+    },
+    buy() {
+        let bought = getBuyableAmount("l", 13)
+        if (bought.gte(this.cap())) return // stop if capped
+        player.l.points = player.l.points.sub(this.cost(bought))
+        setBuyableAmount("l", 13, bought.add(1))
+    },
+    effect() {
+    let amt = getBuyableAmount("l", 13) 
+    let base = new Decimal(1.2).pow(amt)
+    return format(base) 
+    },
+    cap() {
+        let base = new Decimal(100)
+        return base
+    },
+    currency() { 
+        return player.l.points
+    },
+    },
+    21: {
+    title: "#4L: Descension Increase",
+    display() { 
+        let bought = getBuyableAmount("l", 21)
+        let cap = this.cap()
+        return `Boosts descension gain by x1.2 per level.
+        Currently: x${this.effect()}  
+        Bought: ${bought}/${cap}  
+        Cost: ${format(this.cost(bought))} life points`
+    },
+    cost(x) { 
+        return new Decimal(50).times(Decimal.pow(3, x))
+    },
+    canAfford() { 
+        let bought = getBuyableAmount("l", 21)
+        return player.l.points.gte(this.cost(bought)) && bought.lt(this.cap())
+    },
+    buy() {
+        let bought = getBuyableAmount("l", 21)
+        if (bought.gte(this.cap())) return // stop if capped
+        player.l.points = player.l.points.sub(this.cost(bought))
+        setBuyableAmount("l", 21, bought.add(1))
+    },
+    effect() {
+    let amt = getBuyableAmount("l", 21) 
+    let base = new Decimal(1.2).pow(amt)
+    return format(base) 
+    },
+    cap() {
+        let base = new Decimal(100)
+        return base
+    },
+    currency() { 
+        return player.l.points
+    },
+    },
+    22: {
+    title: "#5L: Cap Breaker",
+    display() { 
+        let bought = getBuyableAmount("l", 22)
+        let cap = this.cap()
+        if (inChallenge("trials", 11) || inChallenge("trials", 12) || inChallenge("trials", 13)) return "DISABLED"
+        return `Increase the hardcap on life points by +50 per level.
+        Currently: +${this.effect()}  
+        Bought: ${bought}/${cap}  
+        Cost: ${format(this.cost(bought))} life points`
+    },
+    cost(x) { 
+        return new Decimal(100).times(Decimal.pow(3, x))
+    },
+    canAfford() { 
+        let bought = getBuyableAmount("l", 22)
+        if (inChallenge("trials", 11) || inChallenge("trials", 12) || inChallenge("trials", 13)) return false
+        return player.l.points.gte(this.cost(bought)) && bought.lt(this.cap())
+    },
+    buy() {
+        let bought = getBuyableAmount("l", 22)
+        if (bought.gte(this.cap())) return // stop if capped
+        player.l.points = player.l.points.sub(this.cost(bought))
+        setBuyableAmount("l", 22, bought.add(1))
+    },
+    effect() {
+    let amt = getBuyableAmount("l", 22) 
+    let base = new Decimal(50).times(amt)
+    return format(base) 
+    },
+    cap() {
+        let base = new Decimal(100)
+        return base
+    },
+    currency() { 
+        return player.l.points
+    },
+    },
+    23: {
+    title: "#6L: Ascension Increase II",
+    display() { 
+        let bought = getBuyableAmount("l", 23)
+        let cap = this.cap()
+        if (inChallenge("trials", 12) || inChallenge("trials", 13)) return "DISABLED"
+        return `Boosts ascension gain by +20% per level.
+        Currently: x${this.effect()}  
+        Bought: ${bought}/${cap}  
+        Cost: ${format(this.cost(bought))} life points`
+    },
+    cost(x) { 
+        return new Decimal(150).times(Decimal.pow(1.5, x))
+    },
+    canAfford() { 
+        let bought = getBuyableAmount("l", 23)
+        if (inChallenge("trials", 12) || inChallenge("trials", 13)) return false
+        return player.l.points.gte(this.cost(bought)) && bought.lt(this.cap())
+    },
+    buy() {
+        let bought = getBuyableAmount("l", 23)
+        if (bought.gte(this.cap())) return // stop if capped
+        player.l.points = player.l.points.sub(this.cost(bought))
+        setBuyableAmount("l", 23, bought.add(1))
+    },
+    effect() {
+    let amt = getBuyableAmount("l", 23) 
+    let base = new Decimal(1).add(amt.times(0.2))
+    return format(base) 
+    },
+    cap() {
+        let base = new Decimal(100)
+        return base
+    },
+    currency() { 
+        return player.l.points
+    },
+    unlocked() {return hasUpgrade("gem",61) || getBuyableAmount("l", 23).gt(0)},
+    },
+},
+tabFormat: [
+    ["row", [
+        ["infobox", 1],
+    ]],
+    ["row", [
+        ["bar", 11],
+    ]],
+    ["row", [
+        ["buyable", 11],
+        ["buyable", 12],
+        ["buyable", 13],
+    ]],
+    ["row", [
+        ["buyable", 21],
+        ["buyable", 22],
+        ["buyable", 23],
+    ]],
+]
+})
+
+addLayer("overcharge", {
+    name: "overcharger",
+    symbol: "O", 
+    position: 15, 
+    startData() { return {
+        unlocked: false,
+        points: new Decimal(0),
+    }},
+    color: "rgb(223, 223, 129)",
+    resource: "overcharges",
+    baseResource: "points",  
+    baseAmount() {return player.points},
+    type: "normal", 
+    row: 2,
+    layerShown() {return false},
+    shouldNotify() { return false },
+    doReset(resettingLayer) {
+    },
+    bars: {
+        11: {
+        direction: RIGHT,
+        width: 500,
+        height: 50,
+        progress() { return player.l.points.div(player.l.hardcap) },
+        display() { return format(player.l.points) + "/" + format(player.l.hardcap) + " Life"},
+        fillStyle() {
+                if (player.l.dead) return {
+                            "background-color": "rgb(238, 79, 79)",
+                         }
+                else return {
+                            "background-color": "#7cee4fff",
+                         }
+                 },
+    },
+    },
+    infoboxes: {        
+            1: {
+                title() {
+                let base = new Decimal(1.2)
+                if (hasUpgrade("d", 351)) base = base.sub(0.02)
+                return "You are at " + format(player.overcharge.points) + " overcharge, and overcharging " + format(new Decimal(base).pow(player.overcharge.points).sub(1)) + " life points/s"
+            },
+                body() {return "Overcharge depletes life points at a rate of 1.2^overcharge-1 but grants powerful boosts to speed up progress."},
+                unlocked() {return true}
+                }
+            },
+    clickables: {
+        11: {
+            title: "-100",
+            canClick() {return true},
+            onClick() {
+                player.overcharge.points = player.overcharge.points.sub(100)
+                if (!player.overcharge.points.gte(0)) player.overcharge.points = new Decimal(0)
+            },
+            style() {
+            return {
+                "margin": "0px",
+                "min-height": "120px",
+	            "width": "120px",
+                "font-size": "10px",
+                }
+            },
+        },
+        12: {
+            title: "-10",
+            canClick() {return true},
+            onClick() {
+                player.overcharge.points = player.overcharge.points.sub(10)
+                if (!player.overcharge.points.gte(0)) player.overcharge.points = new Decimal(0)
+            },
+            style() {
+            return {
+                "margin": "0px",
+                "min-height": "120px",
+	            "width": "120px",
+                "font-size": "10px",
+                }
+            },
+        },
+        13: {
+            title: "-1",
+            canClick() {return true},
+            onClick() {
+                player.overcharge.points = player.overcharge.points.sub(1)
+                if (!player.overcharge.points.gte(0)) player.overcharge.points = new Decimal(0)
+            },
+            style() {
+            return {
+                "margin": "0px",
+                "min-height": "120px",
+	            "width": "120px",
+                "font-size": "10px",
+                }
+            },
+        },
+        21: {
+            title: "+1",
+            canClick() {return true},
+            onClick() {
+                player.overcharge.points = player.overcharge.points.add(1)
+            },
+            style() {
+            return {
+                "margin": "0px",
+                "min-height": "120px",
+	            "width": "120px",
+                "font-size": "10px",
+                }
+            },
+        },
+        22: {
+            title: "+10",
+            canClick() {return true},
+            onClick() {
+                player.overcharge.points = player.overcharge.points.add(10)
+            },
+            style() {
+            return {
+                "margin": "0px",
+                "min-height": "120px",
+	            "width": "120px",
+                "font-size": "10px",
+                }
+            },
+        },
+        23: {
+            title: "+100",
+            canClick() {return true},
+            onClick() {
+                player.overcharge.points = player.overcharge.points.add(100)
+            },
+            style() {
+            return {
+                "margin": "0px",
+                "min-height": "120px",
+	            "width": "120px",
+                "font-size": "10px",
+                }
+            },
+        },
+    }, 
+    update(diff) {
+        if (player.overcharge.points.gt(0)) {
+            if (player.l.dead) {
+                player.overcharge.points = new Decimal(0)
+                return
+                }
+            player.l.drain = true
+            let base = new Decimal(1.2)
+            if (hasUpgrade("d", 351)) base = base.sub(0.02)
+
+            player.l.points = player.l.points.sub(new Decimal(base).pow(player.overcharge.points).sub(1).times(diff))
+        }
+        else player.l.drain = false
+        
+    },
+     milestones: {
+    0: {
+        requirementDescription: "10 Overcharge",
+        effect() {
+                if (player.overcharge.points.gte(10)) return new Decimal(4).times(new Decimal(1.1).pow(player.overcharge.points.sub(10))).max(1)
+                else return new Decimal(1)
+        },
+        effectDescription() {
+            return "Boosts point gain by x4 at 10 overcharge, with each additional overcharge giving a x1.1 compounding boost. Current boost: x" + format(this.effect())}, // Fun fact: compounding was too overpowered
+        done() { return player.overcharge.points.gte(10) }
+    },
+    1: {
+        requirementDescription: "20 Overcharge",
+        effect() {
+                if (player.overcharge.points.gte(20)) return new Decimal(4).times(new Decimal(1.1).pow(player.overcharge.points.sub(20))).max(1)
+                else return new Decimal(1)
+        },
+        effectDescription() {
+            return "Boosts money gain by x4 at 20 overcharge, with each additional overcharge giving a x1.1 compounding boost. Current boost: x" + format(this.effect())}, // Fun fact: compounding was too overpowered
+        done() { return player.overcharge.points.gte(20) }
+    },
+    2: {
+        requirementDescription: "30 Overcharge",
+        effect() {
+                if (player.overcharge.points.gte(30)) return new Decimal(4).times(new Decimal(1.1).pow(player.overcharge.points.sub(30))).max(1)
+                else return new Decimal(1)
+        },
+        effectDescription() {
+            return "Boosts ascension gain by x4 at 30 overcharge, with each additional overcharge giving a x1.1 compounding boost. Current boost: x" + format(this.effect())}, // Fun fact: compounding was too overpowered
+        done() { return player.overcharge.points.gte(30) }
+    },
+    3: {
+        requirementDescription: "40 Overcharge",
+        effect() {
+                if (player.overcharge.points.gte(40)) return new Decimal(0.1).add(new Decimal(0.1).times(player.overcharge.points.sub(40))).max(0.1)
+                else return new Decimal(0)
+        },
+        effectDescription() {
+            return "Generate descension points at a rate of 0.1%/s at 40 overcharge, increasing by +0.1% per additional overcharge. Current boost: %" + format(this.effect())}, // Fun fact: compounding was too overpowered
+        done() { return player.overcharge.points.gte(40) }
+    },
+},
+tabFormat: [
+    ["row", [
+        ["infobox", 1],
+    ]],
+    ["row", [
+        ["bar", 11],
+    ]],
+    "milestones",
+    ["row", [
+        ["clickable", 11],
+        ["clickable", 12],
+        ["clickable", 13],
+        ["clickable", 21],
+        ["clickable", 22],
+        ["clickable", 23],
+    ]],
+]
+})
+
+addLayer("trials", {
+    name: "trials",
+    symbol: "T", 
+    position: 99, 
+    startData() { return {
+        unlocked: false,
+        points: new Decimal(0),
+        timer: new Decimal(0),
+    }},
+    color: "rgb(151, 151, 129)",
+    resource: "trials",
+    baseResource: "points",  
+    baseAmount() {return player.points},
+    type: "normal", 
+    row: 3,
+    shouldNotify() { return false },
+    layerShown() {return false},
+    doReset(resettingLayer) {
+    },
+    update(diff) {
+        let gain = new Decimal(0)
+        if (hasChallenge("trials", 11)) gain = gain.add(1)
+        if (hasChallenge("trials", 12)) gain = gain.add(1)
+        if (hasChallenge("trials", 13)) gain = gain.add(1)
+        player.trials.points = gain
+        if (inChallenge("trials", 12)) {
+        player.trials.timer = player.trials.timer.add(diff)
+        } else {
+        player.trials.timer = new Decimal(0)
+        }
+    },
+    infoboxes: {        
+            1: {
+                title() {
+                return "You have completed " + format(player.trials.points) + " trials"
+            },
+                body() {return "Welcome to yet another bonus layer... Trials will reset EVERYTHING upon entering and cannot be undone. It is recommeneded to make a save if you want to try and complete these trials. This sub-layer will be removed next update. The recommended path is to complete each trial in order. Completing a trial will grant you a x2 compounding global boost. <br> *Ascension gain will always round up to 1 if possible to reset."},
+                unlocked() {return true}
+                }
+            },
+    challenges: {
+    11: {
+        name: "Trial 1: Fractured Beginnings",
+        challengeDescription: "x0.8 nearly all currencies, and disable certain parts of the tree.",
+        goalDescription: "Reach the temp end.",
+        rewardDescription: "+1 trial completion.",
+        onEnter() {
+        for (let layer of ["p", "m", "pr", "c", "sp", "b", "g", "a", "cr", "gold", "sac", "gem", "d", "mb", "l", "overcharge", "prism", "sap"]) {
+        layerDataReset(layer)
+        }
+        },
+        canComplete: function() {
+        return hasUpgrade("d", 802)
+        },
+        
+    },
+    12: {
+        name: "Trial 2: Fading Hope",
+        challengeDescription: "Start with x10 nearly all currencies, but overtime shrinks to x0.3 nearly all currencies. Also disable more parts of the tree.",
+        goalDescription: "Reach the temp end.",
+        rewardDescription: "+1 trial completion.",
+        onEnter() {
+        for (let layer of ["p", "m", "pr", "c", "sp", "b", "g", "a", "cr", "gold", "sac", "gem", "d", "mb", "l", "overcharge", "prism", "sap"]) {
+        layerDataReset(layer)
+        }
+        },
+        canComplete: function() {
+        return hasUpgrade("d", 802)
+        },
+        
+    },
+    13: {
+        name: "Trial 3: Bound Potential",
+        challengeDescription: "Even more parts of the tree are disabled. Good luck.",
+        goalDescription: "Reach the temp end.",
+        rewardDescription: "+1 trial completion.",
+        onEnter() {
+        for (let layer of ["p", "m", "pr", "c", "sp", "b", "g", "a", "cr", "gold", "sac", "gem", "d", "mb", "l", "overcharge", "prism", "sap"]) {
+        layerDataReset(layer)
+        }
+        },
+        canComplete: function() {
+        return hasUpgrade("d", 802)
+        },
+        
+    },
+},     
+tabFormat: [
+    ["row", [
+        ["infobox", 1],
+    ]],
+    ["row", [
+        ["challenge", 11],
+        ["challenge", 12],
+        ["challenge", 13],
+    ]],
+]
+})
+
+addLayer("prism", {
+    name: "prism",
+    symbol: "PM", 
+    position: 16,
+    row: 2, 
+    startData() { return {
+        unlocked: false,
+		points: new Decimal(0),
+        descensions: new Decimal(0)
+    }},
+    color: "rgb(151, 151, 129)",
+    resource: "prism power",
+    layerShown() { return false },
+    doReset(resettingLayer) {
+        if (resettingLayer === "sac") {
+                if (player.sac.points.gte(6)) {
+                   player.prism.points = new Decimal(0)
+                   player.prism.descensions = new Decimal(0)
+                }
+        }
+        },
+    autoPrismPower() {
+        if (hasUpgrade("d", 672)) { 
+            let gain = new Decimal(tmp.prism.prismMult)
+            gain = gain.times(0.01)
+            if (hasUpgrade("d", 771)) gain = gain.times(5)
+            return gain
+        } 
+        else return new Decimal(0)
+    },
+    autoPrismDescension() {
+            let gain = new Decimal(2)
+            if (!hasUpgrade("d", 451)) gain = gain.times(0)
+            if (hasUpgrade("d", 571)) gain = gain.times(3.75)
+            if (hasUpgrade("d", 761)) gain = gain.times(4)
+            return gain
+    },
+    update(diff) {
+        player.prism.points = player.prism.points.add(this.autoPrismPower().times(diff))
+        player.prism.descensions = player.prism.descensions.add(this.autoPrismDescension().times(diff))
+        if (player.prism.descensions.gte(250)) {
+            player.d.points = player.d.points.add(layers.d.getResetGain().div(10))
+            player.prism.descensions = new Decimal(0)
+        }
+    },
+    infoboxes: {        
+            1: {
+                title() {
+                let perSec = layers["prism"].autoPrismPower()
+                if (perSec.gt(0)) return "You have " + format(player.prism.points) + " prism power | " + format(perSec) + "/s"
+                else return "You have " + format(player.prism.points) + " prism power"
+            },
+                body() {return `Hope you liked clicks, because you'll be here for a while... The Prism generates power by clicking on it to unlock milestones. There is also a Descension bar where after 250 clicks, it will produce a certain amount of descensions based on descension gain on reset. This is initially at 10%, but can increase with upgrades. The descension bar also has an autoclicker at 2/s.`},
+                unlocked() {return true}
+                }
+            },
+    prismMult() {
+        let gain = new Decimal(1)
+        if (!hasUpgrade("d", 471)) gain = gain.times(0)
+        if (hasUpgrade("d", 471)) gain = gain.times(2)
+        if (hasUpgrade("d", 511)) gain = gain.times(3)
+        if (hasUpgrade("d", 541)) gain = gain.times(upgradeEffect("d", 541))
+        if (hasUpgrade("d", 561)) gain = gain.times(upgradeEffect("d", 561))
+        if (hasUpgrade("d", 592)) gain = gain.times(4)
+        if (hasUpgrade("d", 671)) gain = gain.times(3)
+        if (hasUpgrade("g", 301)) gain = gain.times(1.3)
+  
+        if (hasMilestone("sac", 6)) {
+        gain = gain.times(new Decimal(2).pow(player.sac.points.sub(6)));
+        }
+        gain = gain.times(globalMult())
+        return gain
+    },
+    prismDescensionMult() {
+        let gain = new Decimal(1)
+        if (!hasUpgrade("d", 471)) gain = gain.times(0)
+        if (hasUpgrade("d", 472)) gain = gain.times(2)
+        if (hasUpgrade("d", 551)) gain = gain.times(1.5)
+
+        if (hasMilestone("sac", 6)) {
+        gain = gain.times(new Decimal(2).pow(player.sac.points.sub(6)));
+        }
+        gain = gain.times(globalMult())
+        return gain
+    },
+    bars: {
+        11: {
+        direction: RIGHT,
+        width: 500,
+        height: 50,
+        progress() { return player.prism.descensions.div(250) },
+        display() { return format(player.prism.descensions) + "/250 clicks <br> Generates " + format(layers.d.getResetGain().div(10)) + " descensions"},
+        fillStyle() {
+                return {
+                            "background-color": "rgb(101, 23, 8)",
+                         }
+                 },
+        },
+    },
+    clickables: {
+        11: {
+            title: "Prism",
+            display() {return `Click to generate ${format(tmp.prism.prismMult)} prism power and ${format(tmp.prism.prismDescensionMult)} descension clicks.`},
+            canClick() {return true},
+            onClick() {
+                player.prism.points = player.prism.points.add(tmp.prism.prismMult)
+                player.prism.descensions = player.prism.descensions.add(tmp.prism.prismDescensionMult)
+            }
+        },
+    },
+
+    milestones: {
+    0: {
+        requirementDescription: "100 Prism Power",
+        effect() {
+            return player.prism.points.add(1).pow(0.175).max(1)
+        },
+        effectDescription() {
+        return "Boosts autoclick speed with a formula of prismpower^0.175. Current boost: x" + format(this.effect())},
+        done() { return player.prism.points.gte(100) }
+    },
+    1: {
+        requirementDescription: "1,000 Prism Power",
+        effect() {
+            return player.prism.points.add(1).pow(0.15).max(1)
+        },
+        effectDescription() {
+        return "Boosts life hardcap with a formula of prismpower^0.15. Current boost: x" + format(this.effect())},
+        done() { return player.prism.points.gte(1000) }
+    },
+    2: {
+        requirementDescription: "10,000 Prism Power",
+        effect() {
+            return player.prism.points.add(1).pow(0.075).max(1)
+        },
+        effectDescription() {
+        return "Boosts descensions with a formula of prismpower^0.075. Current boost: x" + format(this.effect())},
+        done() { return player.prism.points.gte(10000) }
+    },
+    3: {
+        requirementDescription: "1,000,000 Prism Power",
+        effect() {
+            return player.prism.points.add(1).pow(0.05).max(1)
+        },
+        effectDescription() {
+        return "Boosts ascensions with a formula of prismpower^0.05. Current boost: x" + format(this.effect())},
+        done() { return player.prism.points.gte(1000000) }
+    },
+    4: {
+        requirementDescription: "10,000,000 Prism Power",
+        effect() {
+            return player.prism.points.add(1).pow(0.04).max(1)
+        },
+        effectDescription() {
+        return "Boosts points with a formula of prismpower^0.04. Current boost: x" + format(this.effect())},
+        done() { return player.prism.points.gte(10000000) }
+    },
+},
+tabFormat: [
+    ["row", [
+        ["infobox", 1],
+    ]],
+    ["row", [
+        ["bar", 11],
+    ]],
+    "milestones",
+    ["row", [
+        ["clickable", 11],
+    ]],
+]
+}) 
+
+addLayer("sap", {
+        name: "sapphires",
+        symbol: "SAP",
+        position: 17,
+        startData() { 
+            return {
+                unlocked: false,
+                points: new Decimal(0),
+            }
+        },
+        color: "rgb(16, 138, 219)",
+        row: 2,
+        layerShown() { return false },
+        resource: "dollars",
+        doReset(resettingLayer) {
+            if (resettingLayer === "sac") {
+            if (player.sac.points.gte(7)) {
+                 player.sap.points = new Decimal(0)
+                }
+            }
+        },
+
+
+    update(diff) {
+        player.sap.points = player.sap.points.add(this.getSapphiresPerSecond().times(diff)) 
+    },
+
+    getSapphiresPerSecond() { 
+    let gain = new Decimal(0)           
+    gain = gain.add(buyableEffect("gold", 32))
+    gain = gain.times(buyableEffect("sap", 11))
+    if (hasUpgrade("d", 651)) gain = gain.times(2)
+    if (hasUpgrade("d", 781)) gain = gain.times(2.5)
+    if (hasUpgrade("d", 711)) gain = gain.times(upgradeEffect("d", 711))
+    if (hasUpgrade("g", 311)) gain = gain.times(1.3)
+    if (hasMilestone("sac", 7)) {
+        gain = gain.times(new Decimal(2).pow(player.sac.points.sub(7)));
+        }
+    gain = gain.times(globalMult())
+
+    return gain                    
+    },
+        upgrades: {
+        },
+
+        infoboxes: {        
+            1: {
+                title() {
+                let perSec = layers["sap"].getSapphiresPerSecond()  // use the layer reference
+                return "You have " + format(player.sap.points) + " sapphires | +" + format(perSec) + "/s"
+            },
+                body() {return "Sapphires are very similar to money, where you can buy buyables to boost progress. You may want to check Gold first..."},
+                unlocked() {return true}
+                }
+            },
+
+        buyables: {
+            11: {
+    title: "#1-SAP: Sapphire Increase",
+    display() { 
+        let bought = getBuyableAmount("sap", 11)
+        let cap = this.cap()
+        if (inChallenge("trials", 12) || inChallenge("trials", 13)) return "DISABLED"
+        return `Increase sapphire gain by +20% additive each purchase. 
+        Currently: x${format(this.effect())}  
+        Bought: ${bought}/${cap}  
+        Cost: ${format(this.cost(bought))} sapphires`
+    },
+    cost(x) { 
+        return new Decimal(10).times(Decimal.pow(1.5, x))
+    },
+    canAfford() { 
+        let bought = getBuyableAmount("sap", 11)
+        if (inChallenge("trials", 12) || inChallenge("trials", 13)) return false
+        return player.sap.points.gte(this.cost(bought)) && bought.lt(this.cap())
+    },
+    buy() {
+        let bought = getBuyableAmount("sap", 11)
+        if (bought.gte(this.cap())) return // stop if capped
+        player.sap.points = player.sap.points.sub(this.cost(bought))
+        if (!player.sap.points.gt(0)) player.sap.points = new Decimal(0)
+        setBuyableAmount("sap", 11, bought.add(1))
+    },
+    effect() {
+    let amt = getBuyableAmount("sap", 11)  
+    let base = new Decimal(1).add(amt.times(0.2))
+    return base 
+    },
+    cap() {
+        let base = 100
+        return base
+    },
+    currency() { 
+        return player.sap.points 
+    },
+},
+12: {
+    title: "#2-SAP: Point Increase",
+    display() { 
+        let bought = getBuyableAmount("sap", 12)
+        let cap = this.cap()
+        return `Multiply point gain by +75% additive each purchase. 
+        After every 10 levels, the effect is multiplied by x1.75.
+        Currently: x${format(this.effect())} 
+        Bought: ${bought}/${cap}  
+        Cost: ${format(this.cost(bought))} sapphires`
+    },
+    cost(x) { 
+        return new Decimal(15).times(Decimal.pow(2.25, x))
+    },
+    canAfford() { 
+        let bought = getBuyableAmount("sap", 12)
+        return player.sap.points.gte(this.cost(bought)) && bought.lt(this.cap())
+    },
+    buy() {
+        let bought = getBuyableAmount("sap", 12)
+        if (bought.gte(this.cap())) return
+        player.sap.points = player.sap.points.sub(this.cost(bought))
+        if (!player.sap.points.gt(0)) player.sap.points = new Decimal(0)
+        setBuyableAmount("sap", 12, bought.add(1))
+    },
+    effect() {
+    let amt = getBuyableAmount("sap", 12)  
+    let base = new Decimal(1).add(amt.times(0.75))
+    let bonus = Decimal.pow(1.75, Math.floor(amt / 10))
+    return base.times(bonus)
+},
+    cap() {
+        let base = 100
+        return base
+    },
+},
+13: {
+    title: "#3-SAP: Booster Descale",
+    display() { 
+        let bought = getBuyableAmount("sap", 13)
+        let cap = this.cap()
+        return `Decreases the exponential scaling of boosters by +/0.01 per level.
+        Currently: /${format(this.effect())}  
+        Bought: ${bought}/${cap}  
+        Cost: ${format(this.cost(bought))} sapphires`
+    },
+    cost(x) { 
+        return new Decimal(100).times(Decimal.pow(3, x))
+    },
+    canAfford() { 
+        let bought = getBuyableAmount("sap", 13)
+        return player.sap.points.gte(this.cost(bought)) && bought.lt(this.cap())
+    },
+    buy() {
+         let bought = getBuyableAmount("sap", 13)
+        if (bought.gte(this.cap())) return
+        player.sap.points = player.sap.points.sub(this.cost(bought))
+        if (!player.sap.points.gt(0)) player.sap.points = new Decimal(0)
+        setBuyableAmount("sap", 13, bought.add(1))
+    },
+    effect() {
+    let amt = getBuyableAmount("sap", 13)  
+    let base = new Decimal(1).add(amt.div(100))
+    return base
+},
+    cap() {
+        let base = 100
+        return base
+    },
+},
+21: {
+    title: "#4-SAP: Descension Increase",
+    display() { 
+        let bought = getBuyableAmount("sap", 21)
+        let cap = this.cap()
+         return `Multiply descension gain by +25% additive each purchase. 
+        After every 10 levels, the effect is multiplied by x1.5.
+        Currently: x${format(this.effect())} 
+        Bought: ${bought}/${cap}  
+        Cost: ${format(this.cost(bought))} sapphires`
+    },
+    cost(x) { 
+        return new Decimal(25).times(Decimal.pow(2.25, x))
+    },
+    canAfford() { 
+        let bought = getBuyableAmount("sap", 21)
+        return player.sap.points.gte(this.cost(bought)) && bought.lt(this.cap())
+    },
+    buy() {
+         let bought = getBuyableAmount("sap", 21)
+        if (bought.gte(this.cap())) return
+        player.sap.points = player.sap.points.sub(this.cost(bought))
+        if (!player.sap.points.gt(0)) player.sap.points = new Decimal(0)
+        setBuyableAmount("sap", 21, bought.add(1))
+    },
+    effect() {
+    let amt = getBuyableAmount("sap", 21)  
+    let base = new Decimal(1).add(amt.times(0.25))
+    let bonus = Decimal.pow(1.25, Math.floor(amt / 10))
+    return base.times(bonus)
+},
+    cap() {
+        let base = 100
+        return base
+    },
+    unlocked() {return hasUpgrade("p",501)},
+},
+22: {
+    title: "#5-SAP: Gold Miner",
+    display() { 
+        let bought = getBuyableAmount("sap", 22)
+        let cap = this.cap()
+        if (inChallenge("trials", 12) || inChallenge("trials", 13)) return "DISABLED"
+        return `Passively generate gold at a rate of +%0.1 per level. 
+        Currently: %${format(this.effect())} 
+        Bought: ${bought}/${cap}  
+        Cost: ${format(this.cost(bought))} sapphires`
+    },
+    cost(x) { 
+        return new Decimal(100).times(Decimal.pow(2.25, x))
+    },
+    canAfford() { 
+        let bought = getBuyableAmount("sap", 22)
+        if (inChallenge("trials", 12) || inChallenge("trials", 13)) return false
+        return player.sap.points.gte(this.cost(bought)) && bought.lt(this.cap())
+    },
+    buy() {
+         let bought = getBuyableAmount("sap", 22)
+        if (bought.gte(this.cap())) return
+        player.sap.points = player.sap.points.sub(this.cost(bought))
+        if (!player.sap.points.gt(0)) player.sap.points = new Decimal(0)
+        setBuyableAmount("sap", 22, bought.add(1))
+    },
+    effect() {
+    let amt = getBuyableAmount("sap", 22)  
+    let base = new Decimal(0).add(amt.div(10))
+    return base
+},
+    cap() {
+        let base = 100
+        return base
+    },
+},
+23: {
+    title: "#6-SAP: Golden Supremacy",
+    display() { 
+        let bought = getBuyableAmount("sap", 23)
+        let cap = this.cap()
+        if (inChallenge("trials", 11) || inChallenge("trials", 12) || inChallenge("trials", 13)) return "DISABLED"
+        return `Gold buyables no longer spend gold.
+        Bought: ${bought}/${cap}  
+        Cost: ${format(this.cost(bought))} sapphires`
+    },
+    cost(x) { 
+        return new Decimal(1000).times(Decimal.pow(1, x))
+    },
+    canAfford() { 
+        let bought = getBuyableAmount("sap", 23)
+        if (inChallenge("trials", 11) || inChallenge("trials", 12) || inChallenge("trials", 13)) return false
+        return player.sap.points.gte(this.cost(bought)) && bought.lt(this.cap())
+    },
+    buy() {
+         let bought = getBuyableAmount("sap", 23)
+        if (bought.gte(this.cap())) return
+        player.sap.points = player.sap.points.sub(this.cost(bought))
+        if (!player.sap.points.gt(0)) player.sap.points = new Decimal(0)
+        setBuyableAmount("sap", 23, bought.add(1))
+    },
+    effect() {
+    },
+    cap() {
+        let base = 1
+        return base
+    },
+},
+        },
+        
+    
+        tabFormat: [
+    ["row", [
+        ["infobox", 1],
+    ]],
+    ["row", [
+        ["buyable", 11],
+        ["buyable", 12],
+        ["buyable", 13],
+    ]],
+    ["row", [
+        ["buyable", 21],
+        ["buyable", 22],
+        ["buyable", 23]
+    ]],
+    ["row", [
+        ["buyable", 31],
+        ["buyable", 32],
+        ["buyable", 33],
+    ]]
+]
+
+    })
