@@ -7832,7 +7832,6 @@ addLayer("d", {
          gain = gain.times(player.prism.points.pow(0.075).max(1));
     }
     gain = gain.times(globalMult())
-    if (inChallenge("ins", 11)) gain = gain.pow(0.95)
     gain = gain.floor();
     return gain
     },
