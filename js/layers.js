@@ -8021,6 +8021,7 @@ addLayer("d", {
                 branches: [111, 112],
                 currencyLayer: "d",
                 effect() {
+                    if (hasUpgrade("d", 422)) return player.d.timeOwned.add(25).div(25).pow(1);
                     if (hasUpgrade("d", 421)) return player.d.timeOwned.add(25).div(25).pow(0.4);
                     return player.d.timeOwned.add(100).div(100).pow(0.4);
                 }, 
