@@ -10162,7 +10162,7 @@ addLayer("prism", {
             },
     prismMult() {
         let gain = new Decimal(1)
-        if (!hasUpgrade("d", 471)) gain = gain.times(0)
+        if (!hasUpgrade("d", 451)) gain = gain.times(0)
         if (hasUpgrade("d", 471)) gain = gain.times(2)
         if (hasUpgrade("d", 511)) gain = gain.times(3)
         if (hasUpgrade("d", 541)) gain = gain.times(upgradeEffect("d", 541))
@@ -10179,7 +10179,7 @@ addLayer("prism", {
     },
     prismDescensionMult() {
         let gain = new Decimal(1)
-        if (!hasUpgrade("d", 471)) gain = gain.times(0)
+        if (!hasUpgrade("d", 451)) gain = gain.times(0)
         if (hasUpgrade("d", 472)) gain = gain.times(2)
         if (hasUpgrade("d", 551)) gain = gain.times(1.5)
 
