@@ -8811,7 +8811,8 @@ addLayer("d", {
                 currencyInternalName: "points",
                 branches: [],
                 currencyLayer: "d",
-                unlocked() { return !player.extraoptions.disableRiskyUpgrade && hasUpgrade(this.layer,611) && !inChallenge("trials", 11) && !inChallenge("trials", 12) && !inChallenge("trials", 13)},
+                canAfford() {return !player.extraoptions.disableRiskyUpgrade && !inChallenge("trials", 11) && !inChallenge("trials", 12) && !inChallenge("trials", 13)},
+                unlocked() { return hasUpgrade(this.layer,621)},
             },
             631: {
                 title: "Upgrade #279",
