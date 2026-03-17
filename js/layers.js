@@ -7218,7 +7218,7 @@ addLayer("sac", {
     return (player.points.gte("1e163") && player.m.points.gte("1e146") && player.c.points.gte("1e70") && player.sp.points.gte("1e164") && player.a.points.gte("1e84") && player.gold.points.gte("1e106") && player.g.power.gte("1e63") && player.cr.points.gte("1e70") && player.gem.points.gte("1e50") && player.d.points.gte("1e17") && player.l.points.gte("100000") && player.prism.points.gte("100000"))
     } else if (player.sac.points.eq(7)) {
     return (player.points.gte("1e179") && player.m.points.gte("1e158") && player.c.points.gte("1e79") && player.sp.points.gte("1e181") && player.a.points.gte("1e98") && player.gold.points.gte("1e120") && player.g.power.gte("1e71") && player.cr.points.gte("1e85") && player.gem.points.gte("1e63") && player.d.points.gte("1e25") && player.l.points.gte("100000") && player.prism.points.gte("100000000") && player.sap.points.gte("100000"))
-    }
+    } else return false
     },
     getResetGain() {
     return new Decimal(1)
