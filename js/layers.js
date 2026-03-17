@@ -5064,6 +5064,7 @@ addLayer("a", {
 
     gain = gain.floor();
     if (hasUpgrade("cr", 42) && gain.gt(player.a.bestAscensionGain)) player.a.bestAscensionGain = gain
+    gain = gain.max(1)
     return gain
     },
     prestigeButtonText() {
@@ -5089,7 +5090,6 @@ addLayer("a", {
             gain = gain.times(player.a.bestAscensionGain.div(current))
         }
     }
-    gain = gain.max(1)
     return gain
     },
     automate() {
