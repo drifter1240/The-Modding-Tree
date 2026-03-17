@@ -6903,7 +6903,7 @@ addLayer("gold", {
     buy() {
         let bought = getBuyableAmount("gold", 11)
         if (bought.gte(this.cap())) return // stop if capped
-        if (!getBuyableAmount("sap", 23).gte(0)) player.gold.points = player.gold.points.sub(this.cost(bought))
+        if (!getBuyableAmount("sap", 23).gt(0)) player.gold.points = player.gold.points.sub(this.cost(bought))
         setBuyableAmount("gold", 11, bought.add(1))
     },
     effect() {
@@ -6942,7 +6942,7 @@ addLayer("gold", {
     buy() {
         let bought = getBuyableAmount("gold", 12)
         if (bought.gte(this.cap())) return
-        if (!getBuyableAmount("sap", 23).gte(0)) player.gold.points = player.gold.points.sub(this.cost(bought))
+        if (!getBuyableAmount("sap", 23).gt(0)) player.gold.points = player.gold.points.sub(this.cost(bought))
         setBuyableAmount("gold", 12, bought.add(1))
     },
     effect() {
@@ -6975,7 +6975,7 @@ addLayer("gold", {
     buy() {
         let bought = getBuyableAmount("gold", 13)
         if (bought.gte(this.cap())) return
-        if (!getBuyableAmount("sap", 23).gte(0)) player.gold.points = player.gold.points.sub(this.cost(bought))
+        if (!getBuyableAmount("sap", 23).gt(0)) player.gold.points = player.gold.points.sub(this.cost(bought))
         setBuyableAmount("gold", 13, bought.add(1))
     },
     effect() {
@@ -7009,7 +7009,7 @@ addLayer("gold", {
     buy() {
         let bought = getBuyableAmount("gold", 21)
         if (bought.gte(this.cap())) return // stop if capped
-        if (!getBuyableAmount("sap", 23).gte(0)) player.gold.points = player.gold.points.sub(this.cost(bought))
+        if (!getBuyableAmount("sap", 23).gt(0)) player.gold.points = player.gold.points.sub(this.cost(bought))
         setBuyableAmount("gold", 21, bought.add(1))
     },
     effect() {
@@ -7048,7 +7048,7 @@ addLayer("gold", {
     buy() {
         let bought = getBuyableAmount("gold", 22)
         if (bought.gte(this.cap())) return // stop if capped
-        if (!getBuyableAmount("sap", 23).gte(0)) player.gold.points = player.gold.points.sub(this.cost(bought))
+        if (!getBuyableAmount("sap", 23).gt(0)) player.gold.points = player.gold.points.sub(this.cost(bought))
         setBuyableAmount("gold", 22, bought.add(1))
     },
     effect() {
@@ -7081,7 +7081,7 @@ addLayer("gold", {
     buy() {
         let bought = getBuyableAmount("gold", 23)
         if (bought.gte(this.cap())) return 
-        if (!getBuyableAmount("sap", 23).gte(0)) player.gold.points = player.gold.points.sub(this.cost(bought))
+        if (!getBuyableAmount("sap", 23).gt(0)) player.gold.points = player.gold.points.sub(this.cost(bought))
         setBuyableAmount("gold", 23, bought.add(1))
     },
     cap() {
@@ -7109,7 +7109,7 @@ addLayer("gold", {
     buy() {
         let bought = getBuyableAmount("gold", 31)
         if (bought.gte(this.cap())) return // stop if capped
-        if (!getBuyableAmount("sap", 23).gte(0)) player.gold.points = player.gold.points.sub(this.cost(bought))
+        if (!getBuyableAmount("sap", 23).gt(0)) player.gold.points = player.gold.points.sub(this.cost(bought))
         setBuyableAmount("gold", 31, bought.add(1))
     },
     effect() {
@@ -7146,7 +7146,7 @@ addLayer("gold", {
     buy() {
         let bought = getBuyableAmount("gold", 32)
         if (bought.gte(this.cap())) return // stop if capped
-        if (!getBuyableAmount("sap", 23).gte(0)) player.gold.points = player.gold.points.sub(this.cost(bought))
+        if (!getBuyableAmount("sap", 23).gt(0)) player.gold.points = player.gold.points.sub(this.cost(bought))
         setBuyableAmount("gold", 32, bought.add(1))
     },
     effect() {
