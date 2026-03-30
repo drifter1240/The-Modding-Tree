@@ -9543,7 +9543,7 @@ addLayer("l", {
                             "background-color": "rgb(238, 79, 79)",
                          }
                 else return {
-                            "background-color": "#7cee4fff",
+                            "background-color": "rgb(106, 202, 67)",
                          }
                  },
     },
@@ -9823,7 +9823,7 @@ addLayer("overcharge", {
                             "background-color": "rgb(238, 79, 79)",
                          }
                 else return {
-                            "background-color": "#7cee4fff",
+                            "background-color": "rgb(106, 202, 67)",
                          }
                  },
     },
