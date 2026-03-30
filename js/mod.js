@@ -12,11 +12,13 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "3.0",
+	num: "3.1",
 	name: "Final Descent",
 }
 
 let changelog = `<h1>Changelog:</h1><br> <br>
+	<h3>v3.1</h3><br>
+		- Some balance changes <br> <br> <br>
 	<h3>v3.0</h3><br>
 		- Music! <br>
 		- Finished Layer 3 & added 5 new sub-layers. No Layer 4 yet... <br>
