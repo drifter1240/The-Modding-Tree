@@ -7084,7 +7084,7 @@ addLayer("gold", {
     buy() {
         let bought = getBuyableAmount("gold", 23)
         if (bought.gte(this.cap())) return 
-        if (!getBuyableAmount("sap", 23).gte(0)) player.gold.points = player.gold.points.sub(this.cost(bought))
+        if (!getBuyableAmount("sap", 23).gt(0)) player.gold.points = player.gold.points.sub(this.cost(bought))
         setBuyableAmount("gold", 23, bought.add(1))
     },
     cap() {
