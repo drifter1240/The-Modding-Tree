@@ -3436,7 +3436,7 @@ addLayer("c", {
         if (hasUpgrade("d", 22)) gain = gain.times(2.5)
         if (hasUpgrade("d", 51)) gain = gain.times(1.5)
         if (hasUpgrade("d", 111)) gain = gain.times(2)
-        if (hasUpgrade("d", 201)) gain = gain.times(10)
+        if (hasUpgrade("d", 201)) gain = gain.times(15)
         if (hasUpgrade("d", 321)) gain = gain.times(3.5)
         if (hasUpgrade("d", 381)) gain = gain.times(3)
         if (hasUpgrade("d", 411)) gain = gain.times(3)
@@ -8153,8 +8153,8 @@ addLayer("d", {
             },
             201: {
                 title: "Upgrade #225",
-                description: "Unlock a new Click milestone. Also x10 clicks.",
-                cost: new Decimal(5.5e134),
+                description: "Unlock a new Click milestone. Also x15 clicks.",
+                cost: new Decimal(2.5e134),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
                 branches: [211],
@@ -8164,7 +8164,7 @@ addLayer("d", {
             211: {
                 title: "Upgrade #226",
                 description: "Unlock Life.",
-                cost: new Decimal(1.75e136),
+                cost: new Decimal(1.05e136),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
                 branches: [221],
@@ -8410,7 +8410,7 @@ addLayer("d", {
             361: {
                 title: "Upgrade #245",
                 description: "Automate the first six gold buyables. Also x3 money and gold.",
-                cost: new Decimal(1.11e149),
+                cost: new Decimal(8.88e148),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
                 branches: [371],
@@ -8782,7 +8782,7 @@ addLayer("d", {
             611: {
                 title: "Upgrade #277",
                 description: "Points boost itself. Formula: points^0.02/350",
-                cost: new Decimal(5.5e168),
+                cost: new Decimal(2.5e168),
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
                 branches: [621],
@@ -8937,7 +8937,7 @@ addLayer("d", {
             731: {
                 title: "Upgrade #290",
                 description: "x5 gemstones.",
-                cost: new Decimal(2e63),
+                cost: new Decimal(1e63),
                 currencyDisplayName: "gemstones",
                 currencyInternalName: "points",
                 branches: [741],
@@ -8957,7 +8957,7 @@ addLayer("d", {
             741: {
                 title: "Upgrade #292",
                 description: "Gemstones boost themselves again. Formula: log5(gemstones)/10",
-                cost: new Decimal(2e64),
+                cost: new Decimal(1e64),
                 currencyDisplayName: "gemstones",
                 currencyInternalName: "points",
                 branches: [751],
