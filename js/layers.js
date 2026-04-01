@@ -10580,3 +10580,1258 @@ addLayer("sap", {
 ]
 
     })
+
+addLayer("oints", {
+        name: "oints",
+        symbol:"o",
+        position: 0, 
+        startData() { return {
+            unlocked: true,
+            points: new Decimal(1),
+        } },
+        color: "rgb(240, 29, 229)",
+        row: 3, 
+        type: "none",
+        tooltip: "Layer 4: oints",
+        layerShown() { return true },
+        update(diff) {
+            let gain = new Decimal(1)
+            if (!hasUpgrade("oints", 11)) gain = gain.times(0)
+            if (hasUpgrade("oints", 21)) gain = gain.times(2)
+            if (hasUpgrade("oints", 31)) gain = gain.times(2)
+            if (hasUpgrade("oints", 41)) gain = gain.times(2)
+            if (hasUpgrade("oints", 51)) gain = gain.times(2)
+            if (hasUpgrade("oints", 61)) gain = gain.times(2)
+            if (hasUpgrade("oints", 71)) gain = gain.times(2)
+            if (hasUpgrade("oints", 81)) gain = gain.times(2)
+            if (hasUpgrade("oints", 91)) gain = gain.times(2)
+            if (hasUpgrade("oints", 101)) gain = gain.times(2)
+            if (hasUpgrade("oints", 111)) gain = gain.times(2)
+            if (hasUpgrade("oints", 121)) gain = gain.times(2)
+            if (hasUpgrade("oints", 131)) gain = gain.times(2)
+            if (hasUpgrade("oints", 141)) gain = gain.times(2)
+            if (hasUpgrade("oints", 151)) gain = gain.times(2)
+            if (hasUpgrade("oints", 161)) gain = gain.times(2)
+            if (hasUpgrade("oints", 171)) gain = gain.times(2)
+            if (hasUpgrade("oints", 181)) gain = gain.times(2)
+            if (hasUpgrade("oints", 191)) gain = gain.times(2)
+            if (hasUpgrade("oints", 201)) gain = gain.times(2)
+            if (hasUpgrade("oints", 211)) gain = gain.times(2)
+            if (hasUpgrade("oints", 221)) gain = gain.times(2)
+            if (hasUpgrade("oints", 231)) gain = gain.times(2)
+            if (hasUpgrade("oints", 241)) gain = gain.times(2)
+            if (hasUpgrade("oints", 251)) gain = gain.times(2)
+            if (hasUpgrade("oints", 261)) gain = gain.times(2)
+            if (hasUpgrade("oints", 271)) gain = gain.times(2)
+            if (hasUpgrade("oints", 281)) gain = gain.times(2)
+            if (hasUpgrade("oints", 291)) gain = gain.times(2)
+            if (hasUpgrade("oints", 301)) gain = gain.times(2)
+            if (hasUpgrade("oints", 311)) gain = gain.times(2)
+            if (hasUpgrade("oints", 321)) gain = gain.times(2)
+            if (hasUpgrade("oints", 331)) gain = gain.times(2)
+            if (hasUpgrade("oints", 341)) gain = gain.times(2)
+            if (hasUpgrade("oints", 351)) gain = gain.times(2)
+            if (hasUpgrade("oints", 361)) gain = gain.times(2)
+            if (hasUpgrade("oints", 371)) gain = gain.times(2)
+            if (hasUpgrade("oints", 381)) gain = gain.times(2)
+            if (hasUpgrade("oints", 391)) gain = gain.times(2)
+            if (hasUpgrade("oints", 401)) gain = gain.times(2)
+            if (hasUpgrade("oints", 411)) gain = gain.times(2)
+            if (hasUpgrade("oints", 421)) gain = gain.times(2)
+            if (hasUpgrade("oints", 431)) gain = gain.times(2)
+            if (hasUpgrade("oints", 441)) gain = gain.times(2)
+            if (hasUpgrade("oints", 451)) gain = gain.times(2)
+            if (hasUpgrade("oints", 461)) gain = gain.times(2)
+            if (hasUpgrade("oints", 471)) gain = gain.times(2)
+            if (hasUpgrade("oints", 481)) gain = gain.times(2)
+            if (hasUpgrade("oints", 491)) gain = gain.times(2)
+            if (hasUpgrade("oints", 501)) gain = gain.times(2)
+            if (hasUpgrade("oints", 511)) gain = gain.times(2)
+            if (hasUpgrade("oints", 521)) gain = gain.times(2)
+            if (hasUpgrade("oints", 531)) gain = gain.times(2)
+            if (hasUpgrade("oints", 541)) gain = gain.times(2)
+            if (hasUpgrade("oints", 551)) gain = gain.times(2)
+            if (hasUpgrade("oints", 561)) gain = gain.times(2)
+            if (hasUpgrade("oints", 571)) gain = gain.times(2)
+            if (hasUpgrade("oints", 581)) gain = gain.times(2)
+            if (hasUpgrade("oints", 591)) gain = gain.times(2)
+            if (hasUpgrade("oints", 601)) gain = gain.times(2)
+            if (hasUpgrade("oints", 611)) gain = gain.times(2)
+            if (hasUpgrade("oints", 621)) gain = gain.times(2)
+            if (hasUpgrade("oints", 631)) gain = gain.times(2)
+            if (hasUpgrade("oints", 641)) gain = gain.times(2)
+            if (hasUpgrade("oints", 651)) gain = gain.times(2)
+            if (hasUpgrade("oints", 661)) gain = gain.times(2)
+            if (hasUpgrade("oints", 671)) gain = gain.times(2)
+            if (hasUpgrade("oints", 681)) gain = gain.times(2)
+            if (hasUpgrade("oints", 691)) gain = gain.times(2)
+            if (hasUpgrade("oints", 701)) gain = gain.times(2)
+            if (hasUpgrade("oints", 711)) gain = gain.times(2)
+            if (hasUpgrade("oints", 721)) gain = gain.times(2)
+            if (hasUpgrade("oints", 731)) gain = gain.times(2)
+            if (hasUpgrade("oints", 741)) gain = gain.times(2)
+            if (hasUpgrade("oints", 751)) gain = gain.times(2)
+            if (hasUpgrade("oints", 761)) gain = gain.times(2)
+            if (hasUpgrade("oints", 771)) gain = gain.times(2)
+            if (hasUpgrade("oints", 781)) gain = gain.times(2)
+            if (hasUpgrade("oints", 791)) gain = gain.times(2)
+            if (hasUpgrade("oints", 801)) gain = gain.times(2)
+            if (hasUpgrade("oints", 811)) gain = gain.times(2)
+            if (hasUpgrade("oints", 821)) gain = gain.times(2)
+            if (hasUpgrade("oints", 831)) gain = gain.times(2)
+            if (hasUpgrade("oints", 841)) gain = gain.times(2)
+            if (hasUpgrade("oints", 851)) gain = gain.times(2)
+            if (hasUpgrade("oints", 861)) gain = gain.times(2)
+            if (hasUpgrade("oints", 871)) gain = gain.times(2)
+            if (hasUpgrade("oints", 881)) gain = gain.times(2)
+            if (hasUpgrade("oints", 891)) gain = gain.times(2)
+            if (hasUpgrade("oints", 901)) gain = gain.times(2)
+            if (hasUpgrade("oints", 911)) gain = gain.times(2)
+            if (hasUpgrade("oints", 921)) gain = gain.times(2)
+            if (hasUpgrade("oints", 931)) gain = gain.times(2)
+            if (hasUpgrade("oints", 941)) gain = gain.times(2)
+            if (hasUpgrade("oints", 951)) gain = gain.times(2)
+            if (hasUpgrade("oints", 961)) gain = gain.times(2)
+            if (hasUpgrade("oints", 971)) gain = gain.times(2)
+            if (hasUpgrade("oints", 981)) gain = gain.times(2)
+            if (hasUpgrade("oints", 991)) gain = gain.times(2)
+            if (hasUpgrade("oints", 1001)) gain = gain.times(2)
+            if (hasUpgrade("oints", 1011)) gain = gain.times(2)
+            gain = gain.pow(new Decimal(1).add(player.trials.points.div(100)))
+            gain = gain.pow(1.01) // had to add this bcuz as it turns out shit was too fucking slow
+            console.log(gain.toString())
+            player.oints.points = player.oints.points.add(gain.times(diff))
+            
+        },
+        
+        upgrades: {
+            11: {
+                title: "Upgrade #0",
+                description: "Start generating oints at a rate of 1/s.",
+                cost: new Decimal(0),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [21],
+            },
+            21: {
+                title: "Upgrade #1",
+                description: "x2 oint gain.",
+                cost: new Decimal(3),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [31],
+            },
+            31: {
+                title: "Upgrade #2",
+                description: "x2 oint gain.",
+                cost: new Decimal(7),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [41],
+                unlocked() {return hasUpgrade("oints", 21)}
+            },
+            41: {
+                title: "Upgrade #3",
+                description: "x2 oint gain.",
+                cost: new Decimal(15),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [51],
+                unlocked() {return hasUpgrade("oints", 31)}
+            },
+            51: {
+                title: "Upgrade #4",
+                description: "x2 oint gain.",
+                cost: new Decimal(32),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [61],
+                unlocked() {return hasUpgrade("oints", 41)}
+            },
+            61: {
+                title: "Upgrade #5",
+                description: "x2 oint gain.",
+                cost: new Decimal(70),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [71],
+                unlocked() {return hasUpgrade("oints", 51)}
+            },
+            71: {
+                title: "Upgrade #6",
+                description: "x2 oint gain.",
+                cost: new Decimal(155),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [81],
+                unlocked() {return hasUpgrade("oints", 61)}
+            },
+            81: {
+                title: "Upgrade #7",
+                description: "x2 oint gain.",
+                cost: new Decimal(340),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [91],
+                unlocked() {return hasUpgrade("oints", 71)}
+            },
+            91: {
+                title: "Upgrade #8",
+                description: "x2 oint gain.",
+                cost: new Decimal(748),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [101],
+                unlocked() {return hasUpgrade("oints", 81)}
+            },
+            101: {
+                title: "Upgrade #9",
+                description: "x2 oint gain.",
+                cost: new Decimal(1646),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [111],
+                unlocked() {return hasUpgrade("oints", 91)}
+            },
+            111: {
+                title: "Upgrade #10",
+                description: "x2 oint gain.",
+                cost: new Decimal(3622),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [121],
+                unlocked() {return hasUpgrade("oints", 101)}
+            },
+            121: {
+                title: "Upgrade #11",
+                description: "x2 oint gain.",
+                cost: new Decimal(7968),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [131],
+                unlocked() {return hasUpgrade("oints", 111)}
+            },
+            131: {
+                title: "Upgrade #12",
+                description: "x2 oint gain.",
+                cost: new Decimal(17530),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [141],
+                unlocked() {return hasUpgrade("oints", 121)}
+            },
+            141: {
+                title: "Upgrade #13",
+                description: "x2 oint gain.",
+                cost: new Decimal(38565),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [151],
+                unlocked() {return hasUpgrade("oints", 131)}
+            },
+            151: {
+                title: "Upgrade #14",
+                description: "x2 oint gain.",
+                cost: new Decimal(84843),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [161],
+                unlocked() {return hasUpgrade("oints", 141)}
+            },
+            161: {
+                title: "Upgrade #15",
+                description: "x2 oint gain.",
+                cost: new Decimal(186655),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [171],
+                unlocked() {return hasUpgrade("oints", 151)}
+            },
+            171: {
+                title: "Upgrade #16",
+                description: "x2 oint gain.",
+                cost: new Decimal(410640),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [181],
+                unlocked() {return hasUpgrade("oints", 161)}
+            },
+            181: {
+                title: "Upgrade #17",
+                description: "x2 oint gain.",
+                cost: new Decimal(903408),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [191],
+                unlocked() {return hasUpgrade("oints", 171)}
+            },
+            191: {
+                title: "Upgrade #18",
+                description: "x2 oint gain.",
+                cost: new Decimal(1987499),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [201],
+                unlocked() {return hasUpgrade("oints", 181)}
+            },
+            201: {
+                title: "Upgrade #19",
+                description: "x2 oint gain.",
+                cost: new Decimal(4372497),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [211],
+                unlocked() {return hasUpgrade("oints", 191)}
+            },
+            211: {
+                title: "Upgrade #20",
+                description: "x2 oint gain.",
+                cost: new Decimal(9619493),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [221],
+                unlocked() {return hasUpgrade("oints", 201)}
+            },
+            221: {
+                title: "Upgrade #21",
+                description: "x2 oint gain.",
+                cost: new Decimal(21162885),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [231],
+                unlocked() {return hasUpgrade("oints", 211)}
+            },
+            231: {
+                title: "Upgrade #22",
+                description: "x2 oint gain.",
+                cost: new Decimal(46558347),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [241],
+                unlocked() {return hasUpgrade("oints", 221)}
+            },
+            241: {
+                title: "Upgrade #23",
+                description: "x2 oint gain.",
+                cost: new Decimal(102428363),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [251],
+                unlocked() {return hasUpgrade("oints", 231)}
+            },
+            251: {
+                title: "Upgrade #24",
+                description: "x2 oint gain.",
+                cost: new Decimal(225342399),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [261],
+                unlocked() {return hasUpgrade("oints", 241)}
+            },
+            261: {
+                title: "Upgrade #25",
+                description: "x2 oint gain.",
+                cost: new Decimal(495753278),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [271],
+                unlocked() {return hasUpgrade("oints", 251)}
+            },
+            271: {
+                title: "Upgrade #26",
+                description: "x2 oint gain.",
+                cost: new Decimal(1090657211),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [281],
+                unlocked() {return hasUpgrade("oints", 261)}
+            },
+            281: {
+                title: "Upgrade #27",
+                description: "x2 oint gain.",
+                cost: new Decimal(2399445865),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [291],
+                unlocked() {return hasUpgrade("oints", 271)}
+            },
+            291: {
+                title: "Upgrade #28",
+                description: "x2 oint gain.",
+                cost: new Decimal(5278780903),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [301],
+                unlocked() {return hasUpgrade("oints", 281)}
+            },
+            301: {
+                title: "Upgrade #29",
+                description: "x2 oint gain.",
+                cost: new Decimal(11613317988),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [311],
+                unlocked() {return hasUpgrade("oints", 291)}
+            },
+            311: {
+                title: "Upgrade #30",
+                description: "x2 oint gain. Fun fact, trials boost oint gain by ^1.01 per trial completed.",
+                cost: new Decimal(25549299573),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [321],
+                unlocked() {return hasUpgrade("oints", 301)}
+            },
+            321: {
+                title: "Upgrade #31",
+                description: "x2 oint gain.",
+                cost: new Decimal(56208459060),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [331],
+                unlocked() {return hasUpgrade("oints", 311)}
+            },
+            331: {
+                title: "Upgrade #32",
+                description: "x2 oint gain.",
+                cost: new Decimal(123658609931),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [341],
+                unlocked() {return hasUpgrade("oints", 321)}
+            },
+            341: {
+                title: "Upgrade #33",
+                description: "x2 oint gain.",
+                cost: new Decimal(272048941849),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [351],
+                unlocked() {return hasUpgrade("oints", 331)}
+            },
+            351: {
+                title: "Upgrade #34",
+                description: "x2 oint gain.",
+                cost: new Decimal(598507672068),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [361],
+                unlocked() {return hasUpgrade("oints", 341)}
+            },
+            361: {
+                title: "Upgrade #35",
+                description: "x2 oint gain.",
+                cost: new Decimal(1316716878549),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [371],
+                unlocked() {return hasUpgrade("oints", 351)}
+            },
+            371: {
+                title: "Upgrade #36",
+                description: "x2 oint gain.",
+                cost: new Decimal(2896777132808),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [381],
+                unlocked() {return hasUpgrade("oints", 361)}
+            },
+            381: {
+                title: "Upgrade #37",
+                description: "x2 oint gain.",
+                cost: new Decimal(6372909692178),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [391],
+                unlocked() {return hasUpgrade("oints", 371)}
+            },
+            391: {
+                title: "Upgrade #38",
+                description: "x2 oint gain.",
+                cost: new Decimal(14020401322792),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [401],
+                unlocked() {return hasUpgrade("oints", 381)}
+            },
+            401: {
+                title: "Upgrade #39",
+                description: "x2 oint gain.",
+                cost: new Decimal(30844882910142),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [411],
+                unlocked() {return hasUpgrade("oints", 391)}
+            },
+            411: {
+                title: "Upgrade #40",
+                description: "x2 oint gain.",
+                cost: new Decimal(67858742402312),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [421],
+                unlocked() {return hasUpgrade("oints", 401)}
+            },
+            421: {
+                title: "Upgrade #41",
+                description: "x2 oint gain.",
+                cost: new Decimal(149289233285086),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [431],
+                unlocked() {return hasUpgrade("oints", 411)}
+            },
+            431: {
+                title: "Upgrade #42",
+                description: "x2 oint gain.",
+                cost: new Decimal(328436313227189),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [441],
+                unlocked() {return hasUpgrade("oints", 421)}
+            },
+            441: {
+                title: "Upgrade #43",
+                description: "x2 oint gain.",
+                cost: new Decimal(722559889099816),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [451],
+                unlocked() {return hasUpgrade("oints", 431)}
+            },
+            451: {
+                title: "Upgrade #44",
+                description: "x2 oint gain.",
+                cost: new Decimal("1.58963e+15"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [461],
+                unlocked() {return hasUpgrade("oints", 441)}
+            },
+            461: {
+                title: "Upgrade #45",
+                description: "x2 oint gain.",
+                cost: new Decimal("3.49719e+15"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [471],
+                unlocked() {return hasUpgrade("oints", 451)}
+            },
+            471: {
+                title: "Upgrade #46",
+                description: "x2 oint gain.",
+                cost: new Decimal("7.69382e+15"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [481],
+                unlocked() {return hasUpgrade("oints", 461)}
+            },
+            481: {
+                title: "Upgrade #47",
+                description: "x2 oint gain.",
+                cost: new Decimal("1.69264e+16"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [491],
+                unlocked() {return hasUpgrade("oints", 471)}
+            },
+            491: {
+                title: "Upgrade #48",
+                description: "x2 oint gain.",
+                cost: new Decimal("3.72381e+16"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [501],
+                unlocked() {return hasUpgrade("oints", 481)}
+            },
+            501: {
+                title: "Upgrade #49",
+                description: "x2 oint gain.",
+                cost: new Decimal("8.19238e+16"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [511],
+                unlocked() {return hasUpgrade("oints", 491)}
+            },
+            511: {
+                title: "Upgrade #50",
+                description: "x2 oint gain.",
+                cost: new Decimal("1.80232e+17"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [521],
+                unlocked() {return hasUpgrade("oints", 501)}
+            },
+            521: {
+                title: "Upgrade #51",
+                description: "x2 oint gain.",
+                cost: new Decimal("3.96511e+17"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [531],
+                unlocked() {return hasUpgrade("oints", 511)}
+            },
+            531: {
+                title: "Upgrade #52",
+                description: "x2 oint gain.",
+                cost: new Decimal("8.72324e+17"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [541],
+                unlocked() {return hasUpgrade("oints", 521)}
+            },
+            541: {
+                title: "Upgrade #53",
+                description: "x2 oint gain.",
+                cost: new Decimal("1.91911e+18"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [551],
+                unlocked() {return hasUpgrade("oints", 531)}
+            },
+            551: {
+                title: "Upgrade #54",
+                description: "x2 oint gain.",
+                cost: new Decimal("4.22205e+18"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [561],
+                unlocked() {return hasUpgrade("oints", 541)}
+            },
+            561: {
+                title: "Upgrade #55",
+                description: "x2 oint gain.",
+                cost: new Decimal("9.28851e+18"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [571],
+                unlocked() {return hasUpgrade("oints", 551)}
+            },
+            571: {
+                title: "Upgrade #56",
+                description: "x2 oint gain.",
+                cost: new Decimal("2.04347e+19"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [581],
+                unlocked() {return hasUpgrade("oints", 561)}
+            },
+            581: {
+                title: "Upgrade #57",
+                description: "x2 oint gain.",
+                cost: new Decimal("4.49564e+19"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [591],
+                unlocked() {return hasUpgrade("oints", 571)}
+            },
+            591: {
+                title: "Upgrade #58",
+                description: "x2 oint gain.",
+                cost: new Decimal("9.89040e+19"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [601],
+                unlocked() {return hasUpgrade("oints", 581)}
+            },
+            601: {
+                title: "Upgrade #59",
+                description: "x2 oint gain.",
+                cost: new Decimal("2.17589e+20"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [611],
+                unlocked() {return hasUpgrade("oints", 591)}
+            },
+            611: {
+                title: "Upgrade #60",
+                description: "x2 oint gain.",
+                cost: new Decimal("4.78696e+20"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [621],
+                unlocked() {return hasUpgrade("oints", 601)}
+            },
+            621: {
+                title: "Upgrade #61",
+                description: "x2 oint gain.",
+                cost: new Decimal("1.05313e+21"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [631],
+                unlocked() {return hasUpgrade("oints", 611)}
+            },
+            631: {
+                title: "Upgrade #62",
+                description: "x2 oint gain.",
+                cost: new Decimal("2.31689e+21"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [641],
+                unlocked() {return hasUpgrade("oints", 621)}
+            },
+            641: {
+                title: "Upgrade #63",
+                description: "x2 oint gain.",
+                cost: new Decimal("5.09715e+21"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [651],
+                unlocked() {return hasUpgrade("oints", 631)}
+            },
+            651: {
+                title: "Upgrade #64",
+                description: "x2 oint gain.",
+                cost: new Decimal("1.12137e+22"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [661],
+                unlocked() {return hasUpgrade("oints", 641)}
+            },
+            661: {
+                title: "Upgrade #65",
+                description: "x2 oint gain.",
+                cost: new Decimal("2.46702e+22"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [671],
+                unlocked() {return hasUpgrade("oints", 651)}
+            },
+            671: {
+                title: "Upgrade #66",
+                description: "x2 oint gain.",
+                cost: new Decimal("5.42745e+22"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [681],
+                unlocked() {return hasUpgrade("oints", 661)}
+            },
+            681: {
+                title: "Upgrade",
+                description: "x2 oint gain.",
+                cost: new Decimal("1.19404e+23"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [691],
+                unlocked() {return hasUpgrade("oints", 671)}
+            },
+            691: {
+                title: "Upgrade #68",
+                description: "x2 oint gain.",
+                cost: new Decimal("2.62688e+23"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [701],
+                unlocked() {return hasUpgrade("oints", 681)}
+            },
+            701: {
+                title: "Upgrade #69",
+                description: "x2 oint gain.",
+                cost: new Decimal("5.77914e+23"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [711],
+                unlocked() {return hasUpgrade("oints", 691)}
+            },
+            711: {
+                title: "Upgrade #70",
+                description: "x2 oint gain.",
+                cost: new Decimal("1.27141e+24"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [721],
+                unlocked() {return hasUpgrade("oints", 701)}
+            },
+            721: {
+                title: "Upgrade #71",
+                description: "x2 oint gain.",
+                cost: new Decimal("2.79711e+24"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [731],
+                unlocked() {return hasUpgrade("oints", 711)}
+            },
+            731: {
+                title: "Upgrade #72",
+                description: "x2 oint gain.",
+                cost: new Decimal("6.15363e+24"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [741],
+                unlocked() {return hasUpgrade("oints", 721)}
+            },
+            741: {
+                title: "Upgrade #73",
+                description: "x2 oint gain.",
+                cost: new Decimal("1.35380e+25"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [751],
+                unlocked() {return hasUpgrade("oints", 731)}
+            },
+            751: {
+                title: "Upgrade #74",
+                description: "x2 oint gain.",
+                cost: new Decimal("2.97836e+25"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [761],
+                unlocked() {return hasUpgrade("oints", 741)}
+            },
+            761: {
+                title: "Upgrade #75",
+                description: "x2 oint gain.",
+                cost: new Decimal("6.55239e+25"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [771],
+                unlocked() {return hasUpgrade("oints", 751)}
+            },
+            771: {
+                title: "Upgrade #76",
+                description: "x2 oint gain.",
+                cost: new Decimal("1.44153e+26"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [781],
+                unlocked() {return hasUpgrade("oints", 761)}
+            },
+            781: {
+                title: "Upgrade #77",
+                description: "x2 oint gain.",
+                cost: new Decimal("3.17136e+26"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [791],
+                unlocked() {return hasUpgrade("oints", 771)}
+            },
+            791: {
+                title: "Upgrade #78",
+                description: "x2 oint gain.",
+                cost: new Decimal("6.97698e+26"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [801],
+                unlocked() {return hasUpgrade("oints", 781)}
+            },
+            801: {
+                title: "Upgrade #79",
+                description: "x2 oint gain.",
+                cost: new Decimal("1.53494e+27"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [811],
+                unlocked() {return hasUpgrade("oints", 791)}
+            },
+            811: {
+                title: "Upgrade #80",
+                description: "x2 oint gain.",
+                cost: new Decimal("3.37686e+27"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [821],
+                unlocked() {return hasUpgrade("oints", 801)}
+            },
+            821: {
+                title: "Upgrade #81",
+                description: "x2 oint gain.",
+                cost: new Decimal("7.42909e+27"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [831],
+                unlocked() {return hasUpgrade("oints", 811)}
+            },
+            831: {
+                title: "Upgrade #82",
+                description: "x2 oint gain.",
+                cost: new Decimal("1.63440e+28"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [841],
+                unlocked() {return hasUpgrade("oints", 821)}
+            },
+            841: {
+                title: "Upgrade #83",
+                description: "x2 oint gain.",
+                cost: new Decimal("3.59568e+28"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [851],
+                unlocked() {return hasUpgrade("oints", 831)}
+            },
+            851: {
+                title: "Upgrade #84",
+                description: "x2 oint gain.",
+                cost: new Decimal("7.91050e+28"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [861],
+                unlocked() {return hasUpgrade("oints", 841)}
+            },
+            861: {
+                title: "Upgrade #85",
+                description: "x2 oint gain.",
+                cost: new Decimal("1.74031e+29"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [871],
+                unlocked() {return hasUpgrade("oints", 851)}
+            },
+            871: {
+                title: "Upgrade #86",
+                description: "x2 oint gain.",
+                cost: new Decimal("3.82868e+29"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [881],
+                unlocked() {return hasUpgrade("oints", 861)}
+            },
+            881: {
+                title: "Upgrade #87",
+                description: "x2 oint gain.",
+                cost: new Decimal("8.42310e+29"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [891],
+                unlocked() {return hasUpgrade("oints", 871)}
+            },
+            891: {
+                title: "Upgrade #88",
+                description: "x2 oint gain.",
+                cost: new Decimal("1.85308e+30"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [901],
+                unlocked() {return hasUpgrade("oints", 881)}
+            },
+            901: {
+                title: "Upgrade #89",
+                description: "x2 oint gain.",
+                cost: new Decimal("4.07678e+30"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [911],
+                unlocked() {return hasUpgrade("oints", 891)}
+            },
+            911: {
+                title: "Upgrade #90",
+                description: "x2 oint gain.",
+                cost: new Decimal("8.96891e+30"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [921],
+                unlocked() {return hasUpgrade("oints", 901)}
+            },
+            921: {
+                title: "Upgrade #91",
+                description: "x2 oint gain.",
+                cost: new Decimal("1.97316e+31"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [931],
+                unlocked() {return hasUpgrade("oints", 911)}
+            },
+            931: {
+                title: "Upgrade #92",
+                description: "x2 oint gain.",
+                cost: new Decimal("4.34095e+31"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [941],
+                unlocked() {return hasUpgrade("oints", 921)}
+            },
+            941: {
+                title: "Upgrade #93",
+                description: "x2 oint gain.",
+                cost: new Decimal("9.55010e+31"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [951],
+                unlocked() {return hasUpgrade("oints", 931)}
+            },
+            951: {
+                title: "Upgrade #94",
+                description: "x2 oint gain.",
+                cost: new Decimal("2.10102e+32"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [961],
+                unlocked() {return hasUpgrade("oints", 941)}
+            },
+            961: {
+                title: "Upgrade #95",
+                description: "x2 oint gain.",
+                cost: new Decimal("4.62225e+32"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [971],
+                unlocked() {return hasUpgrade("oints", 951)}
+            },
+            971: {
+                title: "Upgrade #96",
+                description: "x2 oint gain.",
+                cost: new Decimal("1.01689e+33"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [981],
+                unlocked() {return hasUpgrade("oints", 961)}
+            },
+            981: {
+                title: "Upgrade #97",
+                description: "x2 oint gain.",
+                cost: new Decimal("2.23717e+33"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [991],
+                unlocked() {return hasUpgrade("oints", 971)}
+            },
+            991: {
+                title: "Upgrade #98",
+                description: "x2 oint gain.",
+                cost: new Decimal("4.92177e+33"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [1001],
+                unlocked() {return hasUpgrade("oints", 981)}
+            },
+            1001: {
+                title: "Upgrade #99",
+                description: "x2 oint gain.",
+                cost: new Decimal("1.08279e+34"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [1011],
+                unlocked() {return hasUpgrade("oints", 991)}
+            },
+            1011: {
+                title: "Upgrade #100",
+                description: "x2 oint gain. You actually did it... y'know what? x1.15 global mult. You earned it.",
+                cost: new Decimal("2.38214e+34"),
+                currencyDisplayName: "oints",
+                currencyInternalName: "points",
+                currencyLayer: "oints",
+                branches: [],
+                unlocked() {return hasUpgrade("oints", 1001)}
+            },
+        },
+
+        infoboxes: {
+            1: {
+                title() {return "You have " + format(player.oints.points) + " oints | + at least 0/s"},
+                body() {return `Welcome to rifter's Upgrade Tree, filled with a bunch of upgrades, & ! Note that offline gain is limited to 3 minutes. Enjoy the game!<br><br>Note: If you don't like scrolling, you can flip the tree in settings.`},
+                unlocked() {return true}
+                }
+            },
+
+        tabFormat: () => {
+            const inverseTree = player?.inverseTree ?? false;
+            const upgradeRows = [
+                ["row", [["upgrade", 11]]],
+                ["row", [["upgrade", 21]]],
+                ["row", [["upgrade", 31]]],
+                ["row", [["upgrade", 41]]],
+                ["row", [["upgrade", 51]]],
+                ["row", [["upgrade", 61]]],
+                ["row", [["upgrade", 71]]],
+                ["row", [["upgrade", 81]]],
+                ["row", [["upgrade", 91]]],
+                ["row", [["upgrade", 101]]],
+                ["row", [["upgrade", 111]]],
+                ["row", [["upgrade", 121]]],
+                ["row", [["upgrade", 131]]],
+                ["row", [["upgrade", 141]]],
+                ["row", [["upgrade", 151]]],
+                ["row", [["upgrade", 161]]],
+                ["row", [["upgrade", 171]]],
+                ["row", [["upgrade", 181]]],
+                ["row", [["upgrade", 191]]],
+                ["row", [["upgrade", 201]]],
+                ["row", [["upgrade", 211]]],
+                ["row", [["upgrade", 221]]],
+                ["row", [["upgrade", 231]]],
+                ["row", [["upgrade", 241]]],
+                ["row", [["upgrade", 251]]],
+                ["row", [["upgrade", 261]]],
+                ["row", [["upgrade", 271]]],
+                ["row", [["upgrade", 281]]],
+                ["row", [["upgrade", 291]]],
+                ["row", [["upgrade", 301]]],
+                ["row", [["upgrade", 311]]],
+                ["row", [["upgrade", 321]]],
+                ["row", [["upgrade", 331]]],
+                ["row", [["upgrade", 341]]],
+                ["row", [["upgrade", 351]]],
+                ["row", [["upgrade", 361]]],
+                ["row", [["upgrade", 371]]],
+                ["row", [["upgrade", 381]]],
+                ["row", [["upgrade", 391]]],
+                ["row", [["upgrade", 401]]],
+                ["row", [["upgrade", 411]]],
+                ["row", [["upgrade", 421]]],
+                ["row", [["upgrade", 431]]],
+                ["row", [["upgrade", 441]]],
+                ["row", [["upgrade", 451]]],
+                ["row", [["upgrade", 461]]],
+                ["row", [["upgrade", 471]]],
+                ["row", [["upgrade", 481]]],
+                ["row", [["upgrade", 491]]],
+                ["row", [["upgrade", 501]]],
+                ["row", [["upgrade", 511]]],
+                ["row", [["upgrade", 521]]],
+                ["row", [["upgrade", 531]]],
+                ["row", [["upgrade", 541]]],
+                ["row", [["upgrade", 551]]],
+                ["row", [["upgrade", 561]]],
+                ["row", [["upgrade", 571]]],
+                ["row", [["upgrade", 581]]],
+                ["row", [["upgrade", 591]]],
+                ["row", [["upgrade", 601]]],
+                ["row", [["upgrade", 611]]],
+                ["row", [["upgrade", 621]]],
+                ["row", [["upgrade", 631]]],
+                ["row", [["upgrade", 641]]],
+                ["row", [["upgrade", 651]]],
+                ["row", [["upgrade", 661]]],
+                ["row", [["upgrade", 671]]],
+                ["row", [["upgrade", 681]]],
+                ["row", [["upgrade", 691]]],
+                ["row", [["upgrade", 701]]],
+                ["row", [["upgrade", 711]]],
+                ["row", [["upgrade", 721]]],
+                ["row", [["upgrade", 731]]],
+                ["row", [["upgrade", 741]]],
+                ["row", [["upgrade", 751]]],
+                ["row", [["upgrade", 761]]],
+                ["row", [["upgrade", 771]]],
+                ["row", [["upgrade", 781]]],
+                ["row", [["upgrade", 791]]],
+                ["row", [["upgrade", 801]]],
+                ["row", [["upgrade", 811]]],
+                ["row", [["upgrade", 821]]],
+                ["row", [["upgrade", 831]]],
+                ["row", [["upgrade", 841]]],
+                ["row", [["upgrade", 851]]],
+                ["row", [["upgrade", 861]]],
+                ["row", [["upgrade", 871]]],
+                ["row", [["upgrade", 881]]],
+                ["row", [["upgrade", 891]]],
+                ["row", [["upgrade", 901]]],
+                ["row", [["upgrade", 911]]],
+                ["row", [["upgrade", 921]]],
+                ["row", [["upgrade", 931]]],
+                ["row", [["upgrade", 941]]],
+                ["row", [["upgrade", 951]]],
+                ["row", [["upgrade", 961]]],
+                ["row", [["upgrade", 971]]],
+                ["row", [["upgrade", 981]]],
+                ["row", [["upgrade", 991]]],
+                ["row", [["upgrade", 1001]]],
+                ["row", [["upgrade", 1011]]],
+            ];
+            if (inverseTree) {
+                return [["row", [["infobox", 1]]], ...[...upgradeRows].reverse()];
+            } else {
+                return [["row", [["infobox", 1]]], ...upgradeRows];
+            }
+        },
+    })

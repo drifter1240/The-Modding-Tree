@@ -67,6 +67,7 @@ function globalMult() { // hi if ur seeing this its for a loop layer :3
     gain = gain.times(mult)
 	}
 	gain = gain.times(new Decimal(2).pow(player.trials.points))
+	if (hasUpgrade("oints", 1011)) gain = gain.times(1.15)
     return gain
 }
 
